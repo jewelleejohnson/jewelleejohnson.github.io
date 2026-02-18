@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resume</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="assets.html">3D Assets</a>
+  <a href="unity.html">Unity</a>
+  <a href="av.html">Audiovisual</a>
+  <a href="resume.html">Resume</a>
+</nav>
+
+<h1>Resume</h1>
+
+<p>
+  <a href="resume/Jewel_Lee_Johnson_Resume.pdf" target="_blank">
+    Download Resume (PDF)
+  </a>
+</p>
+
+</body>
+</html>
