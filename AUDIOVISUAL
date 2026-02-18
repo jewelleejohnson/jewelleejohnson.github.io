@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Audiovisual</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="assets.html">3D Assets</a>
+  <a href="unity.html">Unity</a>
+  <a href="av.html">Audiovisual</a>
+  <a href="resume.html">Resume</a>
+</nav>
+
+<h1>Audiovisual Work</h1>
+
+<div class="section">
+  <img src="images/av01.jpg">
+  <p>Experimental audiovisual and XR-focused projects.</p>
+</div>
+
+</body>
+</html>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="assets.html">3D Assets</a>
+  <a href="unity.html">Unity</a>
+  <a href="av.html">Audiovisual</a>
+  <a href="resume.html">Resume</a>
+</nav>
