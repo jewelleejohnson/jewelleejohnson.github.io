@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jewel Lee-Johnson | 3D Artist</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="assets.html">3D Assets</a>
+  <a href="unity.html">Unity</a>
+  <a href="av.html">Audiovisual</a>
+  <a href="resume.html">Resume</a>
+</nav>
+
+<h1>Jewel Lee-Johnson</h1>
+<p>3D Artist — Environments, Assets & Characters  
+<br>Indie Games • Unity • Interactive Media</p>
+
+</body>
+</html>
