@@ -73,12 +73,13 @@
   <div id="viewer"></div>
 </main>
 
-<!-- Three.js and OBJLoader -->
+<!-- Three.js and OBJ/MTL Loaders -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/OBJLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/MTLLoader.js"></script>
 
 <script>
-  // Get container
+  // Container
   const container = document.getElementById('viewer');
 
   // Scene
@@ -102,11 +103,15 @@
   const ambientLight = new THREE.AmbientLight(0xffffff, 1);
   scene.add(ambientLight);
 
-  // Load OBJ
-  const loader = new THREE.OBJLoader();
-  loader.load(
-    '3d-assets/Jewel CD.obj', // updated path to your OBJ file
-    function (object) {
+  // Load MTL first
+  const mtlLoader = new THREE.MTLLoader();
+  mtlLoader.load('3d-assets/Jewel_CD.mtl', function(materials) {
+    materials.preload();
+
+    // Load OBJ with materials
+    const objLoader = new THREE.OBJLoader();
+    objLoader.setMaterials(materials);
+    objLoader.load('3d-assets/Jewel CD.obj', function(object) {
       scene.add(object);
       object.rotation.y = 0;
 
@@ -123,8 +128,8 @@
     },
     function (error) {
       console.error('Error loading OBJ:', error);
-    }
-  );
+    });
+  });
 </script>
 
 </body>
