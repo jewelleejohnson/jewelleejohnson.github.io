@@ -1,10 +1,8 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>3D Assets</title>
-  <link rel="stylesheet" href="index.html">
-
   <style>
     body {
       font-family: 'Space Grotesk', system-ui, sans-serif;
@@ -38,16 +36,10 @@
       margin-bottom: 10px;
     }
 
-    h2 {
-      margin-top: 40px;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      font-size: 18px;
-    }
-
     #viewer {
-      width: 600px;
-      height: 400px;
+      width: 100%;
+      max-width: 800px;
+      height: 500px;
       margin-top: 30px;
       border: 1px solid #555;
     }
@@ -55,7 +47,6 @@
 </head>
 
 <body>
-
 <nav>
   <a href="index.html">Home</a>
   <a href="assets.html">3D Assets</a>
@@ -66,16 +57,11 @@
 
 <main>
   <h1>3D Assets</h1>
-
-  <h2>Environment / Props</h2>
-  <img src="images/asset01.jpg" style="max-width:600px; margin-top:40px;">
-
   <div id="viewer"></div>
 </main>
 
-<!-- Three.js and OBJ/MTL Loaders -->
+<!-- Three.js and OBJLoader -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/MTLLoader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/OBJLoader.js"></script>
 
 <script>
@@ -100,20 +86,20 @@
   container.appendChild(renderer.domElement);
 
   // Light
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
   scene.add(ambientLight);
 
-  // Load MTL first
-  const mtlLoader = new THREE.MTLLoader();
-  mtlLoader.load('3d-assets/Jewel_CD.mtl', function(materials) {
-    materials.preload();
-
-    // Load OBJ with materials
-    const objLoader = new THREE.OBJLoader();
-    objLoader.setMaterials(materials);
-    objLoader.load('3d-assets/Jewel_CD.obj', function(object) {
+  // Load OBJ
+  const loader = new THREE.OBJLoader();
+  loader.load(
+    '3d-assets/Jewel_CD.obj',  // Make sure the path matches exactly
+    function(object) {
+      console.log("OBJ loaded successfully!"); // Confirm load
       scene.add(object);
-      object.rotation.y = 0;
+
+      // Optional: scale/center object
+      object.scale.set(0.01, 0.01, 0.01); // adjust if model is too big
+      object.position.set(0,0,0);
 
       // Animate rotation
       function animate() {
@@ -123,12 +109,19 @@
       }
       animate();
     },
-    function (xhr) {
-      console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    function(xhr){
+      console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
     },
-    function (error) {
-      console.error('Error loading OBJ:', error);
-    });
+    function(err){
+      console.error('Error loading OBJ:', err);
+    }
+  );
+
+  // Handle window resize
+  window.addEventListener('resize', function() {
+    camera.aspect = container.clientWidth / container.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.clientWidth, container.clientHeight);
   });
 </script>
 
