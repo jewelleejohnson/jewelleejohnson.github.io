@@ -1,8 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>3D Assets</title>
   <link rel="stylesheet" href="index.html">
+
+  <style>
+    body {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      margin: 0;
+      padding: 60px;
+      color: #eaeaea;
+      background: #111;
+    }
+
+    nav {
+      margin-bottom: 40px;
+    }
+
+    nav a {
+      margin-right: 28px;
+      color: #eaeaea;
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      opacity: 0.6;
+    }
+
+    h1 {
+      font-size: 36px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin-top: 40px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      font-size: 18px;
+    }
+
+    #viewer {
+      width: 600px;
+      height: 400px;
+      margin-top: 30px;
+      border: 1px solid #555;
+    }
+  </style>
 </head>
 
 <body>
@@ -20,12 +69,63 @@
 
   <h2>Environment / Props</h2>
   <img src="images/asset01.jpg" style="max-width:600px; margin-top:40px;">
-  <div id="viewer" style="width:600px; height:400px; margin-top:30px;"></div>
+
+  <div id="viewer"></div>
 </main>
 
+<!-- Three.js and OBJLoader -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/OBJLoader.js"></script>
-<script src="js/viewer.js"></script>
+
+<script>
+  // Get container
+  const container = document.getElementById('viewer');
+
+  // Scene
+  const scene = new THREE.Scene();
+
+  // Camera
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    container.clientWidth / container.clientHeight,
+    0.1,
+    1000
+  );
+  camera.position.z = 5;
+
+  // Renderer
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  container.appendChild(renderer.domElement);
+
+  // Light
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+  scene.add(ambientLight);
+
+  // Load OBJ
+  const loader = new THREE.OBJLoader();
+  loader.load(
+    '3d-assets/TeethProject.obj', // path to your OBJ file
+    function (object) {
+      scene.add(object);
+      object.rotation.y = 0;
+
+      // Animate rotation
+      function animate() {
+        requestAnimationFrame(animate);
+        object.rotation.y += 0.01; // slow rotation
+        renderer.render(scene, camera);
+      }
+      animate();
+    },
+    function (xhr) {
+      console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    },
+    function (error) {
+      console.error('Error loading OBJ:', error);
+    }
+  );
+</script>
 
 </body>
 </html>
