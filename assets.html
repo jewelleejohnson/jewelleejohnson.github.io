@@ -75,8 +75,8 @@
 
 <!-- Three.js and OBJ/MTL Loaders -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/OBJLoader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/MTLLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/OBJLoader.js"></script>
 
 <script>
   // Container
@@ -111,7 +111,7 @@
     // Load OBJ with materials
     const objLoader = new THREE.OBJLoader();
     objLoader.setMaterials(materials);
-    objLoader.load('3d-assets/Jewel CD.obj', function(object) {
+    objLoader.load('3d-assets/Jewel_CD.obj', function(object) {
       scene.add(object);
       object.rotation.y = 0;
 
