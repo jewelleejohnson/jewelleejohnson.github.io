@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Jewel Lee-Johnson | Portfolio</title>
 
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 60px;
@@ -20,11 +26,12 @@
       background-attachment: fixed;
     }
 
+    /* Dark overlay */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.65);
+      background: rgba(0, 0, 0, 0.65);
       z-index: -1;
     }
 
@@ -33,40 +40,70 @@
     }
 
     nav a {
-      margin-right: 24px;
+      margin-right: 28px;
       color: #eaeaea;
       text-decoration: none;
       font-weight: 500;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      opacity: 0.6;
     }
 
     h1 {
       font-size: 42px;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      opacity: 0.8;
+      margin-bottom: 80px;
     }
 
     h2 {
       margin-top: 80px;
-      letter-spacing: 0.06em;
+      margin-bottom: 30px;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
+      font-size: 18px;
     }
 
-    p {
-      max-width: 700px;
-      line-height: 1.6;
-      margin: 20px auto;
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: flex-start;
     }
 
-    img {
-      max-width: 320px;
-      margin: 20px;
+    .gallery img {
+      width: 300px;
+      height: auto;
+      object-fit: cover;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      cursor: pointer;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.02);
+      opacity: 0.85;
+    }
+
+    footer {
+      margin-top: 120px;
+      font-size: 14px;
+      opacity: 0.7;
     }
   </style>
 </head>
 
 <body>
 
+  <!-- NAV -->
   <nav>
     <a href="index.html">Home</a>
     <a href="assets.html">3D Assets</a>
@@ -75,18 +112,24 @@
     <a href="resume.html">Resume</a>
   </nav>
 
+  <!-- HEADER -->
   <h1>Jewel Lee-Johnson</h1>
-  <p>3D Artist — Environments, Assets & Characters</p>
+  <p class="subtitle">3D Artist — Environments, Assets & Characters</p>
 
-  <h2>Portfolio</h2>
+  <!-- PORTFOLIO -->
+  <h2>Selected Work</h2>
 
-  <img src="https://via.placeholder.com/300">
-  <img src="https://via.placeholder.com/300">
-  <img src="https://via.placeholder.com/300">
+  <div class="gallery">
+    <img src="images/jewel-johnson-asset4.jpg" alt="3D Asset">
+    <img src="images/jewel-lee-johnson-asset11.jpg" alt="3D Asset">
+    <img src="images/jewel-lee-johnson-asset12.jpg" alt="3D Asset">
+    <img src="images/jewel-lee-johnson-asset9.jpg" alt="3D Asset">
+  </div>
 
-  <p>
-    Contact: jewelleejohnson@gmail.com
-  </p>
+  <!-- FOOTER -->
+  <footer>
+    Contact — jewelleejohnson@gmail.com
+  </footer>
 
 </body>
 </html>
