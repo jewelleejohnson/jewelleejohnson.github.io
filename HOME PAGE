@@ -1,9 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Jewel Lee-Johnson | 3D Artist</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Jewel Lee-Johnson | Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 60px;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      color: #eaeaea;
+      background: url("images/background.jpg") center / cover fixed;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: -1;
+    }
+
+    nav {
+      margin-bottom: 100px;
+    }
+
+    nav a {
+      margin-right: 28px;
+      color: #eaeaea;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+    }
+
+    h1 {
+      font-size: 44px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin-top: 80px;
+      font-size: 22px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    p {
+      max-width: 720px;
+      line-height: 1.6;
+    }
+  </style>
 </head>
+
 <body>
 
 <nav>
@@ -14,9 +65,11 @@
   <a href="resume.html">Resume</a>
 </nav>
 
-<h1>Jewel Lee-Johnson</h1>
-<p>3D Artist — Environments, Assets & Characters  
-<br>Indie Games • Unity • Interactive Media</p>
+<main>
+  <h1>Jewel Lee-Johnson</h1>
+  <p>3D Artist — Environments, Assets & Characters  
+  <br>Indie Games • Unity • Interactive Media</p>
+</main>
 
 </body>
 </html>
