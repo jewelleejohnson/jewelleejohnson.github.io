@@ -19,15 +19,12 @@
       padding: 60px;
       font-family: 'Space Grotesk', system-ui, sans-serif;
       color: #eaeaea;
-
-      /* Background image */
       background-image: url("images/jewel-johnson-asset8.jpg");
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
     }
 
-    /* Dark overlay */
     body::before {
       content: "";
       position: fixed;
@@ -64,6 +61,20 @@
     .subtitle {
       opacity: 0.8;
       margin-bottom: 80px;
+    }
+
+    .description {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease-out;
+      max-width: 800px;
+      line-height: 1.6;
+      margin-bottom: 60px;
+    }
+
+    .description.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     h2 {
@@ -117,9 +128,19 @@
   <h1>Jewel Lee-Johnson</h1>
   <p class="subtitle">3D Artist — Environments, Assets & Characters</p>
 
+  <!-- DESCRIPTION -->
+  <div class="description" id="description">
+    Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work. She earned a BFA in Film/Animation/Video from the Rhode Island School of Design, focusing on digital animation, 3D modeling, and experimental media, working with tools such as Blender, Unreal Engine, Unity, and the Adobe Creative Suite.
+
+    Her experience spans 3D modeling, texturing, rendering, motion capture, and procedural animation, as well as compositing and video/film editing. She has worked with motion capture systems including Perception Neuron and Axis Studio, capturing and troubleshooting movement data for animation and XR projects. She has collaborated with Brown University’s XR Hub and supported students with asset management, color spaces, and interactive workflows in Unity and Marvelous Designer.
+
+    Jewel aims to create visually compelling, story-driven work, inspired by the electronic and experimental music scene, audio-reactive gaming, and local Black queer experimental performance artists in Philadelphia. Sound drives her approach to 3D modeling, and she seeks to bring BIPOC experimental art into 3D spaces as an underrepresented yet revolutionary outlet.
+
+    She actively works in electronic sound and DJing, shaping how she considers motion, timing, and atmosphere in 3D space. She is interested in audio-reactive workflows that allow 3D visuals to respond in gameplay, using tools like Wwise, FMOD, Unreal Engine’s Audio Synesthesia, and Pure Data to translate audio into procedural animation, shader changes, particle systems, and lighting shifts. She also works in performance art and audiovisual installations where animation, sound, and environment converge, exploring hybrid workflows combining TouchDesigner with Unreal or Unity to support live, responsive visuals for performances and cinematic environments. Her focus is on using experimental 3D techniques to expand conventional gaming and VFX workflows.
+  </div>
+
   <!-- PORTFOLIO -->
   <h2>Selected Work</h2>
-
   <div class="gallery">
     <img src="images/jewel-johnson-asset4.jpg" alt="3D Asset">
     <img src="images/jewel-lee-johnson-asset11.jpg" alt="3D Asset">
@@ -131,6 +152,18 @@
   <footer>
     Contact — jewelleejohnson@gmail.com
   </footer>
+
+  <!-- SCROLL SCRIPT -->
+  <script>
+    const description = document.getElementById('description');
+
+    window.addEventListener('scroll', () => {
+      const rect = description.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        description.classList.add('show');
+      }
+    });
+  </script>
 
 </body>
 </html>
