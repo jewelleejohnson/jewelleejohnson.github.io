@@ -145,15 +145,18 @@
       opacity: 0.85;
     }
 
-    h2 {
-      margin: 80px 60px 30px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-size: 18px;
+    /* Side Gallery */
+    h2.side-label {
+      position: fixed;
+      top: 100px;
+      right: 60px;
       color: #00ffcc;
+      z-index: 2;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
-    /* Side Gallery (parallax + square images) */
     .side-gallery {
       position: fixed;
       top: 150px;
@@ -167,7 +170,7 @@
 
     .side-gallery img {
       width: 220px;
-      height: 220px;
+      height: 220px; /* square images */
       border: 1px solid #00ffcc;
       border-radius: 4px;
       object-fit: cover;
@@ -236,6 +239,7 @@ She actively works in electronic sound and DJing, shaping how she considers moti
   </div>
 
   <!-- SIDE SELECTED WORK GALLERY -->
+  <h2 class="side-label">Selected Work</h2>
   <div class="side-gallery fade" id="sideGallery">
     <img src="images/jewel-lee-johnson-asset9.jpg" alt="3D Asset">
     <img src="images/jewel-lee-johnson-asset10.jpg" alt="3D Asset">
