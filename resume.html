@@ -1,194 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Jewel Lee-Johnson | Resume</title>
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 60px;
-      font-family: 'Fira Code', monospace;
-      color: #00ffcc;
-      background-image: url("images/jewel-johnson-asset12.jpg");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      overflow-x: hidden;
-    }
-
-    /* Dark overlay */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.65);
-      z-index: -1;
-    }
-
-    nav {
-      margin: 40px 60px;
-    }
-
-    nav a {
-      margin-right: 28px;
-      color: #00ffcc;
-      text-decoration: none;
-      font-weight: 500;
-      text-transform: uppercase;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-    }
-
-    nav a:hover {
-      opacity: 0.6;
-    }
-
-    /* Side Resume Label (clickable) */
-    h2.side-label {
-      position: fixed;
-      top: 100px;
-      right: 60px;
-      z-index: 2;
-      font-size: 18px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    h2.side-label a {
-      color: #00ffcc;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    h2.side-label a:hover {
-      opacity: 0.7;
-      transform: scale(1.05);
-    }
-
-    main {
-      margin: 80px 60px;
-      max-width: 700px;
-      background-color: rgba(0,0,0,0.5);
-      padding: 30px;
-      border-left: 2px solid #00ffcc;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s ease-out;
-      font-size: 15px;
-      line-height: 1.7;
-      color: #00ffcc;
-    }
-
-    main.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 42px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      color: #fff;
-    }
-
-    a.download-link {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 24px;
-      border: 1px solid #00ffcc;
-      border-radius: 4px;
-      text-decoration: none;
-      color: #00ffcc;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      font-size: 16px;
-    }
-
-    a.download-link:hover {
-      background-color: rgba(0, 255, 204, 0.1);
-      transform: scale(1.02);
-    }
-
-    footer {
-      margin: 120px 60px;
-      font-size: 14px;
-      opacity: 0.7;
-      color: #00ffcc;
-    }
-
-    footer a {
-      color: #00ffcc;
-      text-decoration: none;
-      margin-right: 20px;
-    }
-
-    footer a:hover {
-      opacity: 0.6;
-    }
-  </style>
+  <title>Resume</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="assets.html">3D Assets</a>
-    <a href="unity.html">Unity</a>
-    <a href="av.html">Audiovisual</a>
-    <a href="resume.html">Resume</a>
-  </nav>
+<nav>
+@@ -14,13 +14,15 @@
+  <a href="resume.html">Resume</a>
+</nav>
 
-  <!-- Side Resume Label -->
-  <h2 class="side-label">
-    <a href="resume/Resume_Jewel_2026.pdf" target="_blank">Resume</a>
-  </h2>
+<h1>Resume</h1>
+<main>
+  <h1>Resume</h1>
 
-  <!-- MAIN CONTENT -->
-  <main id="resumeMain">
-    <h1>Resume</h1>
-    <p>
-      Click the label on the right or the button below to download my resume (PDF):
-    </p>
-    <p>
-      <a href="resume/Resume_Jewel_2026.pdf" target="_blank" class="download-link">
-        Download Resume
-      </a>
-    </p>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    Contact — jewelleejohnson@gmail.com
-    <br>
-    <a href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
-    <a href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
-    <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
-  </footer>
-
-  <!-- SCROLL SCRIPT -->
-  <script>
-    const resumeMain = document.getElementById('resumeMain');
-
-    window.addEventListener('scroll', () => {
-      const rect = resumeMain.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 100) {
-        resumeMain.classList.add('show');
-      }
-    });
-  </script>
+<p>
+  <a href="resume/Jewel_Lee_Johnson_Resume.pdf" target="_blank">
+    Download Resume (PDF)
+  </a>
+</p>
+  <p>
+    <a href="resume/Jewel_Lee_Johnson_Resume.pdf" target="_blank">
+      Download Resume (PDF)
+    </a>
+  </p>
+</main>
 
 </body>
 </html>
