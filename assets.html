@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Jewel Lee-Johnson | 3D Assets</title>
+
   <link rel="stylesheet" href="style.css">
 
   <style>
@@ -40,10 +41,23 @@
 
     #viewer {
       width: 100%;
-      height: 70vh; /* responsive height */
+      height: 70vh;
       border: 1px solid rgba(255,255,255,0.2);
     }
   </style>
+
+  <!-- ===== IMPORT MAP ===== -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.155/build/three.module.js",
+        "OrbitControls": "https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/controls/OrbitControls.js",
+        "MTLLoader": "https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/loaders/MTLLoader.js",
+        "OBJLoader": "https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/loaders/OBJLoader.js"
+      }
+    }
+  </script>
+
 </head>
 <body>
 
