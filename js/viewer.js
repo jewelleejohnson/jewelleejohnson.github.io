@@ -1,4 +1,3 @@
-// ===== IMPORT MODULES USING IMPORT MAP =====
 import * as THREE from 'three';
 import { OrbitControls } from 'OrbitControls';
 import { MTLLoader } from 'MTLLoader';
@@ -9,7 +8,12 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x111111);
 
 // ===== CAMERA =====
-const camera = new THREE.PerspectiveCamera(45, window.innerWidth / (window.innerHeight * 0.7), 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(
+  45,
+  window.innerWidth / (window.innerHeight * 0.7),
+  0.1,
+  1000
+);
 camera.position.set(0, 1.5, 3);
 
 // ===== RENDERER =====
@@ -20,7 +24,6 @@ document.getElementById("viewer").appendChild(renderer.domElement);
 
 // ===== LIGHTS =====
 scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-
 const dirLight = new THREE.DirectionalLight(0xffffff, 1);
 dirLight.position.set(5, 5, 5);
 scene.add(dirLight);
@@ -69,13 +72,10 @@ mtlLoader.load("Jewel_CD.mtl", (materials) => {
 // ===== ANIMATION LOOP =====
 function animate() {
   requestAnimationFrame(animate);
-
   controls.update();
 
-  // Slow rotation
-  if (model) {
-    model.rotation.y += 0.005;
-  }
+  // Optional slow rotation
+  if (model) model.rotation.y += 0.005;
 
   renderer.render(scene, camera);
 }
