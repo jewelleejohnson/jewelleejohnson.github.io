@@ -1,8 +1,8 @@
-// ===== IMPORT MODULES FROM CDN =====
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155/build/three.module.js';
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/controls/OrbitControls.js';
-import { MTLLoader } from 'https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/loaders/MTLLoader.js';
-import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/loaders/OBJLoader.js';
+// ===== IMPORT MODULES USING IMPORT MAP =====
+import * as THREE from 'three';
+import { OrbitControls } from 'OrbitControls';
+import { MTLLoader } from 'MTLLoader';
+import { OBJLoader } from 'OBJLoader';
 
 // ===== SCENE =====
 const scene = new THREE.Scene();
@@ -33,6 +33,8 @@ controls.enableDamping = true;
 const mtlLoader = new MTLLoader();
 mtlLoader.setPath("./3d-assets/");
 
+let model = null;
+
 mtlLoader.load("Jewel_CD.mtl", (materials) => {
   materials.preload();
 
@@ -43,7 +45,7 @@ mtlLoader.load("Jewel_CD.mtl", (materials) => {
   objLoader.load(
     "Jewel_CD.obj",
     (object) => {
-      // --- AUTO CENTER + SCALE ---
+      // Auto scale and center
       const box = new THREE.Box3().setFromObject(object);
       const size = new THREE.Vector3();
       box.getSize(size);
@@ -57,6 +59,7 @@ mtlLoader.load("Jewel_CD.mtl", (materials) => {
       object.position.sub(center);
 
       scene.add(object);
+      model = object;
     },
     undefined,
     (error) => console.error("OBJ load error:", error)
@@ -66,13 +69,20 @@ mtlLoader.load("Jewel_CD.mtl", (materials) => {
 // ===== ANIMATION LOOP =====
 function animate() {
   requestAnimationFrame(animate);
+
   controls.update();
+
+  // Slow rotation
+  if (model) {
+    model.rotation.y += 0.005;
+  }
+
   renderer.render(scene, camera);
 }
 
 animate();
 
-// ===== HANDLE WINDOW RESIZE =====
+// ===== HANDLE RESIZE =====
 window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / (window.innerHeight * 0.7);
   camera.updateProjectionMatrix();
