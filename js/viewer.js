@@ -1,14 +1,20 @@
+// IMPORT MODULES
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155/build/three.module.js';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/controls/OrbitControls.js';
+import { MTLLoader } from 'https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/loaders/MTLLoader.js';
+import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/loaders/OBJLoader.js';
+
 // ===== SCENE =====
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x111111);
 
 // ===== CAMERA =====
-const camera = new THREE.PerspectiveCamera(45, 600 / 400, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(45, 800 / 500, 0.1, 1000);
 camera.position.set(0, 1.5, 3);
 
 // ===== RENDERER =====
 const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(600, 400);
+renderer.setSize(800, 500);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 document.getElementById("viewer").appendChild(renderer.domElement);
 
@@ -20,17 +26,17 @@ dirLight.position.set(5, 5, 5);
 scene.add(dirLight);
 
 // ===== CONTROLS =====
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
 // ===== LOAD MTL → OBJ =====
-const mtlLoader = new THREE.MTLLoader();
+const mtlLoader = new MTLLoader();
 mtlLoader.setPath("3d-assets/");
 
 mtlLoader.load("Jewel_CD.mtl", (materials) => {
   materials.preload();
 
-  const objLoader = new THREE.OBJLoader();
+  const objLoader = new OBJLoader();
   objLoader.setMaterials(materials);
   objLoader.setPath("3d-assets/");
 
@@ -42,14 +48,13 @@ mtlLoader.load("Jewel_CD.mtl", (materials) => {
       const size = new THREE.Vector3();
       box.getSize(size);
       const maxDim = Math.max(size.x, size.y, size.z);
-      const scale = 1.5 / maxDim; // scale to fit viewer
+      const scale = 1.5 / maxDim; 
       object.scale.setScalar(scale);
 
-      // Recompute bounding box after scaling
       box.setFromObject(object);
       const center = new THREE.Vector3();
       box.getCenter(center);
-      object.position.sub(center); // center model
+      object.position.sub(center);
 
       scene.add(object);
     },
