@@ -1,4 +1,4 @@
-// ===== IMPORT MODULES =====
+// ===== IMPORT MODULES FROM CDN =====
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155/build/three.module.js';
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/controls/OrbitControls.js';
 import { MTLLoader } from 'https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/loaders/MTLLoader.js';
@@ -9,7 +9,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x111111);
 
 // ===== CAMERA =====
-const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / (window.innerHeight * 0.7), 0.1, 1000);
 camera.position.set(0, 1.5, 3);
 
 // ===== RENDERER =====
@@ -72,7 +72,7 @@ function animate() {
 
 animate();
 
-// ===== HANDLE RESIZE =====
+// ===== HANDLE WINDOW RESIZE =====
 window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / (window.innerHeight * 0.7);
   camera.updateProjectionMatrix();
