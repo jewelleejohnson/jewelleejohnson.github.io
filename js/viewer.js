@@ -1,27 +1,26 @@
-// IMPORT MODULES
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155/build/three.module.js';
+// ===== IMPORT MODULES =====
+import { Scene, PerspectiveCamera, WebGLRenderer, Color, AmbientLight, DirectionalLight, Box3, Vector3, SRGBColorSpace } from 'https://cdn.jsdelivr.net/npm/three@0.155/build/three.module.js';
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/controls/OrbitControls.js';
 import { MTLLoader } from 'https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/loaders/MTLLoader.js';
 import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/loaders/OBJLoader.js';
 
 // ===== SCENE =====
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x111111);
+const scene = new Scene();
+scene.background = new Color(0x111111);
 
 // ===== CAMERA =====
-const camera = new THREE.PerspectiveCamera(45, 800 / 500, 0.1, 1000);
+const camera = new PerspectiveCamera(45, 800 / 500, 0.1, 1000);
 camera.position.set(0, 1.5, 3);
 
 // ===== RENDERER =====
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new WebGLRenderer({ antialias: true });
 renderer.setSize(800, 500);
-renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.outputColorSpace = SRGBColorSpace;
 document.getElementById("viewer").appendChild(renderer.domElement);
 
 // ===== LIGHTS =====
-scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-
-const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+scene.add(new AmbientLight(0xffffff, 0.6));
+const dirLight = new DirectionalLight(0xffffff, 1);
 dirLight.position.set(5, 5, 5);
 scene.add(dirLight);
 
@@ -44,15 +43,15 @@ mtlLoader.load("Jewel_CD.mtl", (materials) => {
     "Jewel_CD.obj",
     (object) => {
       // --- AUTO CENTER + SCALE ---
-      const box = new THREE.Box3().setFromObject(object);
-      const size = new THREE.Vector3();
+      const box = new Box3().setFromObject(object);
+      const size = new Vector3();
       box.getSize(size);
       const maxDim = Math.max(size.x, size.y, size.z);
-      const scale = 1.5 / maxDim; 
+      const scale = 1.5 / maxDim;
       object.scale.setScalar(scale);
 
       box.setFromObject(object);
-      const center = new THREE.Vector3();
+      const center = new Vector3();
       box.getCenter(center);
       object.position.sub(center);
 
