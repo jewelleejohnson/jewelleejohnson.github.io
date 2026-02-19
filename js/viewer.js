@@ -9,12 +9,12 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x111111);
 
 // ===== CAMERA =====
-const camera = new THREE.PerspectiveCamera(45, 800 / 500, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(0, 1.5, 3);
 
 // ===== RENDERER =====
 const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(800, 500);
+renderer.setSize(window.innerWidth, window.innerHeight * 0.7);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 document.getElementById("viewer").appendChild(renderer.domElement);
 
@@ -31,14 +31,14 @@ controls.enableDamping = true;
 
 // ===== LOAD MTL → OBJ =====
 const mtlLoader = new MTLLoader();
-mtlLoader.setPath("3d-assets/");
+mtlLoader.setPath("./3d-assets/");
 
 mtlLoader.load("Jewel_CD.mtl", (materials) => {
   materials.preload();
 
   const objLoader = new OBJLoader();
   objLoader.setMaterials(materials);
-  objLoader.setPath("3d-assets/");
+  objLoader.setPath("./3d-assets/");
 
   objLoader.load(
     "Jewel_CD.obj",
@@ -59,9 +59,7 @@ mtlLoader.load("Jewel_CD.mtl", (materials) => {
       scene.add(object);
     },
     undefined,
-    (error) => {
-      console.error("OBJ load error:", error);
-    }
+    (error) => console.error("OBJ load error:", error)
   );
 });
 
@@ -73,3 +71,10 @@ function animate() {
 }
 
 animate();
+
+// ===== HANDLE RESIZE =====
+window.addEventListener("resize", () => {
+  camera.aspect = window.innerWidth / (window.innerHeight * 0.7);
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight * 0.7);
+});
