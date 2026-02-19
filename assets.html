@@ -1,8 +1,125 @@
-<body>
-  <h1 style="color:white;">JS TEST</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3D Assets</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 60px;
+      font-family: system-ui, sans-serif;
+      background: #111;
+      color: #eaeaea;
+    }
 
-  <script>
-    alert("JavaScript is running");
-    document.body.style.background = "#111";
-  </script>
+    nav {
+      margin-bottom: 40px;
+    }
+
+    nav a {
+      margin-right: 28px;
+      color: #eaeaea;
+      text-decoration: none;
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+    }
+
+    nav a:hover {
+      opacity: 0.6;
+    }
+
+    #viewer {
+      width: 800px;
+      height: 500px;
+      border: 2px solid #444;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="assets.html">3D Assets</a>
+  <a href="unity.html">Unity</a>
+  <a href="av.html">Audiovisual</a>
+  <a href="resume.html">Resume</a>
+</nav>
+
+<h1>3D Assets</h1>
+<div id="viewer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/OBJLoader.js"></script>
+
+<script>
+const container = document.getElementById("viewer");
+
+// Scene
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x222222);
+
+// Camera
+const camera = new THREE.PerspectiveCamera(60, 800 / 500, 0.01, 1000);
+camera.position.set(0, 0, 10);
+
+// Renderer
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(800, 500);
+container.appendChild(renderer.domElement);
+
+// Lights
+scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+dirLight.position.set(10, 10, 10);
+scene.add(dirLight);
+
+// Load OBJ
+const loader = new THREE.OBJLoader();
+loader.load(
+  "3d-assets/Jewel_CD.obj",
+  (object) => {
+    console.log("OBJ loaded");
+
+    // Force visible material
+    object.traverse(child => {
+      if (child.isMesh) {
+        child.material = new THREE.MeshStandardMaterial({
+          color: 0xaaaaaa,
+          metalness: 0.2,
+          roughness: 0.7
+        });
+      }
+    });
+
+    // Auto center + scale
+    const box = new THREE.Box3().setFromObject(object);
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scale = 5 / maxDim;
+
+    object.scale.setScalar(scale);
+    object.position.sub(center.multiplyScalar(scale));
+
+    scene.add(object);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      object.rotation.y += 0.01;
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  },
+  undefined,
+  (err) => console.error("OBJ error:", err)
+);
+</script>
+
 </body>
+</html>
