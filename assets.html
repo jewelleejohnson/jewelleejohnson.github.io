@@ -1,9 +1,4 @@
-<script type="module">
-  import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.155/build/three.module.js";
-  import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/controls/OrbitControls.js";
-  import { MTLLoader } from "https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/loaders/MTLLoader.js";
-  import { OBJLoader } from "https://cdn.jsdelivr.net/npm/three@0.155/examples/jsm/loaders/OBJLoader.js";
-
+<script>
   const container = document.getElementById("viewer");
 
   const scene = new THREE.Scene();
@@ -25,14 +20,14 @@
   light.position.set(5, 10, 7);
   scene.add(light);
 
-  const controls = new OrbitControls(camera, renderer.domElement);
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-  const mtlLoader = new MTLLoader();
+  const mtlLoader = new THREE.MTLLoader();
   mtlLoader.setPath("3d-assets/");
   mtlLoader.load("Jewel_CD.mtl", (materials) => {
     materials.preload();
 
-    const objLoader = new OBJLoader();
+    const objLoader = new THREE.OBJLoader();
     objLoader.setMaterials(materials);
     objLoader.setPath("3d-assets/");
     objLoader.load("Jewel_CD.obj", (object) => {
@@ -46,4 +41,4 @@
     renderer.render(scene, camera);
   }
   animate();
-</sc
+</script>
