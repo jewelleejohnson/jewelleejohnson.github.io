@@ -13,9 +13,13 @@
 
   <style>
     /* Tech/Code Aesthetic Overrides */
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       color: #00ffcc;
-      background-image: url("images/jewel-johnson-asset8.jpg");
+      background-image: url("images/jewel-johnson-asset12.jpg");
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -25,6 +29,7 @@
       overflow-x: hidden;
     }
 
+    /* Dark overlay */
     body::before {
       content: "";
       position: fixed;
@@ -57,7 +62,18 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       margin: 40px 60px 20px;
-      color: #fff;
+      color: #ffffff; /* White clickable title */
+    }
+
+    h1 a {
+      text-decoration: none;
+      color: #ffffff; /* Keep link white */
+      transition: all 0.3s ease;
+    }
+
+    h1 a:hover {
+      opacity: 0.7;
+      transform: scale(1.02);
     }
 
     main {
@@ -71,6 +87,7 @@
       opacity: 0;
       transform: translateY(40px);
       transition: all 1s ease-out;
+      color: #00ffcc;
     }
 
     main.show {
@@ -96,26 +113,14 @@
       transform: scale(1.02);
     }
 
-    /* Side label */
-    h2.side-label {
-      position: fixed;
-      top: 100px;
-      right: 60px;
-      z-index: 2;
-      font-size: 18px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    h2.side-label a {
-      color: #00ffcc;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    h2.side-label a:hover {
-      opacity: 0.7;
-      transform: scale(1.05);
+    /* Portfolio Image */
+    img.portfolio-img {
+      display: block;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 30px;
+      border: 2px solid #00ffcc;
+      border-radius: 4px;
     }
 
     footer {
@@ -148,22 +153,24 @@
     <a href="resume.html">Resume</a>
   </nav>
 
-  <!-- Side Resume Label (clickable) -->
-  <h2 class="side-label">
-    <a href="resume/Jewel_Lee_Johnson_Resume.pdf" target="_blank">Resume</a>
-  </h2>
-
   <!-- MAIN CONTENT -->
-  <h1>Resume</h1>
   <main id="resumeMain">
+    <h1>
+      <a href="resume/Jewel_Lee_Johnson_Resume.pdf" target="_blank">Resume</a>
+    </h1>
+
     <p>
-      Click the label on the right or the button below to download my resume (PDF):
+      Click the title above or the button below to download my resume (PDF):
     </p>
+
     <p>
       <a href="resume/Jewel_Lee_Johnson_Resume.pdf" target="_blank" class="download-link">
         Download Resume
       </a>
     </p>
+
+    <!-- Portfolio Image -->
+    <img src="images/JewelWhiteBackground3.jpg" alt="Jewel Lee-Johnson Portfolio" class="portfolio-img">
   </main>
 
   <!-- FOOTER -->
@@ -175,7 +182,7 @@
     <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
   </footer>
 
-  <!-- SCROLL SCRIPT -->
+  <!-- SCROLL FADE SCRIPT -->
   <script>
     const resumeMain = document.getElementById('resumeMain');
     window.addEventListener('scroll', () => {
