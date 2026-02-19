@@ -1,52 +1,133 @@
-<script>
-  const box = document.getElementById("viewer");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jewel Lee-Johnson | 3D Assets</title>
 
-  // make empty world
-  const scene = new THREE.Scene();
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 
-  // make eyes
-  const camera = new THREE.PerspectiveCamera(
-    45,
-    box.clientWidth / box.clientHeight,
-    0.1,
-    1000
-  );
-  camera.position.z = 5;
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-  // make screen
-  const renderer = new THREE.WebGLRenderer({ alpha: true });
-  renderer.setSize(box.clientWidth, box.clientHeight);
-  box.appendChild(renderer.domElement);
+    body {
+      margin: 0;
+      padding: 60px;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      color: #eaeaea;
+      background: #000;
+    }
 
-  // turn on lights (VERY IMPORTANT)
-  scene.add(new THREE.AmbientLight(0xffffff, 0.7));
-  const sun = new THREE.DirectionalLight(0xffffff, 1);
-  sun.position.set(5, 5, 5);
-  scene.add(sun);
+    nav {
+      margin-bottom: 80px;
+    }
 
-  // let mouse move the toy
-  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    nav a {
+      margin-right: 28px;
+      color: #eaeaea;
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
 
-  // load colors first
-  const mtl = new THREE.MTLLoader();
-  mtl.setPath("models/");
-  mtl.load("Jewel_CD.mtl", (materials) => {
-    materials.preload();
+    h1 {
+      font-size: 42px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
 
-    // load shape
-    const obj = new THREE.OBJLoader();
-    obj.setMaterials(materials);
-    obj.setPath("models/");
-    obj.load("Jewel_CD.obj", (model) => {
-      scene.add(model);
-    });
-  });
+    .subtitle {
+      opacity: 0.8;
+      margin-bottom: 60px;
+    }
 
-  // keep drawing forever
-  function draw() {
-    requestAnimationFrame(draw);
-    controls.update();
-    renderer.render(scene, camera);
-  }
-  draw();
-</script>
+    h2 {
+      margin-top: 80px;
+      margin-bottom: 20px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 18px;
+    }
+
+    /* 3D VIEWER BOX */
+    #viewer {
+      width: 600px;
+      height: 400px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="assets.html">3D Assets</a>
+    <a href="unity.html">Unity</a>
+    <a href="av.html">Audiovisual</a>
+    <a href="resume.html">Resume</a>
+  </nav>
+
+  <!-- HEADER -->
+  <h1>Jewel Lee-Johnson</h1>
+  <p class="subtitle">3D Artist — Environments, Assets & Characters</p>
+
+  <!-- 3D ASSET -->
+  <h2>3D Asset Viewer</h2>
+  <div id="viewer"></div>
+
+  <!-- THREE.JS LIBRARIES -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.155/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.155/examples/js/loaders/MTLLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.155/examples/js/loaders/OBJLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.155/examples/js/controls/OrbitControls.js"></script>
+
+  <!-- THREE.JS CODE -->
+  <script>
+    const container = document.getElementById("viewer");
+
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(
+      45,
+      container.clientWidth / container.clientHeight,
+      0.1,
+      1000
+    );
+    camera.position.set(0, 2, 5);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(renderer.domElement);
+
+    // LIGHTS (REQUIRED)
+    scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(5, 10, 7);
+    scene.add(light);
+
+    // CONTROLS
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+
+    // LOAD MATERIAL + OBJ
+    const mtlLoader = new THREE.MTLLoader();
+    mtlLoader.setPath("3d-assets/");
+    mtlLoader.load("Jewel_CD.mtl", (materials) => {
+      materials.preload();
+
+      const objLoader = new THREE.OBJLoader();
+      objLoader.setMaterials(materials);
+      objLoader.setPath("3d-assets/");
+      objLoader.load("Jewel_CD.obj", (object) => {
+        object.scale.set(1, 1, 1);
+        scene.add(object);
