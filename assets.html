@@ -3,25 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>Jewel Lee-Johnson | 3D Assets</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
-
   <style>
     #viewer {
-      width: 600px;
-      height: 400px;
-      border: 1px solid rgba(255,255,255,0.2);
+      width: 100%;
+      max-width: 800px;
+      height: 500px;
       margin-top: 40px;
+      border: 1px solid rgba(255,255,255,0.2);
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="index.html">Home</a>
     <a href="assets.html">3D Assets</a>
@@ -30,21 +24,12 @@
     <a href="resume.html">Resume</a>
   </nav>
 
-  <!-- HEADER -->
   <h1>Jewel Lee-Johnson</h1>
   <p class="subtitle">3D Artist — Interactive Asset Viewer</p>
 
-  <!-- VIEWER -->
   <div id="viewer"></div>
 
-  <!-- THREE.JS LIBRARIES -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.155/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.155/examples/js/loaders/MTLLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.155/examples/js/loaders/OBJLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.155/examples/js/controls/OrbitControls.js"></script>
-
-  <!-- YOUR JS FILE -->
-  <script src="js/viewer.js"></script>
-
+  <!-- JS using ES Modules -->
+  <script type="module" src="js/viewer.js"></script>
 </body>
 </html>
