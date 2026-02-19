@@ -1,122 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>3D Assets</title>
+<script>
+  const box = document.getElementById("viewer");
 
-  <style>
-    body {
-      margin: 0;
-      padding: 60px;
-      font-family: system-ui, sans-serif;
-      background: #111;
-      color: #eaeaea;
-    }
-
-    nav {
-      margin-bottom: 40px;
-    }
-
-    nav a {
-      margin-right: 28px;
-      color: #eaeaea;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-    }
-
-    #viewer {
-      width: 800px;
-      height: 500px;
-      border: 1px solid #555;
-    }
-  </style>
-</head>
-
-<body>
-
-<nav>
-  <a href="index.html">Home</a>
-  <a href="assets.html">3D Assets</a>
-</nav>
-
-<h1>3D Assets</h1>
-<div id="viewer"></div>
-
-<script type="module">
-  import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.module.js";
-  import { OBJLoader } from "https://cdn.jsdelivr.net/npm/three@0.152.2/examples/jsm/loaders/OBJLoader.js";
-  import { MTLLoader } from "https://cdn.jsdelivr.net/npm/three@0.152.2/examples/jsm/loaders/MTLLoader.js";
-
-  const container = document.getElementById("viewer");
-
-  // Scene
+  // make empty world
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x111111);
 
-  // Camera
+  // make eyes
   const camera = new THREE.PerspectiveCamera(
-    60,
-    container.clientWidth / container.clientHeight,
+    45,
+    box.clientWidth / box.clientHeight,
     0.1,
     1000
   );
-  camera.position.set(0, 1, 6);
+  camera.position.z = 5;
 
-  // Renderer
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(container.clientWidth, container.clientHeight);
-  container.appendChild(renderer.domElement);
+  // make screen
+  const renderer = new THREE.WebGLRenderer({ alpha: true });
+  renderer.setSize(box.clientWidth, box.clientHeight);
+  box.appendChild(renderer.domElement);
 
-  // Lights
-  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+  // turn on lights (VERY IMPORTANT)
+  scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+  const sun = new THREE.DirectionalLight(0xffffff, 1);
+  sun.position.set(5, 5, 5);
+  scene.add(sun);
 
-  const light = new THREE.DirectionalLight(0xffffff, 1);
-  light.position.set(5, 10, 7);
-  scene.add(light);
+  // let mouse move the toy
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-  // Load MTL then OBJ
-  const mtlLoader = new MTLLoader();
-  mtlLoader.setPath("3d-assets/");
-  mtlLoader.load("Jewel_CD.mtl", (materials) => {
+  // load colors first
+  const mtl = new THREE.MTLLoader();
+  mtl.setPath("models/");
+  mtl.load("Jewel_CD.mtl", (materials) => {
     materials.preload();
 
-    const objLoader = new OBJLoader();
-    objLoader.setMaterials(materials);
-    objLoader.setPath("3d-assets/");
-    objLoader.load("Jewel_CD.obj", (object) => {
-
-      // Center & scale
-      const box = new THREE.Box3().setFromObject(object);
-      const size = new THREE.Vector3();
-      box.getSize(size);
-      const maxDim = Math.max(size.x, size.y, size.z);
-      const scale = 3 / maxDim;
-      object.scale.setScalar(scale);
-
-      const center = new THREE.Vector3();
-      box.getCenter(center);
-      object.position.sub(center.multiplyScalar(scale));
-
-      scene.add(object);
-
-      function animate() {
-        requestAnimationFrame(animate);
-        object.rotation.y += 0.01;
-        renderer.render(scene, camera);
-      }
-      animate();
+    // load shape
+    const obj = new THREE.OBJLoader();
+    obj.setMaterials(materials);
+    obj.setPath("models/");
+    obj.load("Jewel_CD.obj", (model) => {
+      scene.add(model);
     });
   });
 
-  // Resize handling
-  window.addEventListener("resize", () => {
-    camera.aspect = container.clientWidth / container.clientHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(container.clientWidth, container.clientHeight);
-  });
+  // keep drawing forever
+  function draw() {
+    requestAnimationFrame(draw);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  draw();
 </script>
-
-</body>
-</html>
