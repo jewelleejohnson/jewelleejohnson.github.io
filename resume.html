@@ -19,7 +19,7 @@
       padding: 60px;
       font-family: 'Fira Code', monospace;
       color: #00ffcc;
-      background-image: url("images/jewel-lee-johnson-asset12.jpg");
+      background-image: url("images/jewel-johnson-asset8.jpg");
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -53,6 +53,18 @@
       opacity: 0.6;
     }
 
+    /* Side Resume Label */
+    h2.side-label {
+      position: fixed;
+      top: 100px;
+      right: 60px;
+      color: #00ffcc;
+      z-index: 2;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
     main {
       margin: 80px 60px;
       max-width: 700px;
@@ -84,13 +96,14 @@
     a.download-link {
       display: inline-block;
       margin-top: 20px;
-      padding: 10px 20px;
+      padding: 12px 24px;
       border: 1px solid #00ffcc;
       border-radius: 4px;
       text-decoration: none;
       color: #00ffcc;
       font-weight: 500;
       transition: all 0.3s ease;
+      font-size: 16px;
     }
 
     a.download-link:hover {
@@ -128,12 +141,18 @@
     <a href="resume.html">Resume</a>
   </nav>
 
+  <!-- Side Resume Label -->
+  <h2 class="side-label">Resume</h2>
+
   <!-- MAIN CONTENT -->
   <main id="resumeMain">
     <h1>Resume</h1>
     <p>
+      Click below to download my resume (PDF):
+    </p>
+    <p>
       <a href="resume/Resume_Jewel_2026.pdf" target="_blank" class="download-link">
-        Download Resume (PDF)
+        Download Resume
       </a>
     </p>
   </main>
