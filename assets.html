@@ -1,110 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Jewel Lee-Johnson | 3D Assets</title>
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>3D Assets</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
-      padding: 60px;
-      font-family: 'Fira Code', monospace;
-      background-image: url("images/jewel-johnson-asset4.jpg");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      color: #00ffcc;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.65);
-      z-index: -1;
+      background: #111;
+      color: white;
+      font-family: sans-serif;
     }
 
     nav {
-      margin: 40px 60px;
+      padding: 20px;
     }
 
     nav a {
-      margin-right: 28px;
-      color: #00ffcc;
+      color: white;
+      margin-right: 20px;
       text-decoration: none;
-      font-weight: 500;
-      text-transform: uppercase;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-    }
-
-    nav a:hover {
-      opacity: 0.6;
-    }
-
-    h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 42px;
-      margin-bottom: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #ffffff;
-    }
-
-    .subtitle {
-      opacity: 0.8;
-      margin-bottom: 40px;
-      color: #00ffcc;
     }
 
     #viewer {
-      width: 100%;
-      max-width: 700px;
-      height: 500px;
-      border: 2px solid #00ffcc;
-      border-radius: 4px;
-      margin-top: 30px;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s ease-out;
-    }
-
-    #viewer.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    footer {
-      margin: 60px;
-      font-size: 14px;
-      opacity: 0.7;
-      color: #00ffcc;
-    }
-
-    footer a {
-      color: #00ffcc;
-      text-decoration: none;
-      margin-right: 20px;
-    }
-
-    footer a:hover {
-      opacity: 0.6;
+      width: 100vw;
+      height: 80vh;
     }
   </style>
+
+  <!-- IMPORT MAP -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.155.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.155.0/examples/jsm/"
+    }
+  }
+  </script>
 </head>
+
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="index.html">Home</a>
     <a href="assets.html">3D Assets</a>
@@ -113,40 +49,9 @@
     <a href="resume.html">Resume</a>
   </nav>
 
-  <!-- HEADER -->
-  <h1>Jewel Lee-Johnson</h1>
-  <p class="subtitle">3D Artist — Interactive Asset Viewer</p>
-
-  <!-- 3D Viewer -->
   <div id="viewer"></div>
 
-  <!-- FOOTER -->
-  <footer>
-    Contact — jewelleejohnson@gmail.com
-    <br>
-    <a href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
-    <a href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
-    <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
-  </footer>
-
-  <!-- THREE.JS -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.155/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.155/examples/js/loaders/MTLLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.155/examples/js/loaders/OBJLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.155/examples/js/controls/OrbitControls.js"></script>
-
-  <script src="assets-viewer.js"></script>
-
-  <!-- Scroll Fade Script -->
-  <script>
-    const viewer = document.getElementById('viewer');
-    window.addEventListener('scroll', () => {
-      const rect = viewer.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 100) {
-        viewer.classList.add('show');
-      }
-    });
-  </script>
-
+  <!-- YOUR VIEWER -->
+  <script type="module" src="js/viewer.js"></script>
 </body>
 </html>
