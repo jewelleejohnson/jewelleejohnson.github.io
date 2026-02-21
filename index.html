@@ -14,7 +14,6 @@
     html, body {
       margin: 0;
       padding: 0;
-      height: auto;
     }
 
     body {
@@ -31,18 +30,16 @@
       content: "";
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.65);
+      background: rgba(0,0,0,0.65);
       z-index: -1;
     }
 
-    /* PAGE WRAPPER — THIS ENABLES SCROLL */
-    .page {
-      min-height: 200vh;
-      padding: 60px;
-    }
-
+    /* NAV */
     nav {
-      margin-bottom: 80px;
+      position: fixed;
+      top: 40px;
+      left: 60px;
+      z-index: 10;
     }
 
     nav a {
@@ -54,60 +51,93 @@
       letter-spacing: 0.08em;
     }
 
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      padding: 160px 60px 60px;
+    }
+
     h1 {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 48px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 10px;
-      color: #ffffff;
+      color: #fff;
     }
 
     .subtitle {
       color: #aaa;
-      margin-bottom: 120px;
+      margin-top: 10px;
     }
 
-    /* SCROLL CUE */
-    .scroll-hint {
-      margin-top: 40px;
-      font-size: 13px;
-      opacity: 0.6;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .scroll-indicator {
+      margin-top: 120px;
+      font-size: 32px;
+      opacity: 0.7;
+      animation: bounce 1.5s infinite;
+      cursor: pointer;
     }
 
-    /* DESCRIPTION SECTION */
-    .intro {
-      max-width: 720px;
-      margin-top: 300px;
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    /* SCROLL CONTENT */
+    .content {
+      position: relative;
+      min-height: 200vh; /* THIS is what enables scrolling */
+      padding: 0 60px 120px;
+    }
+
+    .description {
+      max-width: 620px;
+      margin-top: 200px;
       background: rgba(0,0,0,0.5);
       border-left: 2px solid #00ffcc;
       padding: 32px;
       line-height: 1.7;
       font-size: 15px;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 1s ease, transform 1s ease;
     }
 
-    /* SELECTED WORK */
-    .side {
-      margin-top: 200px;
+    .description.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .side h2 {
+    /* SIDE GALLERY */
+    .side-label {
+      position: fixed;
+      top: 140px;
+      right: 60px;
       font-size: 18px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 30px;
     }
 
-    .gallery {
+    .side-gallery {
+      position: fixed;
+      top: 190px;
+      right: 60px;
       display: flex;
+      flex-direction: column;
       gap: 20px;
-      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s ease, transform 1s ease;
     }
 
-    .gallery img,
-    .gallery video {
+    .side-gallery.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .side-gallery img,
+    .side-gallery video {
       width: 220px;
       height: 220px;
       object-fit: cover;
@@ -116,37 +146,38 @@
     }
 
     footer {
-      margin-top: 200px;
+      margin-top: 300px;
       font-size: 14px;
       opacity: 0.7;
     }
 
     footer a {
       color: #00ffcc;
-      margin-right: 20px;
       text-decoration: none;
+      margin-right: 20px;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="page">
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="assets.html">3D Assets</a>
+    <a href="unity.html">Unity</a>
+    <a href="av.html">Audiovisual</a>
+    <a href="resume.html">Resume</a>
+  </nav>
 
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="assets.html">3D Assets</a>
-      <a href="unity.html">Unity</a>
-      <a href="av.html">Audiovisual</a>
-      <a href="resume.html">Resume</a>
-    </nav>
-
+  <section class="hero">
     <h1>Jewel Lee-Johnson</h1>
     <p class="subtitle">// 3D Artist — Environments, Assets & Characters</p>
+    <div class="scroll-indicator">↓</div>
+  </section>
 
-    <div class="scroll-hint">↓ Scroll to read</div>
+  <section class="content">
 
-    <section class="intro">
+    <div class="description" id="description">
       Jewel Lee-Johnson has a strong background in animation and visual arts through
       both academic training and hands-on production work. She earned a BFA in
       Film/Animation/Video from the Rhode Island School of Design, focusing on
@@ -154,20 +185,10 @@
 
       <br><br>
 
-      Her work spans 3D modeling, texturing, rendering, motion capture, and
-      procedural animation, alongside audiovisual performance and XR
-      experimentation. Sound-driven workflows, electronic music, and immersive
-      environments shape her approach to 3D and real-time systems.
-    </section>
-
-    <section class="side">
-      <h2>Selected Work</h2>
-      <div class="gallery">
-        <img src="images/Xcsiber_Front.jpeg" alt="">
-        <img src="images/1final.png" alt="">
-        <video src="images/0001-0250.mov" autoplay loop muted playsinline></video>
-      </div>
-    </section>
+      Her work spans 3D modeling, texturing, rendering, motion capture, procedural
+      animation, and audiovisual performance. Sound-driven workflows, electronic
+      music, and immersive environments shape her approach to real-time systems.
+    </div>
 
     <footer>
       Contact — jewelleejohnson@gmail.com<br><br>
@@ -176,7 +197,29 @@
       <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
     </footer>
 
+  </section>
+
+  <h2 class="side-label">Selected Work</h2>
+  <div class="side-gallery" id="sideGallery">
+    <img src="images/Xcsiber_Front.jpeg">
+    <img src="images/1final.png">
+    <video src="images/0001-0250.mov" autoplay loop muted playsinline></video>
   </div>
+
+  <script>
+    const description = document.getElementById('description');
+    const sideGallery = document.getElementById('sideGallery');
+
+    window.addEventListener('scroll', () => {
+      const trigger = window.innerHeight * 0.75;
+      const rect = description.getBoundingClientRect();
+
+      if (rect.top < trigger) {
+        description.classList.add('show');
+        sideGallery.classList.add('show');
+      }
+    });
+  </script>
 
 </body>
 </html>
