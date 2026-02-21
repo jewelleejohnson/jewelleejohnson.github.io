@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Jewel Lee-Johnson | Portfolio</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -12,9 +11,13 @@
   <style>
     * { box-sizing: border-box; }
 
-    body {
+    html, body {
       margin: 0;
-      padding: 60px;
+      padding: 0;
+      height: auto;
+    }
+
+    body {
       font-family: 'Fira Code', monospace;
       color: #00ffcc;
       background-image: url("images/jewel-johnson-asset8.jpg");
@@ -32,8 +35,14 @@
       z-index: -1;
     }
 
+    /* PAGE WRAPPER — THIS ENABLES SCROLL */
+    .page {
+      min-height: 200vh;
+      padding: 60px;
+    }
+
     nav {
-      margin: 40px 60px;
+      margin-bottom: 80px;
     }
 
     nav a {
@@ -50,103 +59,55 @@
       font-size: 48px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin: 40px 60px 10px;
+      margin-bottom: 10px;
       color: #ffffff;
     }
 
     .subtitle {
-      margin-left: 60px;
-      margin-bottom: 0;
       color: #aaa;
+      margin-bottom: 120px;
     }
 
-    /* HERO SPACER */
-    .hero-spacer {
-      height: 100vh;
-    }
-
-    /* SCROLL INDICATOR */
-    .scroll-indicator {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 28px;
-      opacity: 0.8;
-      cursor: pointer;
-      color: #00ffcc;
-      text-align: center;
-      animation: bounce 1.5s infinite;
-      z-index: 10;
-    }
-
-    .scroll-indicator span {
-      display: block;
-      font-size: 12px;
-      margin-top: 6px;
+    /* SCROLL CUE */
+    .scroll-hint {
+      margin-top: 40px;
+      font-size: 13px;
       opacity: 0.6;
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
-      40% { transform: translate(-50%, -10px); }
-      60% { transform: translate(-50%, -5px); }
-    }
-
-    /* INTRO SECTION */
-    .intro-section {
-      display: flex;
-      gap: 40px;
-      margin: 60px;
-    }
-
-    .description {
-      flex: 1;
+    /* DESCRIPTION SECTION */
+    .intro {
+      max-width: 720px;
+      margin-top: 300px;
       background: rgba(0,0,0,0.5);
       border-left: 2px solid #00ffcc;
-      padding: 30px;
-      font-size: 15px;
+      padding: 32px;
       line-height: 1.7;
-      white-space: pre-line;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s ease-out;
+      font-size: 15px;
     }
-
-    .description.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* FADE CONTROL */
-    .fade { transition: opacity 0.6s ease-out; }
-    .fade.hidden { opacity: 0; }
 
     /* SELECTED WORK */
-    h2.side-label {
-      position: fixed;
-      top: 100px;
-      right: 60px;
+    .side {
+      margin-top: 200px;
+    }
+
+    .side h2 {
       font-size: 18px;
-      text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: #00ffcc;
+      text-transform: uppercase;
+      margin-bottom: 30px;
     }
 
-    .side-gallery {
-      position: fixed;
-      top: 150px;
-      right: 60px;
+    .gallery {
       display: flex;
-      flex-direction: column;
       gap: 20px;
-      z-index: 2;
+      flex-wrap: wrap;
     }
 
-    .side-gallery img,
-    .side-gallery video {
+    .gallery img,
+    .gallery video {
       width: 220px;
       height: 220px;
       object-fit: cover;
@@ -155,7 +116,7 @@
     }
 
     footer {
-      margin: 120px 60px;
+      margin-top: 200px;
       font-size: 14px;
       opacity: 0.7;
     }
@@ -170,77 +131,52 @@
 
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="assets.html">3D Assets</a>
-    <a href="unity.html">Unity</a>
-    <a href="av.html">Audiovisual</a>
-    <a href="resume.html">Resume</a>
-  </nav>
+  <div class="page">
 
-  <!-- HEADER -->
-  <h1>Jewel Lee-Johnson</h1>
-  <p class="subtitle">// 3D Artist — Environments, Assets & Characters</p>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="assets.html">3D Assets</a>
+      <a href="unity.html">Unity</a>
+      <a href="av.html">Audiovisual</a>
+      <a href="resume.html">Resume</a>
+    </nav>
 
-  <!-- FORCED SCROLL SPACE -->
-  <div class="hero-spacer"></div>
+    <h1>Jewel Lee-Johnson</h1>
+    <p class="subtitle">// 3D Artist — Environments, Assets & Characters</p>
 
-  <!-- SCROLL INDICATOR -->
-  <div class="scroll-indicator" onclick="scrollToDescription()">
-    ↓
-    <span>Scroll</span>
+    <div class="scroll-hint">↓ Scroll to read</div>
+
+    <section class="intro">
+      Jewel Lee-Johnson has a strong background in animation and visual arts through
+      both academic training and hands-on production work. She earned a BFA in
+      Film/Animation/Video from the Rhode Island School of Design, focusing on
+      digital animation, 3D modeling, and experimental media.
+
+      <br><br>
+
+      Her work spans 3D modeling, texturing, rendering, motion capture, and
+      procedural animation, alongside audiovisual performance and XR
+      experimentation. Sound-driven workflows, electronic music, and immersive
+      environments shape her approach to 3D and real-time systems.
+    </section>
+
+    <section class="side">
+      <h2>Selected Work</h2>
+      <div class="gallery">
+        <img src="images/Xcsiber_Front.jpeg" alt="">
+        <img src="images/1final.png" alt="">
+        <video src="images/0001-0250.mov" autoplay loop muted playsinline></video>
+      </div>
+    </section>
+
+    <footer>
+      Contact — jewelleejohnson@gmail.com<br><br>
+      <a href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
+      <a href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
+      <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
+    </footer>
+
   </div>
-
-  <!-- INTRO -->
-  <div class="intro-section fade">
-    <div class="description" id="description">
-Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work. She earned a BFA in Film/Animation/Video from the Rhode Island School of Design, focusing on digital animation, 3D modeling, and experimental media.
-
-Her work spans 3D modeling, texturing, rendering, motion capture, and procedural animation, alongside audiovisual performance and XR experimentation. Sound-driven workflows, electronic music, and immersive environments shape her approach to 3D and real-time systems.
-    </div>
-  </div>
-
-  <!-- SELECTED WORK -->
-  <h2 class="side-label">Selected Work</h2>
-  <div class="side-gallery fade" id="sideGallery">
-    <img src="images/Xcsiber_Front.jpeg" alt="Selected Work">
-    <img src="images/1final.png" alt="Selected Work">
-    <video src="images/0001-0250.mov" autoplay loop muted playsinline></video>
-  </div>
-
-  <!-- FOOTER -->
-  <footer>
-    Contact — jewelleejohnson@gmail.com<br>
-    <a href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
-    <a href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
-    <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
-  </footer>
-
-  <!-- SCRIPT -->
-  <script>
-    const description = document.getElementById('description');
-    const fadeElements = document.querySelectorAll('.fade');
-    const sideGallery = document.getElementById('sideGallery');
-
-    function scrollToDescription() {
-      description.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    window.addEventListener('scroll', () => {
-      const rect = description.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 150) {
-        description.classList.add('show');
-      }
-
-      fadeElements.forEach(el => {
-        const r = el.getBoundingClientRect();
-        el.classList.toggle('hidden', r.bottom < 50 || r.top > window.innerHeight);
-      });
-
-      sideGallery.style.transform = `translateY(${window.scrollY * 0.3}px)`;
-    });
-  </script>
 
 </body>
 </html>
