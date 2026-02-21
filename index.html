@@ -2,41 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Jewel Lee-Johnson | Portfolio</title>
+<title>Jewel Lee-Johnson</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
 * { box-sizing: border-box; }
 
-html, body {
-  height: 100%;
-}
+html, body { height: 100%; }
 
 body {
   margin: 0;
   font-family: 'Fira Code', monospace;
   color: #00ffcc;
-  background-image: url("images/Concrete.jpg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background: url("images/Photography.jpg") center / cover fixed no-repeat;
   overflow-x: hidden;
 }
 
-/* DARK + TECH OVERLAY */
+/* DARK / TECH OVERLAY */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   background:
-    linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.72)),
+    linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.78)),
     repeating-linear-gradient(
       to bottom,
-      rgba(255,255,255,0.02) 0px,
-      rgba(255,255,255,0.02) 1px,
+      rgba(255,255,255,0.025) 0px,
+      rgba(255,255,255,0.025) 1px,
       transparent 2px,
       transparent 4px
     );
@@ -52,114 +47,94 @@ nav {
 }
 
 nav a {
-  margin-right: 28px;
+  margin-right: 26px;
   color: #00ffcc;
   text-decoration: none;
-  text-transform: uppercase;
   font-size: 13px;
-  letter-spacing: 0.12em;
-}
-
-nav a:hover { opacity: 0.6; }
-
-/* INTRO + FIRST IMAGE */
-.intro-split {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  padding: 120px 100px;
-  gap: 100px;
-}
-
-.intro-text {
-  max-width: 680px;
-}
-
-h1 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 64px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #fff;
-  margin-bottom: 24px;
 }
 
-.subtitle {
-  color: #aaa;
-  margin-bottom: 48px;
-  font-size: 18px;
-}
-
-.intro-text p {
-  font-size: 20px;
-  line-height: 1.9;
-}
-
-/* INTRO IMAGE */
-.intro-media img {
-  width: 100%;
-  max-width: 720px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border: 1px solid #00ffcc;
-}
-
-/* SPLIT SECTIONS */
-section.split {
+/* HERO */
+.hero {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  padding: 100px;
-  gap: 100px;
+  padding: 140px 100px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 900px;
 }
 
-.split.right { direction: rtl; }
-.split.right > * { direction: ltr; }
+.hero h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 72px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 32px;
+}
 
-/* MEDIA */
-.media img,
-.media video {
-  width: 100%;
-  max-width: 720px;
-  aspect-ratio: 1 / 1;
+.hero p {
+  font-size: 22px;
+  line-height: 1.9;
+  max-width: 760px;
+}
+
+/* STATEMENT BLOCK */
+.statement {
+  min-height: 60vh;
+  padding: 120px 100px;
+  display: flex;
+  align-items: center;
+}
+
+.statement p {
+  font-size: 26px;
+  line-height: 1.8;
+  max-width: 820px;
+  border-left: 3px solid #888;
+  padding-left: 40px;
+  background: rgba(0,0,0,0.55);
+}
+
+/* FULL BLEED MEDIA */
+.media-full {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-full img,
+.media-full video {
+  width: 1280px;
+  height: 1280px;
   object-fit: cover;
   border: 1px solid #00ffcc;
 }
 
-/* TEXT PANEL */
-.text {
-  max-width: 700px;
-  background: rgba(0,0,0,0.55);
-  border-left: 3px solid #888;
-  padding: 48px;
-  font-size: 20px;
-  line-height: 1.9;
-  position: relative;
+/* TEXT INTERRUPT */
+.interrupt {
+  padding: 100px;
+  max-width: 720px;
 }
 
-/* subtle tech corner */
-.text::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 24px;
-  height: 24px;
-  border-top: 1px solid #00ffcc;
-  border-right: 1px solid #00ffcc;
-  opacity: 0.4;
+.interrupt p {
+  font-size: 20px;
+  line-height: 1.9;
+  background: rgba(0,0,0,0.6);
+  padding: 48px;
+  border: 1px solid #555;
 }
 
 /* FADE IN / OUT */
-.reveal {
+.fade {
   opacity: 0;
-  transform: translateY(60px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(80px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
 }
 
-.reveal.visible {
+.fade.visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -177,20 +152,6 @@ footer a {
   text-decoration: none;
   margin-right: 24px;
 }
-
-footer a:hover { opacity: 0.6; }
-
-/* SCROLL CUE */
-.scroll-indicator {
-  position: fixed;
-  bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  opacity: 0.7;
-}
 </style>
 </head>
 
@@ -204,52 +165,46 @@ footer a:hover { opacity: 0.6; }
   <a href="resume.html">Resume</a>
 </nav>
 
-<div class="scroll-indicator">Scroll</div>
-
-<!-- INTRO -->
-<section class="intro-split">
-  <div class="intro-text">
-    <h1>Jewel Lee-Johnson</h1>
-    <p class="subtitle">// 3D Artist — Environments, Assets & Audiovisual Worlds</p>
-    <p>
-      Jewel Lee-Johnson is a 3D artist working at the intersection of game engines,
-      experimental sound, and performance. Her practice focuses on immersive,
-      audio-responsive environments that treat visuals as systems rather than
-      static objects.
-    </p>
-  </div>
-
-  <div class="intro-media">
-    <img src="images/Xcsiber_Front.jpeg" alt="Featured Work">
-  </div>
+<!-- HERO -->
+<section class="hero">
+  <h1>Jewel Lee-Johnson</h1>
+  <p>
+    3D artist working across game engines, experimental sound, and performance.
+    Her practice focuses on immersive systems where visuals respond to audio,
+    motion, and live interaction.
+  </p>
 </section>
 
-<!-- SECTION 1 -->
-<section class="split right reveal">
-  <div class="media">
-    <video src="images/0001-0250.mov" autoplay muted loop playsinline></video>
-  </div>
-  <div class="text">
-    <p>
-      Sound functions as structure. Rhythm, frequency, and movement drive form,
-      allowing environments to behave dynamically in real time rather than
-      remaining visually fixed.
-    </p>
-  </div>
+<!-- STATEMENT -->
+<section class="statement fade">
+  <p>
+    These environments are not static scenes, but live systems—capable of
+    modulation, disruption, and performance.
+  </p>
 </section>
 
-<!-- SECTION 2 -->
-<section class="split left reveal">
-  <div class="media">
-    <img src="images/1final.png" alt="Selected Work">
-  </div>
-  <div class="text">
-    <p>
-      Drawing from DJ culture and experimental performance, her work merges
-      procedural animation with Unreal and Unity, positioning visuals as
-      instruments within live systems.
-    </p>
-  </div>
+<!-- MEDIA 1 -->
+<section class="media-full fade">
+  <img src="images/Xcsiber_Front.jpeg" alt="Work">
+</section>
+
+<!-- TEXT INTERRUPT -->
+<section class="interrupt fade">
+  <p>
+    Drawing from DJ culture and audiovisual performance, Jewel treats 3D space
+    as an instrument—one that can be played, remixed, and reconfigured in real
+    time.
+  </p>
+</section>
+
+<!-- MEDIA 2 -->
+<section class="media-full fade">
+  <video src="images/0001-0250.mov" autoplay muted loop playsinline></video>
+</section>
+
+<!-- MEDIA 3 -->
+<section class="media-full fade">
+  <img src="images/1final.png" alt="Work">
 </section>
 
 <footer>
@@ -260,10 +215,10 @@ footer a:hover { opacity: 0.6; }
 </footer>
 
 <script>
-const reveals = document.querySelectorAll('.reveal');
+const fades = document.querySelectorAll('.fade');
 
 window.addEventListener('scroll', () => {
-  reveals.forEach(el => {
+  fades.forEach(el => {
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25) {
       el.classList.add('visible');
