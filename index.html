@@ -10,9 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -26,7 +24,6 @@
       overflow-x: hidden;
     }
 
-    /* Dark overlay */
     body::before {
       content: "";
       position: fixed;
@@ -43,14 +40,9 @@
       margin-right: 28px;
       color: #00ffcc;
       text-decoration: none;
-      font-weight: 500;
       text-transform: uppercase;
       font-size: 14px;
       letter-spacing: 0.08em;
-    }
-
-    nav a:hover {
-      opacity: 0.6;
     }
 
     h1 {
@@ -66,10 +58,8 @@
       margin-left: 60px;
       margin-bottom: 60px;
       color: #aaa;
-      font-family: 'Fira Code', monospace;
     }
 
-    /* Scroll Indicator */
     .scroll-indicator {
       position: absolute;
       bottom: 20px;
@@ -79,33 +69,30 @@
       opacity: 0.7;
       animation: bounce 1.5s infinite;
       color: #00ffcc;
-      cursor: pointer;
     }
 
     @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-      40% { transform: translateX(-50%) translateY(-10px); }
-      60% { transform: translateX(-50%) translateY(-5px); }
+      0%, 20%, 50%, 80%, 100% { transform: translate(-50%,0); }
+      40% { transform: translate(-50%,-10px); }
+      60% { transform: translate(-50%,-5px); }
     }
 
     .intro-section {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin: 60px;
       gap: 40px;
+      margin: 60px;
     }
 
     .description {
-      flex: 1 1 500px;
-      background-color: rgba(0,0,0,0.5);
+      flex: 1;
+      background: rgba(0,0,0,0.5);
       border-left: 2px solid #00ffcc;
       padding: 30px;
+      font-size: 15px;
+      line-height: 1.7;
       opacity: 0;
       transform: translateY(40px);
       transition: all 1s ease-out;
-      font-size: 15px;
-      line-height: 1.7;
       white-space: pre-line;
     }
 
@@ -114,44 +101,14 @@
       transform: translateY(0);
     }
 
-    /* Fade-out when leaving viewport */
-    .fade {
-      opacity: 1;
-      transition: opacity 0.6s ease-out;
-    }
+    .fade { transition: opacity 0.6s ease-out; }
+    .fade.hidden { opacity: 0; }
 
-    .fade.hidden {
-      opacity: 0;
-    }
-
-    .side-images {
-      flex: 1 1 300px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .side-images img {
-      width: 100%;
-      height: 200px;
-      border: 1px solid #00ffcc;
-      border-radius: 4px;
-      object-fit: cover;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .side-images img:hover {
-      transform: scale(1.02);
-      opacity: 0.85;
-    }
-
-    /* Side Gallery */
+    /* SIDE SELECTED WORK */
     h2.side-label {
       position: fixed;
       top: 100px;
       right: 60px;
-      color: #00ffcc;
-      z-index: 2;
       font-size: 18px;
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -164,39 +121,28 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      max-width: 220px;
       z-index: 2;
     }
 
-    .side-gallery img {
+    .side-gallery img,
+    .side-gallery video {
       width: 220px;
-      height: 220px; /* square images */
+      height: 220px;
+      object-fit: cover;
       border: 1px solid #00ffcc;
       border-radius: 4px;
-      object-fit: cover;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .side-gallery img:hover {
-      transform: scale(1.02);
-      opacity: 0.85;
     }
 
     footer {
       margin: 120px 60px;
       font-size: 14px;
       opacity: 0.7;
-      color: #00ffcc;
     }
 
     footer a {
       color: #00ffcc;
-      text-decoration: none;
       margin-right: 20px;
-    }
-
-    footer a:hover {
-      opacity: 0.6;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -216,40 +162,28 @@
   <h1>Jewel Lee-Johnson</h1>
   <p class="subtitle">// 3D Artist — Environments, Assets & Characters</p>
 
-  <!-- Scroll Indicator -->
   <div class="scroll-indicator">&#x21e3;</div>
 
-  <!-- INTRO SECTION -->
-  <div class="intro-section fade" id="introSection">
+  <!-- INTRO -->
+  <div class="intro-section fade">
     <div class="description" id="description">
-Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work. She earned a BFA in Film/Animation/Video from the Rhode Island School of Design, focusing on digital animation, 3D modeling, and experimental media, working with tools such as Blender, Unreal Engine, Unity, and the Adobe Creative Suite.
+Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work. She earned a BFA in Film/Animation/Video from the Rhode Island School of Design, focusing on digital animation, 3D modeling, and experimental media.
 
-Her experience spans 3D modeling, texturing, rendering, motion capture, and procedural animation, as well as compositing and video/film editing. She has worked with motion capture systems including Perception Neuron and Axis Studio, capturing and troubleshooting movement data for animation and XR projects. She has collaborated with Brown University’s XR Hub and supported students with asset management, color spaces, and interactive workflows in Unity and Marvelous Designer.
-
-Jewel aims to create visually compelling, story-driven work, inspired by the electronic and experimental music scene, audio-reactive gaming, and local Black queer experimental performance artists in Philadelphia. Sound drives her approach to 3D modeling, and she seeks to bring BIPOC experimental art into 3D spaces as an underrepresented yet revolutionary outlet.
-
-She actively works in electronic sound and DJing, shaping how she considers motion, timing, and atmosphere in 3D space. She is interested in audio-reactive workflows that allow 3D visuals to respond in gameplay, using tools like Wwise, FMOD, Unreal Engine’s Audio Synesthesia, and Pure Data to translate audio into procedural animation, shader changes, particle systems, and lighting shifts. She also works in performance art and audiovisual installations where animation, sound, and environment converge, exploring hybrid workflows combining TouchDesigner with Unreal or Unity to support live, responsive visuals for performances and cinematic environments. Her focus is on using experimental 3D techniques to expand conventional gaming and VFX workflows.
-    </div>
-
-    <div class="side-images">
-      <img src="images/jewel-johnson-asset4.jpg" alt="3D Asset">
-      <img src="images/jewel-lee-johnson-asset11.jpg" alt="3D Asset">
-      <img src="images/jewel-lee-johnson-asset12.jpg" alt="3D Asset">
+Her work spans 3D modeling, texturing, rendering, motion capture, and procedural animation, alongside audiovisual performance and XR experimentation. Sound-driven workflows, electronic music, and immersive environments shape her approach to 3D and real-time systems.
     </div>
   </div>
 
-  <!-- SIDE SELECTED WORK GALLERY -->
+  <!-- SELECTED WORK -->
   <h2 class="side-label">Selected Work</h2>
   <div class="side-gallery fade" id="sideGallery">
-    <img src="images/jewel-lee-johnson-asset9.jpg" alt="3D Asset">
-    <img src="images/jewel-lee-johnson-asset10.jpg" alt="3D Asset">
-    <img src="images/jewel-lee-johnson-asset13.jpg" alt="3D Asset">
+    <img src="images/Xcsiber_Front.jpeg" alt="Selected Work">
+    <img src="images/1final.png" alt="Selected Work">
+    <video src="images/0001-0250.mov" autoplay loop muted playsinline></video>
   </div>
 
   <!-- FOOTER -->
   <footer>
-    Contact — jewelleejohnson@gmail.com
-    <br>
+    Contact — jewelleejohnson@gmail.com<br>
     <a href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
     <a href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
     <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
@@ -262,24 +196,16 @@ She actively works in electronic sound and DJing, shaping how she considers moti
     const sideGallery = document.getElementById('sideGallery');
 
     window.addEventListener('scroll', () => {
-      const rect = description.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 100) {
+      if (description.getBoundingClientRect().top < window.innerHeight - 100) {
         description.classList.add('show');
       }
 
-      // Fade elements leaving viewport
       fadeElements.forEach(el => {
-        const elRect = el.getBoundingClientRect();
-        if (elRect.bottom < 50 || elRect.top > window.innerHeight) {
-          el.classList.add('hidden');
-        } else {
-          el.classList.remove('hidden');
-        }
+        const r = el.getBoundingClientRect();
+        el.classList.toggle('hidden', r.bottom < 50 || r.top > window.innerHeight);
       });
 
-      // Parallax effect for side gallery
-      const scrollY = window.scrollY;
-      sideGallery.style.transform = `translateY(${scrollY * 0.3}px)`;
+      sideGallery.style.transform = `translateY(${window.scrollY * 0.3}px)`;
     });
   </script>
 
