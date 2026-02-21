@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Jewel Lee-Johnson | Portfolio</title>
 
-<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -23,7 +22,6 @@ body {
   overflow-x: hidden;
 }
 
-/* dark overlay */
 body::before {
   content: "";
   position: fixed;
@@ -48,18 +46,29 @@ nav a {
 
 nav a:hover { opacity: 0.6; }
 
-/* INTRO (TEXT + IMAGE VISIBLE ON LOAD) */
-.intro {
-  min-height: 100vh;
+/* HERO IMAGE */
+.hero {
+  min-height: 90vh;
   display: flex;
   align-items: center;
-  gap: 80px;
-  padding: 120px 80px 80px;
+  justify-content: center;
+  padding: 80px;
 }
 
-.intro-text {
-  flex: 1;
-  max-width: 620px;
+.hero img {
+  width: 60vw;
+  max-width: 640px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid #00ffcc;
+  border-radius: 4px;
+}
+
+/* INTRO */
+.intro {
+  min-height: 70vh;
+  padding: 80px;
+  max-width: 820px;
 }
 
 h1 {
@@ -73,36 +82,22 @@ h1 {
 
 .subtitle {
   color: #aaa;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
   font-size: 16px;
 }
 
-.intro-text p {
-  font-size: 18px;
+.intro p {
   line-height: 1.85;
-}
-
-/* HERO IMAGE */
-.intro-media {
-  flex: 1;
-}
-
-.intro-media img {
-  width: 100%;
-  max-width: 720px;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border: 1px solid #00ffcc;
-  border-radius: 4px;
+  font-size: 17px;
 }
 
 /* SPLIT SECTIONS */
 section.split {
-  min-height: 100vh;
+  min-height: 85vh;
   display: flex;
   align-items: center;
-  padding: 80px;
-  gap: 80px;
+  padding: 60px 80px;
+  gap: 60px;
 }
 
 .split.right { flex-direction: row-reverse; }
@@ -116,8 +111,8 @@ section.split {
 .media img,
 .media video {
   width: 100%;
-  max-width: 820px;
-  aspect-ratio: 16 / 9;
+  max-width: 640px; /* 1280x1280 visual scale */
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border: 1px solid #00ffcc;
   border-radius: 4px;
@@ -130,15 +125,15 @@ section.split {
   background: rgba(0,0,0,0.55);
   border-left: 2px solid #888;
   padding: 36px;
-  font-size: 18px;
   line-height: 1.85;
+  font-size: 17px;
 }
 
 /* SCROLL REVEAL */
 .reveal {
   opacity: 0;
-  transform: translateY(60px);
-  transition: all 0.9s ease;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
 }
 
 .reveal.show {
@@ -148,7 +143,7 @@ section.split {
 
 /* FOOTER */
 footer {
-  margin: 120px 60px;
+  margin: 100px 60px 120px;
   font-size: 14px;
   opacity: 0.7;
 }
@@ -164,7 +159,7 @@ footer a:hover { opacity: 0.6; }
 /* SCROLL CUE */
 .scroll-indicator {
   position: fixed;
-  bottom: 24px;
+  bottom: 22px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 12px;
@@ -188,23 +183,22 @@ footer a:hover { opacity: 0.6; }
 
 <div class="scroll-indicator">Scroll</div>
 
+<!-- HERO IMAGE -->
+<section class="hero">
+  <img src="images/1final.png" alt="Featured Work">
+</section>
+
 <!-- INTRO -->
 <section class="intro">
-  <div class="intro-text">
-    <h1>Jewel Lee-Johnson</h1>
-    <p class="subtitle">// 3D Artist — Environments, Assets & Audiovisual Worlds</p>
+  <h1>Jewel Lee-Johnson</h1>
+  <p class="subtitle">// 3D Artist — Environments, Assets & Audiovisual Worlds</p>
 
-    <p>
-      Jewel Lee-Johnson is a 3D artist working at the intersection of game engines,
-      experimental sound, and performance. Her practice centers on immersive,
-      audio-responsive environments that treat space as something live,
-      performative, and reactive.
-    </p>
-  </div>
-
-  <div class="intro-media">
-    <img src="images/1final.png" alt="Featured Work">
-  </div>
+  <p>
+    Jewel Lee-Johnson is a 3D artist working at the intersection of game engines,
+    experimental sound, and performance. Her practice centers on immersive,
+    audio-responsive environments that treat visuals as systems rather than
+    static objects.
+  </p>
 </section>
 
 <!-- SECTION 1 -->
@@ -214,9 +208,9 @@ footer a:hover { opacity: 0.6; }
   </div>
   <div class="text">
     <p>
-      Sound is a primary driver in Jewel’s workflow. Rhythm, frequency, and motion
-      actively shape visual systems, allowing environments to shift in real time
-      rather than remain static compositions.
+      Sound is a primary driver in Jewel’s workflow. She approaches 3D space as
+      something that can be performed and modulated in real time, allowing rhythm,
+      frequency, and movement to shape visual form.
     </p>
   </div>
 </section>
@@ -229,8 +223,8 @@ footer a:hover { opacity: 0.6; }
   <div class="text">
     <p>
       Drawing from DJ culture and experimental performance, her work merges
-      procedural animation with Unreal and Unity, treating visuals as instruments
-      that can be played, disrupted, and transformed.
+      procedural animation with Unreal and Unity, creating environments that
+      respond dynamically to audio and live input.
     </p>
   </div>
 </section>
