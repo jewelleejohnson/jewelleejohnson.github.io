@@ -34,11 +34,11 @@ body::before {
 
 /* NAV */
 nav {
-  margin: 40px 60px;
+  margin: 32px 48px;
 }
 
 nav a {
-  margin-right: 28px;
+  margin-right: 24px;
   color: #00ffcc;
   text-decoration: none;
   text-transform: uppercase;
@@ -50,8 +50,7 @@ nav a:hover { opacity: 0.6; }
 
 /* INTRO */
 .intro {
-  min-height: 100vh;
-  padding: 140px 80px 80px;
+  padding: 100px 64px 40px;
   max-width: 760px;
 }
 
@@ -66,57 +65,49 @@ h1 {
 
 .subtitle {
   color: #aaa;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
+  font-size: 15px;
 }
 
 .intro p {
   line-height: 1.8;
-  font-size: 15px;
+  font-size: 18px;
 }
 
-/* SPLIT SECTIONS */
-section.split {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 80px;
-  gap: 80px;
+/* MEDIA SECTIONS */
+.media-section {
+  padding: 40px 64px;
 }
 
-.split.right { flex-direction: row-reverse; }
-.split.left { flex-direction: row; }
-
-/* MEDIA */
-.media {
-  flex: 1;
-}
-
-.media img,
-.media video {
+.media-section img,
+.media-section video {
   width: 100%;
-  max-width: 700px;
+  max-width: 900px;
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border: 1px solid #00ffcc;
   border-radius: 4px;
 }
 
-/* TEXT PANEL (RESTORED STYLE) */
-.text {
-  flex: 1;
-  max-width: 560px;
+/* TEXT SECTIONS */
+.text-section {
+  padding: 32px 64px 48px;
+  max-width: 720px;
+}
+
+.text-panel {
   background: rgba(0,0,0,0.55);
   border-left: 2px solid #888;
   padding: 32px;
-  line-height: 1.8;
-  font-size: 15px;
+  font-size: 18px;
+  line-height: 1.85;
 }
 
-/* SCROLL REVEAL */
+/* REVEAL */
 .reveal {
   opacity: 0;
-  transform: translateY(60px);
-  transition: all 0.9s ease;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
 }
 
 .reveal.show {
@@ -124,9 +115,9 @@ section.split {
   transform: translateY(0);
 }
 
-/* FOOTER (ORIGINAL STYLE) */
+/* FOOTER */
 footer {
-  margin: 120px 60px;
+  margin: 80px 48px;
   font-size: 14px;
   opacity: 0.7;
 }
@@ -142,7 +133,7 @@ footer a:hover { opacity: 0.6; }
 /* SCROLL CUE */
 .scroll-indicator {
   position: fixed;
-  bottom: 24px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 12px;
@@ -170,7 +161,6 @@ footer a:hover { opacity: 0.6; }
 <section class="intro">
   <h1>Jewel Lee-Johnson</h1>
   <p class="subtitle">// 3D Artist — Environments, Assets & Audiovisual Worlds</p>
-
   <p>
     Jewel Lee-Johnson is a 3D artist working at the intersection of game engines,
     experimental sound, and performance. Her practice centers on immersive,
@@ -178,45 +168,45 @@ footer a:hover { opacity: 0.6; }
   </p>
 </section>
 
-<!-- SECTION 1 -->
-<section class="split right reveal">
-  <div class="media">
-    <video src="images/0001-0250.mov" autoplay muted loop playsinline></video>
-  </div>
-  <div class="text">
-    <p>
-      Sound is a primary driver in Jewel’s workflow. She approaches 3D space as
-      something that can be performed and modulated in real time, allowing rhythm,
-      frequency, and movement to shape visual form.
-    </p>
+<!-- HERO MEDIA (VISIBLE IMMEDIATELY) -->
+<section class="media-section">
+  <video src="images/0001-0250.mov" autoplay muted loop playsinline></video>
+</section>
+
+<!-- TEXT 1 -->
+<section class="text-section reveal">
+  <div class="text-panel">
+    Sound is a primary driver in Jewel’s workflow. She approaches 3D space as
+    something that can be performed and modulated in real time, allowing rhythm,
+    frequency, and motion to shape visual form.
   </div>
 </section>
 
-<!-- SECTION 2 -->
-<section class="split left reveal">
-  <div class="media">
-    <img src="images/1final.png" alt="Selected Work">
-  </div>
-  <div class="text">
-    <p>
-      Drawing from DJ culture and experimental performance, her work merges
-      procedural animation with Unreal and Unity, treating visuals as instruments
-      rather than static assets.
-    </p>
+<!-- IMAGE 2 -->
+<section class="media-section reveal">
+  <img src="images/1final.png" alt="Selected Work">
+</section>
+
+<!-- TEXT 2 -->
+<section class="text-section reveal">
+  <div class="text-panel">
+    Drawing from DJ culture and experimental performance, her work merges
+    procedural animation with Unreal and Unity, treating visuals as instruments
+    rather than static assets.
   </div>
 </section>
 
-<!-- SECTION 3 -->
-<section class="split right reveal">
-  <div class="media">
-    <img src="images/Xcsiber_Front.jpeg" alt="Selected Work">
-  </div>
-  <div class="text">
-    <p>
-      Through audiovisual installations and interactive worlds, Jewel explores
-      alternative pipelines for gaming and cinematic production—prioritizing live
-      systems, hybridity, and underrepresented voices in 3D space.
-    </p>
+<!-- IMAGE 3 -->
+<section class="media-section reveal">
+  <img src="images/Xcsiber_Front.jpeg" alt="Selected Work">
+</section>
+
+<!-- TEXT 3 -->
+<section class="text-section reveal">
+  <div class="text-panel">
+    Through audiovisual installations and interactive worlds, Jewel explores
+    alternative pipelines for gaming and cinematic production—prioritizing live
+    systems, hybridity, and underrepresented voices in 3D space.
   </div>
 </section>
 
@@ -233,7 +223,7 @@ const reveals = document.querySelectorAll('.reveal');
 
 window.addEventListener('scroll', () => {
   reveals.forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight - 120) {
+    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
       el.classList.add('show');
     }
   });
