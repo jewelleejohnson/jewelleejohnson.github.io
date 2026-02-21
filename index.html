@@ -15,13 +15,14 @@ body {
   margin: 0;
   font-family: 'Fira Code', monospace;
   color: #00ffcc;
-  background-image: url("images/jewel-johnson-asset8.jpg");
+  background-image: url("images/Concrete.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   overflow-x: hidden;
 }
 
+/* dark overlay */
 body::before {
   content: "";
   position: fixed;
@@ -46,29 +47,18 @@ nav a {
 
 nav a:hover { opacity: 0.6; }
 
-/* HERO IMAGE */
-.hero {
+/* INTRO + FIRST IMAGE */
+.intro-split {
   min-height: 90vh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 80px;
+  gap: 80px;
+  padding: 100px 80px 60px;
 }
 
-.hero img {
-  width: 60vw;
-  max-width: 640px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border: 1px solid #00ffcc;
-  border-radius: 4px;
-}
-
-/* INTRO */
-.intro {
-  min-height: 70vh;
-  padding: 80px;
-  max-width: 820px;
+.intro-text {
+  flex: 1;
+  max-width: 600px;
 }
 
 h1 {
@@ -86,9 +76,23 @@ h1 {
   font-size: 16px;
 }
 
-.intro p {
+.intro-text p {
   line-height: 1.85;
   font-size: 17px;
+}
+
+/* FIRST IMAGE */
+.intro-media {
+  flex: 1;
+}
+
+.intro-media img {
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid #00ffcc;
+  border-radius: 4px;
 }
 
 /* SPLIT SECTIONS */
@@ -96,22 +100,18 @@ section.split {
   min-height: 85vh;
   display: flex;
   align-items: center;
-  padding: 60px 80px;
   gap: 60px;
+  padding: 60px 80px;
 }
 
 .split.right { flex-direction: row-reverse; }
 .split.left { flex-direction: row; }
 
 /* MEDIA */
-.media {
-  flex: 1;
-}
-
 .media img,
 .media video {
   width: 100%;
-  max-width: 640px; /* 1280x1280 visual scale */
+  max-width: 640px;
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border: 1px solid #00ffcc;
@@ -120,23 +120,22 @@ section.split {
 
 /* TEXT PANEL */
 .text {
-  flex: 1;
   max-width: 600px;
   background: rgba(0,0,0,0.55);
   border-left: 2px solid #888;
   padding: 36px;
-  line-height: 1.85;
   font-size: 17px;
+  line-height: 1.85;
 }
 
-/* SCROLL REVEAL */
+/* FADE IN / OUT */
 .reveal {
   opacity: 0;
   transform: translateY(50px);
-  transition: all 0.8s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.reveal.show {
+.reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -183,22 +182,22 @@ footer a:hover { opacity: 0.6; }
 
 <div class="scroll-indicator">Scroll</div>
 
-<!-- HERO IMAGE -->
-<section class="hero">
-  <img src="images/1final.png" alt="Featured Work">
-</section>
+<!-- INTRO + FIRST IMAGE -->
+<section class="intro-split">
+  <div class="intro-text">
+    <h1>Jewel Lee-Johnson</h1>
+    <p class="subtitle">// 3D Artist — Environments, Assets & Audiovisual Worlds</p>
+    <p>
+      Jewel Lee-Johnson is a 3D artist working at the intersection of game engines,
+      experimental sound, and performance. Her practice centers on immersive,
+      audio-responsive environments that treat visuals as systems rather than
+      static objects.
+    </p>
+  </div>
 
-<!-- INTRO -->
-<section class="intro">
-  <h1>Jewel Lee-Johnson</h1>
-  <p class="subtitle">// 3D Artist — Environments, Assets & Audiovisual Worlds</p>
-
-  <p>
-    Jewel Lee-Johnson is a 3D artist working at the intersection of game engines,
-    experimental sound, and performance. Her practice centers on immersive,
-    audio-responsive environments that treat visuals as systems rather than
-    static objects.
-  </p>
+  <div class="intro-media">
+    <img src="images/Xcsiber_Front.jpeg" alt="Featured Work">
+  </div>
 </section>
 
 <!-- SECTION 1 -->
@@ -218,7 +217,7 @@ footer a:hover { opacity: 0.6; }
 <!-- SECTION 2 -->
 <section class="split left reveal">
   <div class="media">
-    <img src="images/Xcsiber_Front.jpeg" alt="Selected Work">
+    <img src="images/1final.png" alt="Selected Work">
   </div>
   <div class="text">
     <p>
@@ -242,8 +241,11 @@ const reveals = document.querySelectorAll('.reveal');
 
 window.addEventListener('scroll', () => {
   reveals.forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight - 120) {
-      el.classList.add('show');
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.7 && rect.bottom > window.innerHeight * 0.3) {
+      el.classList.add('visible');
+    } else {
+      el.classList.remove('visible');
     }
   });
 });
