@@ -34,11 +34,11 @@ body::before {
 
 /* NAV */
 nav {
-  margin: 32px 48px;
+  margin: 40px 60px;
 }
 
 nav a {
-  margin-right: 24px;
+  margin-right: 28px;
   color: #00ffcc;
   text-decoration: none;
   text-transform: uppercase;
@@ -48,66 +48,97 @@ nav a {
 
 nav a:hover { opacity: 0.6; }
 
-/* INTRO */
+/* INTRO (TEXT + IMAGE VISIBLE ON LOAD) */
 .intro {
-  padding: 100px 64px 40px;
-  max-width: 760px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  padding: 120px 80px 80px;
+}
+
+.intro-text {
+  flex: 1;
+  max-width: 620px;
 }
 
 h1 {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 48px;
+  font-size: 52px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #fff;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .subtitle {
   color: #aaa;
-  margin-bottom: 32px;
-  font-size: 15px;
+  margin-bottom: 40px;
+  font-size: 16px;
 }
 
-.intro p {
-  line-height: 1.8;
+.intro-text p {
   font-size: 18px;
+  line-height: 1.85;
 }
 
-/* MEDIA SECTIONS */
-.media-section {
-  padding: 40px 64px;
+/* HERO IMAGE */
+.intro-media {
+  flex: 1;
 }
 
-.media-section img,
-.media-section video {
+.intro-media img {
   width: 100%;
-  max-width: 900px;
-  aspect-ratio: 1 / 1;
+  max-width: 720px;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border: 1px solid #00ffcc;
   border-radius: 4px;
 }
 
-/* TEXT SECTIONS */
-.text-section {
-  padding: 32px 64px 48px;
-  max-width: 720px;
+/* SPLIT SECTIONS */
+section.split {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 80px;
+  gap: 80px;
 }
 
-.text-panel {
+.split.right { flex-direction: row-reverse; }
+.split.left { flex-direction: row; }
+
+/* MEDIA */
+.media {
+  flex: 1;
+}
+
+.media img,
+.media video {
+  width: 100%;
+  max-width: 820px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid #00ffcc;
+  border-radius: 4px;
+}
+
+/* TEXT PANEL */
+.text {
+  flex: 1;
+  max-width: 600px;
   background: rgba(0,0,0,0.55);
   border-left: 2px solid #888;
-  padding: 32px;
+  padding: 36px;
   font-size: 18px;
   line-height: 1.85;
 }
 
-/* REVEAL */
+/* SCROLL REVEAL */
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
+  transform: translateY(60px);
+  transition: all 0.9s ease;
 }
 
 .reveal.show {
@@ -117,7 +148,7 @@ h1 {
 
 /* FOOTER */
 footer {
-  margin: 80px 48px;
+  margin: 120px 60px;
   font-size: 14px;
   opacity: 0.7;
 }
@@ -133,7 +164,7 @@ footer a:hover { opacity: 0.6; }
 /* SCROLL CUE */
 .scroll-indicator {
   position: fixed;
-  bottom: 20px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 12px;
@@ -159,54 +190,48 @@ footer a:hover { opacity: 0.6; }
 
 <!-- INTRO -->
 <section class="intro">
-  <h1>Jewel Lee-Johnson</h1>
-  <p class="subtitle">// 3D Artist — Environments, Assets & Audiovisual Worlds</p>
-  <p>
-    Jewel Lee-Johnson is a 3D artist working at the intersection of game engines,
-    experimental sound, and performance. Her practice centers on immersive,
-    audio-responsive environments that blend visual systems with live interaction.
-  </p>
-</section>
+  <div class="intro-text">
+    <h1>Jewel Lee-Johnson</h1>
+    <p class="subtitle">// 3D Artist — Environments, Assets & Audiovisual Worlds</p>
 
-<!-- HERO MEDIA (VISIBLE IMMEDIATELY) -->
-<section class="media-section">
-  <video src="images/0001-0250.mov" autoplay muted loop playsinline></video>
-</section>
+    <p>
+      Jewel Lee-Johnson is a 3D artist working at the intersection of game engines,
+      experimental sound, and performance. Her practice centers on immersive,
+      audio-responsive environments that treat space as something live,
+      performative, and reactive.
+    </p>
+  </div>
 
-<!-- TEXT 1 -->
-<section class="text-section reveal">
-  <div class="text-panel">
-    Sound is a primary driver in Jewel’s workflow. She approaches 3D space as
-    something that can be performed and modulated in real time, allowing rhythm,
-    frequency, and motion to shape visual form.
+  <div class="intro-media">
+    <img src="images/1final.png" alt="Featured Work">
   </div>
 </section>
 
-<!-- IMAGE 2 -->
-<section class="media-section reveal">
-  <img src="images/1final.png" alt="Selected Work">
-</section>
-
-<!-- TEXT 2 -->
-<section class="text-section reveal">
-  <div class="text-panel">
-    Drawing from DJ culture and experimental performance, her work merges
-    procedural animation with Unreal and Unity, treating visuals as instruments
-    rather than static assets.
+<!-- SECTION 1 -->
+<section class="split right reveal">
+  <div class="media">
+    <video src="images/0001-0250.mov" autoplay muted loop playsinline></video>
+  </div>
+  <div class="text">
+    <p>
+      Sound is a primary driver in Jewel’s workflow. Rhythm, frequency, and motion
+      actively shape visual systems, allowing environments to shift in real time
+      rather than remain static compositions.
+    </p>
   </div>
 </section>
 
-<!-- IMAGE 3 -->
-<section class="media-section reveal">
-  <img src="images/Xcsiber_Front.jpeg" alt="Selected Work">
-</section>
-
-<!-- TEXT 3 -->
-<section class="text-section reveal">
-  <div class="text-panel">
-    Through audiovisual installations and interactive worlds, Jewel explores
-    alternative pipelines for gaming and cinematic production—prioritizing live
-    systems, hybridity, and underrepresented voices in 3D space.
+<!-- SECTION 2 -->
+<section class="split left reveal">
+  <div class="media">
+    <img src="images/Xcsiber_Front.jpeg" alt="Selected Work">
+  </div>
+  <div class="text">
+    <p>
+      Drawing from DJ culture and experimental performance, her work merges
+      procedural animation with Unreal and Unity, treating visuals as instruments
+      that can be played, disrupted, and transformed.
+    </p>
   </div>
 </section>
 
@@ -223,7 +248,7 @@ const reveals = document.querySelectorAll('.reveal');
 
 window.addEventListener('scroll', () => {
   reveals.forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+    if (el.getBoundingClientRect().top < window.innerHeight - 120) {
       el.classList.add('show');
     }
   });
