@@ -1,60 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>3D Assets</title>
+  <meta charset="UTF-8">
+  <title>Jewel Lee-Johnson | 3D Assets</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      background: #111;
-      color: white;
-      font-family: sans-serif;
+      padding: 60px;
+      font-family: 'Fira Code', monospace;
+      color: #00ffcc;
+      background-image: url("images/Photography.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.68);
+      z-index: -1;
     }
 
     nav {
-      padding: 20px;
+      margin: 40px 60px;
     }
 
     nav a {
-      color: white;
-      margin-right: 20px;
+      margin-right: 28px;
+      color: #00ffcc;
       text-decoration: none;
-      font-size: 14px;
-      letter-spacing: 0.1em;
+      font-weight: 500;
       text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 0.08em;
     }
 
-    #viewer {
-      width: 100vw;
-      height: 80vh;
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 52px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 40px 60px 10px;
+      color: #fff;
+    }
+
+    .subtitle {
+      margin-left: 60px;
+      margin-bottom: 60px;
+      color: #aaa;
+      font-size: 16px;
+    }
+
+    /* PORTFOLIO LAYOUT */
+    .portfolio-section {
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+      margin: 60px;
+    }
+
+    .project {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .project-media {
+      flex: 1 1 600px;
+      border: 2px solid #00ffcc;
+      box-shadow: 0 0 20px #00ffcc55;
+      padding: 12px;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .project-media:hover {
+      box-shadow: 0 0 40px #00ffccaa;
+    }
+
+    .project-media img,
+    .project-media video {
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      border: 1px solid #00ffcc;
+    }
+
+    .project-info {
+      flex: 1 1 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 16px;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    .project-info h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      margin: 0;
+      color: #fff;
+      letter-spacing: 0.08em;
+    }
+
+    .project-info p {
+      margin: 0;
+      color: #aaa;
+    }
+
+    footer {
+      margin: 120px 60px;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    footer a {
+      color: #00ffcc;
+      text-decoration: none;
+      margin-right: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .project {
+        flex-direction: column;
+      }
+      .project-media, .project-info {
+        flex: 1 1 100%;
+      }
+      .project-media img,
+      .project-media video {
+        max-width: 100%;
+      }
     }
   </style>
-
-  <!-- IMPORT MAP -->
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://unpkg.com/three@0.155.0/build/three.module.js",
-      "three/addons/": "https://unpkg.com/three@0.155.0/examples/jsm/"
-    }
-  }
-  </script>
 </head>
 
 <body>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="assets.html">3D Assets</a>
-    <a href="unity.html">Unity</a>
-    <a href="av.html">Audiovisual</a>
-    <a href="resume.html">Resume</a>
-  </nav>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="assets.html">3D Assets</a>
+  <a href="unity.html">Unity</a>
+  <a href="av.html">Audiovisual</a>
+  <a href="resume.html">Resume</a>
+</nav>
 
-  <div id="viewer"></div>
+<h1>3D Assets</h1>
+<p class="subtitle">// Portfolio of 3D environments, assets, and experimental studies</p>
 
-  <!-- VIEWER SCRIPT -->
-  <script type="module" src="js/viewer.js"></script>
+<div class="portfolio-section">
+  <!-- Project 1 -->
+  <div class="project">
+    <div class="project-media">
+      <video src="images/Eni_Turn.mp4" autoplay muted loop playsinline></video>
+      <img src="images/Environment.png" alt="Environment">
+    </div>
+    <div class="project-info">
+      <h2>Corner</h2>
+      <p><strong>Date:</strong> Spring 2025</p>
+      <p><strong>Role:</strong> Environment modeling, sculpting, UVs, texturing</p>
+      <p><strong>Credits:</strong> Substance Painter library for textures</p>
+      <p>This environment study focuses on decayed natural structures. Overgrown ruins with stonework. Inspired by my hometown in Philadelphia, with barbed wire and urban decay masking the neighborhood. There is a sanitation workers’ strike, leading to trash build-up and a raw sense of collapse that would inspire me for future projects. The goal was to push atmosphere through surface storytelling and sculpted rhythm.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Contact — jewelleejohnson@gmail.com<br><br>
+  <a href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
+  <a href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
+  <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
+</footer>
+
 </body>
 </html>
