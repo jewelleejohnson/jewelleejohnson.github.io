@@ -1,172 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Jewel Lee-Johnson | Portfolio</title>
+  <meta charset="UTF-8">
+  <title>Jewel Lee-Johnson | Portfolio</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
-<style>
-* { box-sizing: border-box; }
+  <style>
+    * { box-sizing: border-box; }
 
-body {
-  margin: 0;
-  padding: 60px;
-  font-family: 'Fira Code', monospace;
-  color: #00ffcc;
-  background: url("images/Photography.jpg") center / cover fixed no-repeat;
-  overflow-x: hidden;
-}
+    body {
+      margin: 0;
+      padding: 60px;
+      font-family: 'Fira Code', monospace;
+      color: #00ffcc;
+      background-image: url("images/Photography.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
 
-/* DARK + GRAIN OVERLAY */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    rgba(0,0,0,0.68),
-    url("data:image/svg+xml;utf8,\
-    <svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'>\
-    <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/></filter>\
-    <rect width='200' height='200' filter='url(%23n)' opacity='0.05'/>\
-    </svg>");
-  z-index: -1;
-}
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.68);
+      z-index: -1;
+    }
 
-nav {
-  margin: 40px 60px;
-}
+    nav {
+      margin: 40px 60px;
+    }
 
-nav a {
-  margin-right: 28px;
-  color: #00ffcc;
-  text-decoration: none;
-  font-size: 14px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
+    nav a {
+      margin-right: 28px;
+      color: #00ffcc;
+      text-decoration: none;
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+    }
 
-h1 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 52px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin: 40px 60px 10px;
-  color: #fff;
-}
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 52px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 40px 60px 10px;
+      color: #fff;
+    }
 
-.subtitle {
-  margin-left: 60px;
-  margin-bottom: 60px;
-  color: #aaa;
-}
+    .subtitle {
+      margin-left: 60px;
+      margin-bottom: 60px;
+      color: #aaa;
+      font-size: 16px;
+    }
 
-/* INTRO */
-.intro-section {
-  display: flex;
-  gap: 40px;
-  margin: 60px;
-  align-items: flex-start;
-}
+    .scroll-indicator {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 32px;
+      opacity: 0.7;
+      animation: bounce 1.5s infinite;
+      color: #00ffcc;
+    }
 
-.description {
-  flex: 1 1 520px;
-  background: rgba(0,0,0,0.55);
-  border-left: 2px solid #888;
-  padding: 36px;
-  font-size: 17px;
-  line-height: 1.8;
-  white-space: pre-line;
-  box-shadow: 0 0 0 rgba(0,255,204,0.0);
-  transition: box-shadow 0.3s ease;
-}
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-10px); }
+      60% { transform: translateX(-50%) translateY(-5px); }
+    }
 
-/* VIDEO INSIDE TEXT SYSTEM */
-.inline-video {
-  margin-top: 32px;
-  border: 1px solid #888;
-}
+    .intro-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 60px;
+      gap: 40px;
+    }
 
-.inline-video video {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  display: block;
-}
+    .description {
+      flex: 1 1 520px;
+      background-color: rgba(0,0,0,0.55);
+      border-left: 2px solid #888;
+      padding: 36px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease-out;
+      font-size: 17px;
+      line-height: 1.8;
+      white-space: pre-line;
+    }
 
-/* SIDE MEDIA */
-.side-images {
-  flex: 1 1 420px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
+    .description.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-.side-images img,
-.side-images video {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border: 1px solid #00ffcc;
-  object-fit: cover;
-}
+    .fade {
+      opacity: 1;
+      transition: opacity 0.6s ease-out;
+    }
 
-/* SELECTED WORK */
-.side-label {
-  position: fixed;
-  top: 100px;
-  right: 60px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
+    .fade.hidden {
+      opacity: 0;
+    }
 
-.side-gallery {
-  position: fixed;
-  top: 150px;
-  right: 60px;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
+    /* LARGE LANDSCAPE VIDEO */
+    .wide-video {
+      width: 100%;
+      margin: 40px 60px 0;
+    }
 
-.side-gallery img {
-  width: 280px;
-  height: 280px;
-  object-fit: cover;
-  border: 1px solid #00ffcc;
-  cursor: pointer;
-}
+    .wide-video video {
+      width: 100%;
+      max-width: 1400px;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border: 1px solid #00ffcc;
+      display: block;
+    }
 
-/* EXPANDED VIEW */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.9);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
+    .side-images {
+      flex: 1 1 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
 
-.lightbox img {
-  width: 70vw;
-  max-width: 900px;
-  border: 1px solid #00ffcc;
-}
+    .side-images img,
+    .side-images video {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      max-width: 520px;
+      border: 1px solid #00ffcc;
+      object-fit: cover;
+    }
 
-/* FOOTER */
-footer {
-  margin: 120px 60px;
-  font-size: 14px;
-  opacity: 0.7;
-}
-footer a {
-  color: #00ffcc;
-  margin-right: 20px;
-  text-decoration: none;
-}
-</style>
+    h2.side-label {
+      position: fixed;
+      top: 100px;
+      right: 60px;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .side-gallery {
+      position: fixed;
+      top: 150px;
+      right: 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      z-index: 2;
+    }
+
+    .side-gallery img {
+      width: 280px;
+      height: 280px;
+      border: 1px solid #00ffcc;
+      object-fit: cover;
+    }
+
+    footer {
+      margin: 120px 60px;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    footer a {
+      color: #00ffcc;
+      text-decoration: none;
+      margin-right: 20px;
+    }
+  </style>
 </head>
 
 <body>
@@ -182,15 +198,17 @@ footer a {
 <h1>Jewel Lee-Johnson</h1>
 <p class="subtitle">// 3D Artist — Environments, Assets & Characters</p>
 
-<div class="intro-section">
-  <div class="description" id="reactiveBox">
+<div class="scroll-indicator">&#x21e3;</div>
+
+<div class="intro-section fade">
+  <div class="description" id="description">
 Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work. She earned a BFA in Film/Animation/Video from the Rhode Island School of Design, focusing on digital animation, 3D modeling, and experimental media, working with tools such as Blender, Unreal Engine, Unity, and the Adobe Creative Suite.
 
-Her experience spans 3D modeling, texturing, rendering, motion capture, and procedural animation, as well as compositing and video/film editing.
+Her experience spans 3D modeling, texturing, rendering, motion capture, and procedural animation, as well as compositing and video/film editing. She has worked with motion capture systems including Perception Neuron and Axis Studio, capturing and troubleshooting movement data for animation and XR projects. She has collaborated with Brown University’s XR Hub and supported students with asset management, color spaces, and interactive workflows in Unity and Marvelous Designer.
 
-    <div class="inline-video">
-      <video id="audioSource" src="images/NEORAT - Trim.mp4" autoplay muted loop playsinline></video>
-    </div>
+Jewel aims to create visually compelling, story-driven work, inspired by the electronic and experimental music scene, audio-reactive gaming, and local Black queer experimental performance artists in Philadelphia. Sound drives her approach to 3D modeling, and she seeks to bring BIPOC experimental art into 3D spaces as an underrepresented yet revolutionary outlet.
+
+She actively works in electronic sound and DJing, shaping how she considers motion, timing, and atmosphere in 3D space. She is interested in audio-reactive workflows that allow 3D visuals to respond in gameplay, using tools like Wwise, FMOD, Unreal Engine’s Audio Synesthesia, and Pure Data to translate audio into procedural animation, shader changes, particle systems, and lighting shifts. She also works in performance art and audiovisual installations where animation, sound, and environment converge, exploring hybrid workflows combining TouchDesigner with Unreal or Unity to support live, responsive visuals for performances and cinematic environments. Her focus is on using experimental 3D techniques to expand conventional gaming and VFX workflows.
   </div>
 
   <div class="side-images">
@@ -200,8 +218,13 @@ Her experience spans 3D modeling, texturing, rendering, motion capture, and proc
   </div>
 </div>
 
+<!-- LARGE LANDSCAPE VIDEO -->
+<div class="wide-video fade">
+  <video src="images/NEORAT - Trim.mp4" autoplay muted loop playsinline></video>
+</div>
+
 <h2 class="side-label">Selected Work</h2>
-<div class="side-gallery">
+<div class="side-gallery fade" id="sideGallery">
   <img src="images/jewel-johnson-asset4.jpg">
   <img src="images/jewel-lee-johnson-asset11.jpg">
   <img src="images/jewel-lee-johnson-asset9.jpg">
@@ -209,55 +232,32 @@ Her experience spans 3D modeling, texturing, rendering, motion capture, and proc
 
 <footer>
   Contact — jewelleejohnson@gmail.com<br><br>
-  <a href="#">LinkedIn</a>
-  <a href="#">ArtStation</a>
-  <a href="#">Instagram</a>
+  <a href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
+  <a href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
+  <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
 </footer>
 
-<div class="lightbox" id="lightbox">
-  <img id="lightboxImg">
-</div>
-
 <script>
-/* CLICK EXPAND */
-const galleryImgs = document.querySelectorAll('.side-gallery img');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
+const description = document.getElementById('description');
+const fadeElements = document.querySelectorAll('.fade');
+const sideGallery = document.getElementById('sideGallery');
 
-galleryImgs.forEach(img => {
-  img.addEventListener('click', () => {
-    lightboxImg.src = img.src;
-    lightbox.style.display = 'flex';
+window.addEventListener('scroll', () => {
+  const rect = description.getBoundingClientRect();
+  if (rect.top < window.innerHeight - 100) {
+    description.classList.add('show');
+  }
+
+  fadeElements.forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.bottom < 50 || r.top > window.innerHeight) {
+      el.classList.add('hidden');
+    } else {
+      el.classList.remove('hidden');
+    }
   });
-});
 
-lightbox.addEventListener('click', () => {
-  lightbox.style.display = 'none';
-});
-
-/* AUDIO-REACTIVE GLOW */
-const video = document.getElementById('audioSource');
-const box = document.getElementById('reactiveBox');
-
-const ctx = new (window.AudioContext || window.webkitAudioContext)();
-const src = ctx.createMediaElementSource(video);
-const analyser = ctx.createAnalyser();
-analyser.fftSize = 256;
-src.connect(analyser);
-analyser.connect(ctx.destination);
-
-const data = new Uint8Array(analyser.frequencyBinCount);
-
-function animateGlow() {
-  analyser.getByteFrequencyData(data);
-  const avg = data.reduce((a,b)=>a+b,0)/data.length;
-  box.style.boxShadow = `0 0 ${avg/2}px rgba(0,255,204,0.35)`;
-  requestAnimationFrame(animateGlow);
-}
-
-video.addEventListener('play', () => {
-  ctx.resume();
-  animateGlow();
+  sideGallery.style.transform = `translateY(${window.scrollY * 0.25}px)`;
 });
 </script>
 
