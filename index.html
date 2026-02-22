@@ -62,23 +62,6 @@
       font-size: 16px;
     }
 
-    .scroll-indicator {
-      position: absolute;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 32px;
-      opacity: 0.7;
-      animation: bounce 1.5s infinite;
-      color: #00ffcc;
-    }
-
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-      40% { transform: translateX(-50%) translateY(-10px); }
-      60% { transform: translateX(-50%) translateY(-5px); }
-    }
-
     .intro-section {
       display: flex;
       flex-wrap: wrap;
@@ -110,13 +93,12 @@
     }
 
     .description-container .inline-video video {
-  width: 95%; /* slightly bigger */
-  max-width: 650px;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border: 1px solid #00ffcc;
-  display: block;
-}
+      width: 95%; /* slightly bigger */
+      max-width: 650px;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border: 1px solid #00ffcc;
+      display: block;
     }
 
     /* SIDE IMAGES/VIDEOS */
@@ -136,26 +118,25 @@
       object-fit: cover;
     }
 
-    h2.side-label {
-      position: fixed;
-      top: 100px;
-      right: 60px;
+    /* SELECTED WORK SECTION */
+    .selected-work {
+      margin: 80px 60px 0;
+    }
+
+    .selected-work h2 {
       font-size: 18px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
+      margin-bottom: 24px;
     }
 
-    .side-gallery {
-      position: fixed;
-      top: 150px;
-      right: 60px;
+    .selected-work .gallery {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       gap: 22px;
-      z-index: 2;
     }
 
-    .side-gallery img {
+    .selected-work .gallery img {
       width: 280px;
       height: 280px;
       border: 1px solid #00ffcc;
@@ -198,18 +179,9 @@
 <h1>Jewel Lee-Johnson</h1>
 <p class="subtitle">// 3D Artist — Environments, Assets & Characters</p>
 
-<div class="scroll-indicator">&#x21e3;</div>
-
 <div class="intro-section fade">
   <div class="description-container" id="descriptionContainer">
     Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work. She earned a BFA in Film/Animation/Video from the Rhode Island School of Design, focusing on digital animation, 3D modeling, and experimental media, working with tools such as Blender, Unreal Engine, Unity, and the Adobe Creative Suite.
-
-Her experience spans 3D modeling, texturing, rendering, motion capture, and procedural animation, as well as compositing and video/film editing. She has worked with motion capture systems including Perception Neuron and Axis Studio, capturing and troubleshooting movement data for animation and XR projects. She has collaborated with Brown University’s XR Hub and supported students with asset management, color spaces, and interactive workflows in Unity and Marvelous Designer.
-
-Jewel aims to create visually compelling, story-driven work, inspired by the electronic and experimental music scene, audio-reactive gaming, and local Black queer experimental performance artists in Philadelphia. Sound drives her approach to 3D modeling, and she seeks to bring BIPOC experimental art into 3D spaces as an underrepresented yet revolutionary outlet.
-
-She actively works in electronic sound and DJing, shaping how she considers motion, timing, and atmosphere in 3D space. She is interested in audio-reactive workflows that allow 3D visuals to respond in gameplay, using tools like Wwise, FMOD, Unreal Engine’s Audio Synesthesia, and Pure Data to translate audio into procedural animation, shader changes, particle systems, and lighting shifts. She also works in performance art and audiovisual installations where animation, sound, and environment converge, exploring hybrid workflows combining TouchDesigner with Unreal or Unity to support live, responsive visuals for performances and cinematic environments. Her focus is on using experimental 3D techniques to expand conventional gaming and VFX workflows.
-
 
     <div class="inline-video">
       <video src="images/NEORAT - Trim.mp4" autoplay muted loop playsinline></video>
@@ -223,11 +195,14 @@ She actively works in electronic sound and DJing, shaping how she considers moti
   </div>
 </div>
 
-<h2 class="side-label">Selected Work</h2>
-<div class="side-gallery fade" id="sideGallery">
-  <img src="images/jewel-johnson-asset4.jpg">
-  <img src="images/jewel-lee-johnson-asset11.jpg">
-  <img src="images/jewel-lee-johnson-asset9.jpg">
+<!-- SELECTED WORK BELOW SIDE IMAGES -->
+<div class="selected-work fade">
+  <h2>Selected Work</h2>
+  <div class="gallery">
+    <img src="images/jewel-johnson-asset4.jpg" alt="Asset 1">
+    <img src="images/jewel-lee-johnson-asset11.jpg" alt="Asset 2">
+    <img src="images/jewel-lee-johnson-asset9.jpg" alt="Asset 3">
+  </div>
 </div>
 
 <footer>
@@ -239,7 +214,6 @@ She actively works in electronic sound and DJing, shaping how she considers moti
 
 <script>
 const fadeElements = document.querySelectorAll('.fade');
-const sideGallery = document.getElementById('sideGallery');
 
 // Scroll fade effect
 window.addEventListener('scroll', () => {
@@ -251,7 +225,6 @@ window.addEventListener('scroll', () => {
       el.classList.remove('hidden');
     }
   });
-  sideGallery.style.transform = `translateY(${window.scrollY * 0.25}px)`;
 });
 </script>
 
