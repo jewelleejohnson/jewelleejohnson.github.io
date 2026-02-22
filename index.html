@@ -87,42 +87,47 @@
       gap: 40px;
     }
 
-    .description {
-      flex: 1 1 520px;
+    .description-container {
+      flex: 1 1 600px;
       background-color: rgba(0,0,0,0.55);
       border-left: 2px solid #888;
       padding: 36px;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s ease-out;
       font-size: 17px;
       line-height: 1.8;
-      white-space: pre-line;
+      cursor: pointer;
+      overflow: hidden;
+      max-height: 400px;
+      transition: max-height 0.8s ease, box-shadow 0.3s ease;
+      position: relative;
     }
 
-    .description.show {
-      opacity: 1;
-      transform: translateY(0);
+    .description-container.expanded {
+      max-height: 2500px; /* big enough to show all content */
+      box-shadow: 0 0 20px #00ffcc99;
     }
 
-    .fade {
-      opacity: 1;
-      transition: opacity 0.6s ease-out;
+    .description-container::after {
+      content: "▼ Click to expand";
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: #00ffcc;
+      opacity: 0.7;
+      transition: transform 0.3s;
     }
 
-    .fade.hidden {
-      opacity: 0;
+    .description-container.expanded::after {
+      content: "▲ Click to collapse";
     }
 
-    /* LARGE LANDSCAPE VIDEO */
-    .wide-video {
+    .description-container .inline-video {
+      margin-top: 24px;
+    }
+
+    .description-container .inline-video video {
       width: 100%;
-      margin: 40px 60px 0;
-    }
-
-    .wide-video video {
-      width: 100%;
-      max-width: 1400px;
       aspect-ratio: 16 / 9;
       object-fit: cover;
       border: 1px solid #00ffcc;
@@ -182,6 +187,15 @@
       text-decoration: none;
       margin-right: 20px;
     }
+
+    .fade {
+      opacity: 1;
+      transition: opacity 0.6s ease-out;
+    }
+
+    .fade.hidden {
+      opacity: 0;
+    }
   </style>
 </head>
 
@@ -201,14 +215,18 @@
 <div class="scroll-indicator">&#x21e3;</div>
 
 <div class="intro-section fade">
-  <div class="description" id="description">
-Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work. She earned a BFA in Film/Animation/Video from the Rhode Island School of Design, focusing on digital animation, 3D modeling, and experimental media, working with tools such as Blender, Unreal Engine, Unity, and the Adobe Creative Suite.
+  <div class="description-container" id="descriptionContainer">
+    Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work. She earned a BFA in Film/Animation/Video from the Rhode Island School of Design, focusing on digital animation, 3D modeling, and experimental media, working with tools such as Blender, Unreal Engine, Unity, and the Adobe Creative Suite.
 
-Her experience spans 3D modeling, texturing, rendering, motion capture, and procedural animation, as well as compositing and video/film editing. She has worked with motion capture systems including Perception Neuron and Axis Studio, capturing and troubleshooting movement data for animation and XR projects. She has collaborated with Brown University’s XR Hub and supported students with asset management, color spaces, and interactive workflows in Unity and Marvelous Designer.
+    Her experience spans 3D modeling, texturing, rendering, motion capture, and procedural animation, as well as compositing and video/film editing. She has worked with motion capture systems including Perception Neuron and Axis Studio, capturing and troubleshooting movement data for animation and XR projects. She has collaborated with Brown University’s XR Hub and supported students with asset management, color spaces, and interactive workflows in Unity and Marvelous Designer.
 
-Jewel aims to create visually compelling, story-driven work, inspired by the electronic and experimental music scene, audio-reactive gaming, and local Black queer experimental performance artists in Philadelphia. Sound drives her approach to 3D modeling, and she seeks to bring BIPOC experimental art into 3D spaces as an underrepresented yet revolutionary outlet.
+    Jewel aims to create visually compelling, story-driven work, inspired by the electronic and experimental music scene, audio-reactive gaming, and local Black queer experimental performance artists in Philadelphia. Sound drives her approach to 3D modeling, and she seeks to bring BIPOC experimental art into 3D spaces as an underrepresented yet revolutionary outlet.
 
-She actively works in electronic sound and DJing, shaping how she considers motion, timing, and atmosphere in 3D space. She is interested in audio-reactive workflows that allow 3D visuals to respond in gameplay, using tools like Wwise, FMOD, Unreal Engine’s Audio Synesthesia, and Pure Data to translate audio into procedural animation, shader changes, particle systems, and lighting shifts. She also works in performance art and audiovisual installations where animation, sound, and environment converge, exploring hybrid workflows combining TouchDesigner with Unreal or Unity to support live, responsive visuals for performances and cinematic environments. Her focus is on using experimental 3D techniques to expand conventional gaming and VFX workflows.
+    She actively works in electronic sound and DJing, shaping how she considers motion, timing, and atmosphere in 3D space. She is interested in audio-reactive workflows that allow 3D visuals to respond in gameplay, using tools like Wwise, FMOD, Unreal Engine’s Audio Synesthesia, and Pure Data to translate audio into procedural animation, shader changes, particle systems, and lighting shifts. She also works in performance art and audiovisual installations where animation, sound, and environment converge, exploring hybrid workflows combining TouchDesigner with Unreal or Unity to support live, responsive visuals for performances and cinematic environments. Her focus is on using experimental 3D techniques to expand conventional gaming and VFX workflows.
+
+    <div class="inline-video">
+      <video src="images/NEORAT - Trim.mp4" autoplay muted loop playsinline></video>
+    </div>
   </div>
 
   <div class="side-images">
@@ -216,11 +234,6 @@ She actively works in electronic sound and DJing, shaping how she considers moti
     <video src="images/0001-0250.mov" autoplay muted loop playsinline></video>
     <img src="images/1final.png">
   </div>
-</div>
-
-<!-- LARGE LANDSCAPE VIDEO -->
-<div class="wide-video fade">
-  <video src="images/NEORAT - Trim.mp4" autoplay muted loop playsinline></video>
 </div>
 
 <h2 class="side-label">Selected Work</h2>
@@ -238,16 +251,12 @@ She actively works in electronic sound and DJing, shaping how she considers moti
 </footer>
 
 <script>
-const description = document.getElementById('description');
+const descriptionContainer = document.getElementById('descriptionContainer');
 const fadeElements = document.querySelectorAll('.fade');
 const sideGallery = document.getElementById('sideGallery');
 
+// Scroll fade effect
 window.addEventListener('scroll', () => {
-  const rect = description.getBoundingClientRect();
-  if (rect.top < window.innerHeight - 100) {
-    description.classList.add('show');
-  }
-
   fadeElements.forEach(el => {
     const r = el.getBoundingClientRect();
     if (r.bottom < 50 || r.top > window.innerHeight) {
@@ -256,8 +265,12 @@ window.addEventListener('scroll', () => {
       el.classList.remove('hidden');
     }
   });
-
   sideGallery.style.transform = `translateY(${window.scrollY * 0.25}px)`;
+});
+
+// Click to expand/collapse
+descriptionContainer.addEventListener('click', () => {
+  descriptionContainer.classList.toggle('expanded');
 });
 </script>
 
