@@ -114,6 +114,21 @@
       opacity: 0;
     }
 
+    /* LARGE LANDSCAPE VIDEO */
+    .wide-video {
+      width: 100%;
+      margin: 40px 60px 0;
+    }
+
+    .wide-video video {
+      width: 100%;
+      max-width: 1400px;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border: 1px solid #00ffcc;
+      display: block;
+    }
+
     .side-images {
       flex: 1 1 420px;
       display: flex;
@@ -149,8 +164,7 @@
       z-index: 2;
     }
 
-    .side-gallery img,
-    .side-gallery video {
+    .side-gallery img {
       width: 280px;
       height: 280px;
       border: 1px solid #00ffcc;
@@ -198,17 +212,22 @@ She actively works in electronic sound and DJing, shaping how she considers moti
   </div>
 
   <div class="side-images">
-    <img src="images/Xcsiber_Front.jpeg" alt="Work">
+    <img src="images/Xcsiber_Front.jpeg">
     <video src="images/0001-0250.mov" autoplay muted loop playsinline></video>
-    <img src="images/1final.png" alt="Work">
+    <img src="images/1final.png">
   </div>
+</div>
+
+<!-- LARGE LANDSCAPE VIDEO -->
+<div class="wide-video fade">
+  <video src="images/NEORAT - Trim.mp4" autoplay muted loop playsinline></video>
 </div>
 
 <h2 class="side-label">Selected Work</h2>
 <div class="side-gallery fade" id="sideGallery">
-  <img src="images/Xcsiber_Front.jpeg">
-  <video src="images/0001-0250.mov" autoplay muted loop playsinline></video>
-  <img src="images/1final.png">
+  <img src="images/jewel-johnson-asset4.jpg">
+  <img src="images/jewel-lee-johnson-asset11.jpg">
+  <img src="images/jewel-lee-johnson-asset9.jpg">
 </div>
 
 <footer>
