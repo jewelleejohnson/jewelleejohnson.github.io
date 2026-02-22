@@ -87,16 +87,22 @@
       gap: 40px;
     }
 
-    /* DESCRIPTION CONTAINER */
+    /* DESCRIPTION CONTAINER WITH NEON GLOW */
     .description-container {
       flex: 1 1 600px;
       background-color: rgba(0,0,0,0.55);
-      border-left: 2px solid #888;
+      border-left: 2px solid #00ffcc;
+      box-shadow: 0 0 20px #00ffcc55; /* neon glow */
       padding: 36px;
       font-size: 17px;
       line-height: 1.8;
       overflow: hidden;
       position: relative;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .description-container:hover {
+      box-shadow: 0 0 40px #00ffccaa; /* stronger glow on hover */
     }
 
     .description-container .inline-video {
@@ -104,7 +110,8 @@
     }
 
     .description-container .inline-video video {
-      width: 100%;
+      width: 90%; /* slightly smaller */
+      max-width: 600px;
       aspect-ratio: 16 / 9;
       object-fit: cover;
       border: 1px solid #00ffcc;
@@ -126,26 +133,6 @@
       max-width: 520px;
       border: 1px solid #00ffcc;
       object-fit: cover;
-      cursor: pointer;
-      transition: all 0.4s ease;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* expanded state */
-    .side-images img.expanded,
-    .side-images video.expanded {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80%;
-      height: auto;
-      max-height: 90%;
-      z-index: 999;
-      border: 2px solid #00ffcc;
-      cursor: zoom-out;
-      background-color: rgba(0,0,0,0.95);
     }
 
     h2.side-label {
@@ -222,6 +209,7 @@ Jewel aims to create visually compelling, story-driven work, inspired by the ele
 
 She actively works in electronic sound and DJing, shaping how she considers motion, timing, and atmosphere in 3D space. She is interested in audio-reactive workflows that allow 3D visuals to respond in gameplay, using tools like Wwise, FMOD, Unreal Engine’s Audio Synesthesia, and Pure Data to translate audio into procedural animation, shader changes, particle systems, and lighting shifts. She also works in performance art and audiovisual installations where animation, sound, and environment converge, exploring hybrid workflows combining TouchDesigner with Unreal or Unity to support live, responsive visuals for performances and cinematic environments. Her focus is on using experimental 3D techniques to expand conventional gaming and VFX workflows.
 
+
     <div class="inline-video">
       <video src="images/NEORAT - Trim.mp4" autoplay muted loop playsinline></video>
     </div>
@@ -263,19 +251,6 @@ window.addEventListener('scroll', () => {
     }
   });
   sideGallery.style.transform = `translateY(${window.scrollY * 0.25}px)`;
-});
-
-// Click to expand individual images/videos
-const sideMedia = document.querySelectorAll('.side-images img, .side-images video');
-sideMedia.forEach(el => {
-  el.addEventListener('click', () => {
-    if (el.classList.contains('expanded')) {
-      el.classList.remove('expanded');
-    } else {
-      sideMedia.forEach(m => m.classList.remove('expanded')); // collapse others
-      el.classList.add('expanded');
-    }
-  });
 });
 </script>
 
