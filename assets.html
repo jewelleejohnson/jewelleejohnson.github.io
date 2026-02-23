@@ -29,6 +29,28 @@ body::before {
   z-index: -1;
 }
 
+/* ---------- GLITCH UI ---------- */
+.glitch {
+  position: relative;
+}
+
+.glitch:hover::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  top: 0;
+  width: 100%;
+  color: inherit;
+  clip-path: inset(40% 0 45% 0);
+  animation: glitchX 0.25s steps(2) infinite;
+}
+
+@keyframes glitchX {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-3px); }
+  100% { transform: translateX(3px); }
+}
+
 /* ---------- NAV ---------- */
 nav {
   margin-bottom: 80px;
@@ -36,9 +58,9 @@ nav {
 
 nav a {
   margin-right: 32px;
-  font-size: 15px;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 15px;
   color: #fff;
 }
 
@@ -47,55 +69,102 @@ h1 {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 48px;
   letter-spacing: 0.14em;
-  text-transform: uppercase;
-  margin-bottom: 80px;
+  margin-bottom: 60px;
 }
 
 /* ---------- GRID ---------- */
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 60px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 48px;
 }
 
-/* ---------- PROJECT CARD ---------- */
 .project {
   border: 1px solid #fff;
-  aspect-ratio: 1 / 1; /* keeps square (1280x1280 logic) */
-  padding: 24px;
+  aspect-ratio: 1 / 1;
+  padding: 16px;
   cursor: pointer;
-  position: relative;
   transition: box-shadow 0.3s ease;
 }
 
 .project:hover {
-  box-shadow: 0 0 28px rgba(255,255,255,0.35);
+  box-shadow: 0 0 24px rgba(255,255,255,0.35);
 }
 
 .project img,
 .project video {
   width: 100%;
-  height: calc(100% - 48px);
+  height: calc(100% - 36px);
   object-fit: cover;
   border: 1px solid #fff;
 }
 
 .project-title {
-  margin-top: 14px;
-  font-size: 20px;
-  letter-spacing: 0.08em;
+  margin-top: 10px;
+  font-size: 18px;
   text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
-/* ---------- FULLSCREEN VIEWER ---------- */
-.viewer {
+/* ---------- FULLSCREEN PROJECT ---------- */
+.overlay {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.95);
   display: none;
+  z-index: 1000;
+}
+
+.overlay.active {
+  display: flex;
+}
+
+.overlay-inner {
+  max-width: 1400px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 48px;
+}
+
+.overlay-media {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.overlay-media img,
+.overlay-media video {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+
+.overlay-text {
+  font-size: 15px;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+.exit {
+  position: fixed;
+  top: 32px;
+  right: 40px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* ---------- FULLSCREEN IMAGE ---------- */
+.viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.97);
+  display: none;
+  z-index: 2000;
   align-items: center;
   justify-content: center;
-  z-index: 999;
 }
 
 .viewer.active {
@@ -104,17 +173,9 @@ h1 {
 
 .viewer img,
 .viewer video {
-  max-width: 90vw;
-  max-height: 90vh;
+  max-width: 92vw;
+  max-height: 92vh;
   border: 1px solid #fff;
-}
-
-.viewer .exit {
-  position: fixed;
-  top: 32px;
-  right: 40px;
-  font-size: 28px;
-  cursor: pointer;
 }
 
 /* ---------- FOOTER ---------- */
@@ -133,26 +194,24 @@ footer a {
 <body>
 
 <nav>
-  <a href="index.html">Home</a>
-  <a href="assets.html">3D Assets</a>
-  <a href="unity.html">Unity</a>
-  <a href="av.html">Audiovisual</a>
-  <a href="resume.html">Resume</a>
+  <a class="glitch" data-text="Home" href="index.html">Home</a>
+  <a class="glitch" data-text="3D Assets" href="assets.html">3D Assets</a>
+  <a class="glitch" data-text="Unity" href="unity.html">Unity</a>
+  <a class="glitch" data-text="Audiovisual" href="av.html">Audiovisual</a>
+  <a class="glitch" data-text="Resume" href="resume.html">Resume</a>
 </nav>
 
 <h1>3D Assets</h1>
 
 <section class="projects">
 
-  <!-- CORNER -->
-  <div class="project">
-    <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline onclick="openViewer(this.src, 'video')"></video>
+  <div class="project" onclick="openProject('corner')">
+    <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline></video>
     <div class="project-title">Corner</div>
   </div>
 
-  <!-- JEWEL CASE -->
-  <div class="project">
-    <img src="images/CD_1.jpeg" onclick="openViewer(this.src, 'img')">
+  <div class="project" onclick="openProject('jewel')">
+    <img src="images/CD_1.jpeg">
     <div class="project-title">Jewel Case</div>
   </div>
 
@@ -160,33 +219,88 @@ footer a {
 
 <footer>
   Contact — jewelleejohnson@gmail.com<br><br>
-  <a href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
-  <a href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
-  <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
+  <a class="glitch" data-text="LinkedIn" href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
+  <a class="glitch" data-text="ArtStation" href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
+  <a class="glitch" data-text="Instagram" href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
 </footer>
 
-<!-- FULLSCREEN VIEWER -->
-<div class="viewer" id="viewer">
-  <div class="exit" onclick="closeViewer()">✕</div>
-  <div id="viewerContent"></div>
+<!-- PROJECT OVERLAY -->
+<div class="overlay" id="overlay" onclick="closeProject(event)">
+  <div class="exit" onclick="closeProject()">✕</div>
+  <div class="overlay-inner" id="overlayContent"></div>
 </div>
 
+<!-- IMAGE VIEWER -->
+<div class="viewer" id="viewer" onclick="closeViewer()"></div>
+
 <script>
-function openViewer(src, type) {
+function openProject(project) {
+  const overlay = document.getElementById('overlay');
+  const content = document.getElementById('overlayContent');
+
+  document.body.style.overflow = 'hidden';
+
+  if (project === 'corner') {
+    content.innerHTML = `
+      <div class="overlay-media">
+        <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <img src="3d-assets/Environment.png" onclick="openViewer(this.outerHTML)">
+      </div>
+      <div class="overlay-text">
+Corner
+Spring 2025
+
+Environment modeling, sculpting, UVs, texturing  
+Credits: Substance Painter library
+
+An environment study focused on decayed urban structures inspired by Philadelphia’s collapsing infrastructure and surface storytelling.
+      </div>`;
+  }
+
+  if (project === 'jewel') {
+    content.innerHTML = `
+      <div class="overlay-media">
+        <img src="images/CD_1.jpeg" onclick="openViewer(this.outerHTML)">
+        <img src="images/CD_2.jpeg" onclick="openViewer(this.outerHTML)">
+        <img src="images/CD_3.png" onclick="openViewer(this.outerHTML)">
+      </div>
+      <div class="overlay-text">
+Jewel Case
+
+Blender  
+Geometry Nodes, Cycles
+
+A small study exploring transparency, material layering, and surface behavior.
+      </div>`;
+  }
+
+  overlay.classList.add('active');
+}
+
+function closeProject(e) {
+  if (!e || e.target.id === 'overlay') {
+    document.getElementById('overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function openViewer(html) {
   const viewer = document.getElementById('viewer');
-  const content = document.getElementById('viewerContent');
-
-  content.innerHTML = type === 'video'
-    ? `<video src="${src}" autoplay muted loop playsinline></video>`
-    : `<img src="${src}">`;
-
+  viewer.innerHTML = html;
   viewer.classList.add('active');
 }
 
 function closeViewer() {
   document.getElementById('viewer').classList.remove('active');
-  document.getElementById('viewerContent').innerHTML = '';
+  document.getElementById('viewer').innerHTML = '';
 }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeViewer();
+    closeProject();
+  }
+});
 </script>
 
 </body>
