@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Jewel Lee-Johnson | 3D Assets</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -27,7 +26,7 @@
       content: "";
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.68);
+      background: rgba(0,0,0,0.68);
       z-index: -1;
     }
 
@@ -71,15 +70,20 @@
     .project {
       background: rgba(0,0,0,0.55);
       border: 2px solid #00ffcc;
-      box-shadow: 0 0 20px #00ffcc55;
       padding: 20px;
       cursor: pointer;
-      transition: box-shadow 0.3s ease;
       position: relative;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
     }
 
     .project:hover {
-      box-shadow: 0 0 45px #00ffccaa;
+      box-shadow: 0 0 30px #00ffcc88;
+    }
+
+    /* EXPANDED — ONLY THIS CARD */
+    .project.expanded {
+      box-shadow: 0 0 55px #00ffccaa;
+      transform: scale(1.01);
     }
 
     /* HOVER TITLE */
@@ -94,9 +98,9 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: #fff;
-      background: rgba(0,0,0,0.55);
+      background: rgba(0,0,0,0.6);
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.25s ease;
       pointer-events: none;
       text-shadow: 0 0 20px #00ffcc;
     }
@@ -115,7 +119,7 @@
       display: block;
     }
 
-    /* EXPANDABLE */
+    /* COLLAPSIBLE CONTENT */
     .project-details {
       max-height: 0;
       opacity: 0;
@@ -130,7 +134,7 @@
       margin-top: 24px;
     }
 
-    /* DETAILS MEDIA */
+    /* MEDIA GRID */
     .details-media {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -140,7 +144,7 @@
 
     .details-media img {
       width: 100%;
-      aspect-ratio: 1 / 1; /* square CDs */
+      aspect-ratio: 1 / 1;
       object-fit: cover;
       border: 1px solid #00ffcc;
     }
@@ -152,16 +156,53 @@
       font-size: 15px;
     }
 
+    /* FOOTER */
     footer {
       margin: 120px 60px;
       font-size: 14px;
-      opacity: 0.7;
+      opacity: 0.8;
     }
 
     footer a {
+      position: relative;
       color: #00ffcc;
       text-decoration: none;
-      margin-right: 20px;
+      margin-right: 24px;
+      display: inline-block;
+    }
+
+    /* GLITCH EFFECT */
+    footer a::before,
+    footer a::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+    }
+
+    footer a:hover::before {
+      opacity: 1;
+      color: #ff00ff;
+      animation: glitch1 0.3s infinite;
+    }
+
+    footer a:hover::after {
+      opacity: 1;
+      color: #00ffff;
+      animation: glitch2 0.3s infinite;
+    }
+
+    @keyframes glitch1 {
+      0% { transform: translate(1px, -1px); }
+      50% { transform: translate(-1px, 1px); }
+      100% { transform: translate(1px, 0); }
+    }
+
+    @keyframes glitch2 {
+      0% { transform: translate(-1px, 1px); }
+      50% { transform: translate(1px, -1px); }
+      100% { transform: translate(0, 1px); }
     }
   </style>
 </head>
@@ -177,7 +218,7 @@
 </nav>
 
 <h1>3D Assets</h1>
-<p class="subtitle">// Environments, objects, and experimental studies</p>
+<p class="subtitle">// Environments, objects, texture studies</p>
 
 <div class="portfolio-grid">
 
@@ -198,7 +239,7 @@ Date: Spring 2025
 Role: Environment modeling, sculpting, UVs, texturing  
 Credits: Substance Painter library  
 
-This environment study focuses on decayed natural structures and overgrown ruins. Inspired by Philadelphia’s urban decay, barbed wire, and sanitation-worker strikes, the goal was to push atmosphere through surface storytelling and sculpted rhythm.
+This environment study focuses on decayed natural structures and overgrown ruins inspired by Philadelphia’s urban decay, barbed wire, and sanitation-worker strikes. The goal was to push atmosphere through surface storytelling and sculpted rhythm.
       </div>
     </div>
   </div>
@@ -218,11 +259,10 @@ This environment study focuses on decayed natural structures and overgrown ruins
       </div>
 
       <div class="details-text">
-Title: Jewel Case  
 Blender  
 Geometry Nodes, Cycles  
 
-A small passion project focused on studying texture through transparency. Modeled and textured entirely in Blender, this project explores material response, subtle surface imperfections, and light behavior through transparent geometry.
+A small passion project studying texture through transparency. Modeled and textured entirely in Blender, focusing on light behavior, material response, and subtle surface imperfections.
       </div>
     </div>
   </div>
@@ -231,14 +271,14 @@ A small passion project focused on studying texture through transparency. Modele
 
 <footer>
   Contact — jewelleejohnson@gmail.com<br><br>
-  <a href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
-  <a href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
-  <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
+  <a href="https://www.linkedin.com/in/jleejohnson" target="_blank" data-text="LinkedIn">LinkedIn</a>
+  <a href="https://www.artstation.com/jewelleejohnson" target="_blank" data-text="ArtStation">ArtStation</a>
+  <a href="https://www.instagram.com/jewel.fbx/" target="_blank" data-text="Instagram">Instagram</a>
 </footer>
 
 <script>
-function toggleProject(project) {
-  project.classList.toggle('expanded');
+function toggleProject(clicked) {
+  clicked.classList.toggle('expanded');
 }
 </script>
 
