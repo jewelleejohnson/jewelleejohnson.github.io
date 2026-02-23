@@ -2,169 +2,131 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>3D Assets</title>
+<title>3D Assets | Jewel Lee-Johnson</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
-/* ---------- BASE ---------- */
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: monospace;
-  background: #000;
-  color: #eaeaea;
+  padding: 60px;
+  font-family: 'Fira Code', monospace;
+  color: #fff;
+  background-image: url("images/Photography.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-a { color: inherit; text-decoration: none; }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: -1;
+}
 
 /* ---------- NAV ---------- */
 nav {
-  padding: 24px;
-  display: flex;
-  gap: 24px;
+  margin-bottom: 80px;
 }
 
-nav a,
-footer a {
-  position: relative;
+nav a {
+  margin-right: 32px;
+  font-size: 15px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
 }
 
-nav a:hover,
-footer a:hover {
-  animation: glitch 0.35s steps(2) infinite;
+/* ---------- PAGE TITLE ---------- */
+h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 48px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 80px;
 }
 
-@keyframes glitch {
-  0% { clip-path: inset(0 0 85% 0); transform: translateX(-2px); }
-  25% { clip-path: inset(20% 0 55% 0); transform: translateX(2px); }
-  50% { clip-path: inset(45% 0 30% 0); transform: translateX(-1px); }
-  75% { clip-path: inset(70% 0 10% 0); transform: translateX(1px); }
-  100% { clip-path: inset(0 0 0 0); transform: none; }
-}
-
-/* ---------- GRID (RESTORED STYLE) ---------- */
+/* ---------- GRID ---------- */
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 48px;
-  padding: 48px;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 60px;
 }
 
+/* ---------- PROJECT CARD ---------- */
 .project {
-  border: 1px solid #222;
-  padding: 16px;
+  border: 1px solid #fff;
+  aspect-ratio: 1 / 1; /* keeps square (1280x1280 logic) */
+  padding: 24px;
   cursor: pointer;
+  position: relative;
   transition: box-shadow 0.3s ease;
 }
 
 .project:hover {
-  box-shadow: 0 0 18px #8fff;
+  box-shadow: 0 0 28px rgba(255,255,255,0.35);
 }
 
-.project video,
-.project img {
+.project img,
+.project video {
   width: 100%;
-  display: block;
+  height: calc(100% - 48px);
+  object-fit: cover;
+  border: 1px solid #fff;
 }
 
 .project-title {
-  margin-top: 12px;
-  font-size: 16px;
+  margin-top: 14px;
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-/* ---------- OVERLAY ---------- */
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.92);
-  z-index: 999;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-  overflow-y: auto;
-}
-
-.overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.overlay-content {
-  max-width: 1400px;
-  margin: 80px auto;
-  padding: 40px;
-  position: relative;
-}
-
-.close {
-  position: fixed;
-  top: 24px;
-  right: 32px;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-.overlay-title {
-  font-size: 24px;
-  margin-bottom: 32px;
-}
-
-.overlay-layout {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 48px;
-}
-
-.overlay-layout video {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  margin-bottom: 24px;
-}
-
-/* ---------- MEDIA ---------- */
-.overlay-media {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 32px;
-}
-
-.overlay-media img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  cursor: zoom-in;
-}
-
-.overlay-text {
-  white-space: pre-line;
-  line-height: 1.6;
-}
-
-/* ---------- IMAGE ZOOM ---------- */
-.zoom {
+/* ---------- FULLSCREEN VIEWER ---------- */
+.viewer {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.95);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 999;
 }
 
-.zoom img {
+.viewer.active {
+  display: flex;
+}
+
+.viewer img,
+.viewer video {
   max-width: 90vw;
   max-height: 90vh;
+  border: 1px solid #fff;
+}
+
+.viewer .exit {
+  position: fixed;
+  top: 32px;
+  right: 40px;
+  font-size: 28px;
+  cursor: pointer;
 }
 
 /* ---------- FOOTER ---------- */
 footer {
-  padding: 40px;
-  text-align: center;
-  border-top: 1px solid #222;
+  margin-top: 140px;
+  font-size: 16px;
 }
 
-footer a { margin: 0 12px; }
+footer a {
+  margin-right: 24px;
+  color: #fff;
+}
 </style>
 </head>
 
@@ -178,24 +140,23 @@ footer a { margin: 0 12px; }
   <a href="resume.html">Resume</a>
 </nav>
 
+<h1>3D Assets</h1>
+
 <section class="projects">
 
-  <div class="project" onclick="openProject('corner')">
-    <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline></video>
+  <!-- CORNER -->
+  <div class="project">
+    <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline onclick="openViewer(this.src, 'video')"></video>
     <div class="project-title">Corner</div>
   </div>
 
-  <div class="project" onclick="openProject('jewel')">
-    <img src="images/CD_1.jpeg">
+  <!-- JEWEL CASE -->
+  <div class="project">
+    <img src="images/CD_1.jpeg" onclick="openViewer(this.src, 'img')">
     <div class="project-title">Jewel Case</div>
   </div>
 
 </section>
-
-<div class="overlay" id="overlay" onclick="if(event.target.id==='overlay') closeProject()">
-  <div class="close" onclick="closeProject()">✕</div>
-  <div class="overlay-content" id="overlayContent"></div>
-</div>
 
 <footer>
   Contact — jewelleejohnson@gmail.com<br><br>
@@ -204,64 +165,27 @@ footer a { margin: 0 12px; }
   <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
 </footer>
 
+<!-- FULLSCREEN VIEWER -->
+<div class="viewer" id="viewer">
+  <div class="exit" onclick="closeViewer()">✕</div>
+  <div id="viewerContent"></div>
+</div>
+
 <script>
-function openProject(id) {
-  const overlay = document.getElementById('overlay');
-  const content = document.getElementById('overlayContent');
-  document.body.style.overflow = 'hidden';
+function openViewer(src, type) {
+  const viewer = document.getElementById('viewer');
+  const content = document.getElementById('viewerContent');
 
-  if (id === 'corner') {
-    content.innerHTML = `
-      <div class="overlay-title">Corner</div>
-      <div class="overlay-layout">
-        <div>
-          <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline></video>
-          <div class="overlay-media">
-            <img src="3d-assets/Environment.png" onclick="zoom(this.src)">
-          </div>
-        </div>
-        <div class="overlay-text">
-Date: Spring 2025
-Role: Environment modeling, sculpting, UVs, texturing
-Credits: Substance Painter library
+  content.innerHTML = type === 'video'
+    ? `<video src="${src}" autoplay muted loop playsinline></video>`
+    : `<img src="${src}">`;
 
-This environment study explores decay, overgrowth, and urban collapse inspired by Philadelphia. The goal was to push atmosphere through sculpted rhythm and surface storytelling.
-        </div>
-      </div>`;
-  }
-
-  if (id === 'jewel') {
-    content.innerHTML = `
-      <div class="overlay-title">Jewel Case</div>
-      <div class="overlay-layout">
-        <div class="overlay-media">
-          <img src="images/CD_1.jpeg" onclick="zoom(this.src)">
-          <img src="images/CD_2.jpeg" onclick="zoom(this.src)">
-          <img src="images/CD_3.png" onclick="zoom(this.src)">
-        </div>
-        <div class="overlay-text">
-Blender
-Geometry Nodes, Cycles
-
-A small passion project studying transparency, texture layering, and material response. Modeled and textured entirely in Blender.
-        </div>
-      </div>`;
-  }
-
-  overlay.classList.add('active');
+  viewer.classList.add('active');
 }
 
-function closeProject() {
-  document.getElementById('overlay').classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-function zoom(src) {
-  const z = document.createElement('div');
-  z.className = 'zoom';
-  z.innerHTML = `<img src="${src}">`;
-  z.onclick = () => z.remove();
-  document.body.appendChild(z);
+function closeViewer() {
+  document.getElementById('viewer').classList.remove('active');
+  document.getElementById('viewerContent').innerHTML = '';
 }
 </script>
 
