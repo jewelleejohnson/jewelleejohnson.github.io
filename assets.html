@@ -2,154 +2,118 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Jewel Lee-Johnson | 3D Assets</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<title>3D Assets</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* { box-sizing: border-box; }
+
+/* ------------------ BASE ------------------ */
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-  padding: 60px;
-  font-family: 'Fira Code', monospace;
-  color: #00ffcc;
-  background-image: url("../images/Photography.jpg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  font-family: monospace;
+  background: #000;
+  color: #eaeaea;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.68);
-  z-index: -1;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-/* NAV + FOOTER */
-nav, footer {
-  margin: 40px 60px;
+/* ------------------ NAV ------------------ */
+nav {
+  padding: 24px;
+  display: flex;
+  gap: 24px;
 }
 
 nav a,
 footer a {
-  margin-right: 28px;
-  color: #00ffcc;
-  text-decoration: none;
-  font-size: 14px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   position: relative;
 }
 
-/* HORIZONTAL GLITCH */
-nav a::before,
-footer a::before {
+nav a::after,
+footer a::after {
   content: attr(data-text);
   position: absolute;
   left: 0;
   top: 0;
   opacity: 0;
+  pointer-events: none;
 }
 
-nav a:hover::before,
-footer a:hover::before {
-  opacity: 1;
-  animation: glitchHorizontal 0.4s infinite;
+nav a:hover,
+footer a:hover {
+  animation: glitch 0.35s steps(2) infinite;
 }
 
-@keyframes glitchHorizontal {
-  0%   { transform: translateX(0); clip-path: inset(0 0 80% 0); }
-  25%  { transform: translateX(-2px); clip-path: inset(20% 0 55% 0); }
-  50%  { transform: translateX(2px); clip-path: inset(45% 0 25% 0); }
-  75%  { transform: translateX(-1px); clip-path: inset(70% 0 5% 0); }
-  100% { transform: translateX(0); clip-path: inset(0 0 80% 0); }
+/* horizontal glitch */
+@keyframes glitch {
+  0% { clip-path: inset(0 0 85% 0); transform: translateX(-2px); }
+  20% { clip-path: inset(15% 0 60% 0); transform: translateX(2px); }
+  40% { clip-path: inset(40% 0 30% 0); transform: translateX(-1px); }
+  60% { clip-path: inset(65% 0 10% 0); transform: translateX(1px); }
+  100% { clip-path: inset(0 0 0 0); transform: none; }
 }
 
-/* HEADERS */
-h1 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 52px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin: 40px 60px 10px;
-  color: #fff;
-}
-
-.subtitle {
-  margin-left: 60px;
-  margin-bottom: 60px;
-  color: #aaa;
-}
-
-/* GRID */
-.portfolio-grid {
-  margin: 60px;
+/* ------------------ GRID ------------------ */
+.projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 40px;
+  padding: 40px;
 }
 
-/* PROJECT CARD */
 .project {
-  background: rgba(0,0,0,0.55);
-  border: 2px solid #00ffcc55;
-  padding: 20px;
+  border: 1px solid #222;
+  padding: 16px;
   cursor: pointer;
   position: relative;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: box-shadow 0.3s ease;
 }
 
 .project:hover {
-  border-color: #00ffcc;
-  box-shadow: 0 0 30px #00ffcc88;
+  box-shadow: 0 0 18px #8fff;
 }
 
-/* HOVER TITLE */
-.hover-title {
+.project-title {
   position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 26px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #fff;
-  background: rgba(0,0,0,0.6);
+  bottom: 12px;
+  left: 12px;
   opacity: 0;
-  transition: opacity 0.25s ease;
-  pointer-events: none;
-  text-shadow: 0 0 18px #00ffcc;
+  transition: opacity 0.3s ease;
 }
 
-.project:hover .hover-title {
+.project:hover .project-title {
   opacity: 1;
 }
 
-/* HERO MEDIA */
-.hero video,
-.hero img {
+.project video,
+.project img {
   width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border: 1px solid #00ffcc;
+  display: block;
 }
 
-/* OVERLAY */
+/* keep CD images square */
+.square {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+/* ------------------ OVERLAY ------------------ */
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.9);
+  background: rgba(0,0,0,0.92);
   z-index: 999;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.4s ease;
+  overflow-y: auto;
 }
 
 .overlay.active {
@@ -157,75 +121,64 @@ h1 {
   pointer-events: auto;
 }
 
-/* CLOSE */
-.close-btn {
+.overlay-content {
+  max-width: 1400px;
+  margin: 80px auto;
+  padding: 40px;
+  position: relative;
+}
+
+.close {
   position: fixed;
-  top: 30px;
-  right: 40px;
-  font-size: 28px;
-  color: #00ffcc;
+  top: 24px;
+  right: 32px;
+  font-size: 24px;
   cursor: pointer;
 }
 
-/* CONTENT */
-.overlay-content {
-  max-width: 1200px;
-  margin: 120px auto;
-  padding: 40px;
-  background: rgba(0,0,0,0.55);
-  border: 2px solid #00ffcc;
-  box-shadow: 0 0 50px #00ffcc88;
-}
-
-/* TITLE IN OVERLAY */
 .overlay-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 28px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 30px;
-  color: #fff;
+  font-size: 24px;
+  margin-bottom: 32px;
 }
 
-/* TWO COLUMN LAYOUT */
 .overlay-layout {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 48px;
 }
 
 .overlay-layout video {
   width: 100%;
-  margin-bottom: 20px;
-  border: 1px solid #00ffcc;
+  aspect-ratio: 16 / 10;
+  margin-bottom: 24px;
 }
 
 .overlay-media {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
 }
 
 .overlay-media img {
   width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border: 1px solid #00ffcc;
 }
 
 .overlay-text {
   white-space: pre-line;
-  line-height: 1.7;
-  color: #aaa;
-  font-size: 15px;
+  line-height: 1.6;
 }
 
-/* FOOTER */
+/* ------------------ FOOTER ------------------ */
 footer {
-  margin: 120px 60px;
-  font-size: 14px;
-  opacity: 0.85;
+  padding: 40px;
+  text-align: center;
+  border-top: 1px solid #222;
 }
+
+footer a {
+  margin: 0 12px;
+}
+
 </style>
 </head>
 
@@ -239,30 +192,26 @@ footer {
   <a href="resume.html" data-text="Resume">Resume</a>
 </nav>
 
-<h1>3D Assets</h1>
-<p class="subtitle">// Environments, objects, texture studies</p>
+<section class="projects">
 
-<div class="portfolio-grid">
-
-  <div class="project" onclick="openOverlay('corner')">
-    <div class="hover-title">Corner</div>
-    <div class="hero">
-      <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline></video>
-    </div>
+  <!-- CORNER -->
+  <div class="project" onclick="openProject('corner')">
+    <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline></video>
+    <div class="project-title">Corner</div>
   </div>
 
-  <div class="project" onclick="openOverlay('jewel')">
-    <div class="hover-title">Jewel Case</div>
-    <div class="hero">
-      <img src="images/CD_1.jpeg">
-    </div>
+  <!-- JEWEL CASE -->
+  <div class="project" onclick="openProject('jewel')">
+    <img src="images/CD_1.jpeg" class="square">
+    <div class="project-title">Jewel Case</div>
   </div>
 
-</div>
+</section>
 
-<div class="overlay" id="overlay" onclick="closeOverlay()">
-  <div class="close-btn" onclick="closeOverlay()">✕</div>
-  <div class="overlay-content" id="overlayContent" onclick="event.stopPropagation()"></div>
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" onclick="if(event.target.id==='overlay') closeProject()">
+  <div class="close" onclick="closeProject()">✕</div>
+  <div class="overlay-content" id="overlayContent"></div>
 </div>
 
 <footer>
@@ -273,11 +222,12 @@ footer {
 </footer>
 
 <script>
-function openOverlay(project) {
+function openProject(id) {
   const overlay = document.getElementById('overlay');
   const content = document.getElementById('overlayContent');
+  document.body.style.overflow = 'hidden';
 
-  if (project === 'corner') {
+  if (id === 'corner') {
     content.innerHTML = `
       <div class="overlay-title">Corner</div>
       <div class="overlay-layout">
@@ -292,36 +242,37 @@ Date: Spring 2025
 Role: Environment modeling, sculpting, UVs, texturing
 Credits: Substance Painter library
 
-This environment study focuses on decayed natural structures inspired by Philadelphia’s urban decay. The goal was to push atmosphere through surface storytelling and sculpted rhythm.
+This environment study focuses on decayed natural structures inspired by Philadelphia. Overgrown ruins, barbed wire, and urban collapse informed the atmosphere. The goal was to push surface storytelling through sculpted rhythm and material decay.
         </div>
-      </div>`;
+      </div>
+    `;
   }
 
-  if (project === 'jewel') {
+  if (id === 'jewel') {
     content.innerHTML = `
       <div class="overlay-title">Jewel Case</div>
       <div class="overlay-layout">
-        <div>
-          <div class="overlay-media">
-            <img src="images/CD_1.jpeg">
-            <img src="images/CD_2.jpeg">
-            <img src="images/CD_3.png">
-          </div>
+        <div class="overlay-media">
+          <img src="images/CD_1.jpeg">
+          <img src="images/CD_2.jpeg">
+          <img src="images/CD_3.png">
         </div>
         <div class="overlay-text">
 Blender
 Geometry Nodes, Cycles
 
-A small passion project studying texture through transparency. Modeled and textured entirely in Blender, focusing on material response, light behavior, and surface subtlety.
+A small passion project studying texture, transparency, and material behavior. Modeled and textured entirely in Blender.
         </div>
-      </div>`;
+      </div>
+    `;
   }
 
   overlay.classList.add('active');
 }
 
-function closeOverlay() {
+function closeProject() {
   document.getElementById('overlay').classList.remove('active');
+  document.body.style.overflow = '';
 }
 </script>
 
