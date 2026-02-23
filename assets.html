@@ -30,6 +30,7 @@
       z-index: -1;
     }
 
+    /* NAV */
     nav {
       margin: 40px 60px;
     }
@@ -41,6 +42,31 @@
       font-size: 14px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      position: relative;
+    }
+
+    /* GLITCH DISPLACEMENT (NO COLOR CHANGE) */
+    nav a::before,
+    footer a::before {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+    }
+
+    nav a:hover::before,
+    footer a:hover::before {
+      opacity: 1;
+      animation: glitchShift 0.35s infinite;
+    }
+
+    @keyframes glitchShift {
+      0%   { transform: translate(0, 0); clip-path: inset(0 0 90% 0); }
+      25%  { transform: translate(1px, -1px); clip-path: inset(10% 0 60% 0); }
+      50%  { transform: translate(-1px, 1px); clip-path: inset(40% 0 20% 0); }
+      75%  { transform: translate(1px, 0); clip-path: inset(70% 0 5% 0); }
+      100% { transform: translate(0, 0); clip-path: inset(0 0 90% 0); }
     }
 
     h1 {
@@ -69,21 +95,23 @@
     /* PROJECT CARD */
     .project {
       background: rgba(0,0,0,0.55);
-      border: 2px solid #00ffcc;
+      border: 2px solid #00ffcc55;
       padding: 20px;
       cursor: pointer;
       position: relative;
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
     }
 
     .project:hover {
-      box-shadow: 0 0 30px #00ffcc88;
+      border-color: #00ffcc;
     }
 
-    /* EXPANDED — ONLY THIS CARD */
+    /* EXPANDED — SINGLE PROJECT ONLY */
     .project.expanded {
+      border-color: #00ffcc;
       box-shadow: 0 0 55px #00ffccaa;
-      transform: scale(1.01);
+      transform: scale(1.015);
+      z-index: 2;
     }
 
     /* HOVER TITLE */
@@ -102,7 +130,7 @@
       opacity: 0;
       transition: opacity 0.25s ease;
       pointer-events: none;
-      text-shadow: 0 0 20px #00ffcc;
+      text-shadow: 0 0 18px #00ffcc;
     }
 
     .project:hover .hover-title {
@@ -160,49 +188,14 @@
     footer {
       margin: 120px 60px;
       font-size: 14px;
-      opacity: 0.8;
+      opacity: 0.85;
     }
 
     footer a {
-      position: relative;
       color: #00ffcc;
       text-decoration: none;
       margin-right: 24px;
-      display: inline-block;
-    }
-
-    /* GLITCH EFFECT */
-    footer a::before,
-    footer a::after {
-      content: attr(data-text);
-      position: absolute;
-      left: 0;
-      top: 0;
-      opacity: 0;
-    }
-
-    footer a:hover::before {
-      opacity: 1;
-      color: #ff00ff;
-      animation: glitch1 0.3s infinite;
-    }
-
-    footer a:hover::after {
-      opacity: 1;
-      color: #00ffff;
-      animation: glitch2 0.3s infinite;
-    }
-
-    @keyframes glitch1 {
-      0% { transform: translate(1px, -1px); }
-      50% { transform: translate(-1px, 1px); }
-      100% { transform: translate(1px, 0); }
-    }
-
-    @keyframes glitch2 {
-      0% { transform: translate(-1px, 1px); }
-      50% { transform: translate(1px, -1px); }
-      100% { transform: translate(0, 1px); }
+      position: relative;
     }
   </style>
 </head>
@@ -210,11 +203,11 @@
 <body>
 
 <nav>
-  <a href="index.html">Home</a>
-  <a href="assets.html">3D Assets</a>
-  <a href="unity.html">Unity</a>
-  <a href="av.html">Audiovisual</a>
-  <a href="resume.html">Resume</a>
+  <a href="index.html" data-text="Home">Home</a>
+  <a href="assets.html" data-text="3D Assets">3D Assets</a>
+  <a href="unity.html" data-text="Unity">Unity</a>
+  <a href="av.html" data-text="Audiovisual">Audiovisual</a>
+  <a href="resume.html" data-text="Resume">Resume</a>
 </nav>
 
 <h1>3D Assets</h1>
@@ -239,7 +232,7 @@ Date: Spring 2025
 Role: Environment modeling, sculpting, UVs, texturing  
 Credits: Substance Painter library  
 
-This environment study focuses on decayed natural structures and overgrown ruins inspired by Philadelphia’s urban decay, barbed wire, and sanitation-worker strikes. The goal was to push atmosphere through surface storytelling and sculpted rhythm.
+This environment study focuses on decayed natural structures and overgrown ruins inspired by Philadelphia’s urban decay and infrastructure collapse. The goal was to push atmosphere through surface storytelling and sculpted rhythm.
       </div>
     </div>
   </div>
@@ -248,21 +241,21 @@ This environment study focuses on decayed natural structures and overgrown ruins
   <div class="project" onclick="toggleProject(this)">
     <div class="hover-title">Jewel Case</div>
     <div class="hero">
-      <img src="3d-assets/CD_1.jpeg">
+      <img src="images/CD_1.jpeg">
     </div>
 
     <div class="project-details">
       <div class="details-media">
-        <img src="3d-assets/CD_1.jpeg">
-        <img src="3d-assets/CD_2.jpeg">
-        <img src="3d-assets/CD_3.png">
+        <img src="images/CD_1.jpeg">
+        <img src="images/CD_2.jpeg">
+        <img src="images/CD_3.png">
       </div>
 
       <div class="details-text">
 Blender  
 Geometry Nodes, Cycles  
 
-A small passion project studying texture through transparency. Modeled and textured entirely in Blender, focusing on light behavior, material response, and subtle surface imperfections.
+A small passion project focused on texture and transparency. Modeled and textured entirely in Blender, studying material response, light behavior, and subtle surface imperfections.
       </div>
     </div>
   </div>
@@ -278,6 +271,9 @@ A small passion project studying texture through transparency. Modeled and textu
 
 <script>
 function toggleProject(clicked) {
+  document.querySelectorAll('.project').forEach(project => {
+    if (project !== clicked) project.classList.remove('expanded');
+  });
   clicked.classList.toggle('expanded');
 }
 </script>
