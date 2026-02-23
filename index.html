@@ -34,7 +34,7 @@ body::before {
   z-index: -1;
 }
 
-/* ---------- GLITCH (HORIZONTAL) ---------- */
+/* ---------- GLITCH ---------- */
 .glitch {
   position: relative;
   display: inline-block;
@@ -106,14 +106,13 @@ h1 {
   white-space: pre-line;
   transition: box-shadow 0.3s ease;
   overflow: hidden;
-  position: relative;
 }
 
 .description-container:hover {
   box-shadow: 0 0 40px rgba(0,255,204,0.6);
 }
 
-/* Paragraph fade-in */
+/* Paragraph fade-in/out */
 .description-container p {
   opacity: 0;
   transform: translateY(20px);
@@ -138,12 +137,13 @@ h1 {
   border: 1px solid var(--cyber-green);
 }
 
-/* SIDE MEDIA */
+/* SIDE IMAGES SLIDESHOW */
 .side-images {
   flex: 1 1 420px;
   display: flex;
   flex-direction: column;
   gap: 24px;
+  position: relative;
 }
 
 .side-images img,
@@ -151,35 +151,19 @@ h1 {
   width: 100%;
   aspect-ratio: 1 / 1;
   max-width: 520px;
-  border: 1px solid var(--cyber-green);
+  border: 2px solid #fff;
   object-fit: cover;
-}
-
-/* SLIDESHOW PANEL */
-.slideshow {
   position: absolute;
-  top: 20px;
-  right: -160px;
-  width: 150px;
-  height: 150px;
-  border: 2px solid var(--cyber-green);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.slideshow img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  top: 0;
+  left: 0;
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 1s ease-in-out;
 }
 
-.slideshow img.active {
+.side-images img.active,
+.side-images video.active {
   opacity: 1;
+  position: relative;
 }
 
 /* ---------- SELECTED WORK ---------- */
@@ -229,6 +213,23 @@ footer a {
 .fade.hidden {
   opacity: 0;
 }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .intro-section {
+    flex-direction: column;
+  }
+  .side-images {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .side-images img,
+  .side-images video {
+    width: calc(50% - 6px);
+    position: relative;
+  }
+}
 </style>
 </head>
 
@@ -248,11 +249,6 @@ footer a {
 <div class="intro-section fade">
 
   <div class="description-container">
-    <div class="slideshow">
-      <img src="images/jewel-johnson-asset4.jpg" class="active">
-      <img src="images/jewel-lee-johnson-asset11.jpg">
-      <img src="images/jewel-lee-johnson-asset9.jpg">
-    </div>
 
     <p>// :: Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work. She earned a BFA in Film/Animation/Video from the Rhode Island School of Design, focusing on digital animation, 3D modeling, and experimental media, working with tools such as Blender, Unreal Engine, Unity, and the Adobe Creative Suite.</p>
 
@@ -268,8 +264,8 @@ footer a {
   </div>
 
   <div class="side-images">
-    <img src="images/Xcsiber_Front.jpeg" alt="">
-    <video src="images/0001-0250.mov" autoplay muted loop playsinline></video>
+    <img src="images/Xcsiber_Front.jpeg" class="active" alt="">
+    <video src="images/0001-0250.mov" muted loop playsinline></video>
     <img src="images/1final.png" alt="">
   </div>
 
@@ -305,30 +301,30 @@ window.addEventListener('scroll', () => {
   });
 });
 
-/* ---------- DESCRIPTION PARAGRAPH SCROLL ---------- */
+/* ---------- DESCRIPTION PARAGRAPH FADE ---------- */
 const paragraphs = document.querySelectorAll('.description-container p');
-
-function showParagraphs() {
+function fadeDescription() {
   paragraphs.forEach(p => {
     const rect = p.getBoundingClientRect();
-    if(rect.top < window.innerHeight - 50) {
+    if(rect.top < window.innerHeight - 50 && rect.bottom > 50) {
       p.classList.add('visible');
+    } else {
+      p.classList.remove('visible');
     }
   });
 }
+window.addEventListener('scroll', fadeDescription);
+window.addEventListener('resize', fadeDescription);
+fadeDescription();
 
-window.addEventListener('scroll', showParagraphs);
-window.addEventListener('resize', showParagraphs);
-showParagraphs();
-
-/* ---------- SLIDESHOW ---------- */
-const slides = document.querySelectorAll('.slideshow img');
-let current = 0;
+/* ---------- SIDE IMAGES SLIDESHOW ---------- */
+const sideItems = document.querySelectorAll('.side-images img, .side-images video');
+let currentSide = 0;
 setInterval(() => {
-  slides[current].classList.remove('active');
-  current = (current + 1) % slides.length;
-  slides[current].classList.add('active');
-}, 3000); // change every 3s
+  sideItems.forEach((el,i) => el.classList.remove('active'));
+  currentSide = (currentSide + 1) % sideItems.length;
+  sideItems[currentSide].classList.add('active');
+}, 3000);
 </script>
 
 </body>
