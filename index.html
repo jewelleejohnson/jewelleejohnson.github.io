@@ -1,189 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Jewel Lee-Johnson | Portfolio</title>
+<meta charset="UTF-8">
+<title>Jewel Lee-Johnson | Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
-  <style>
-    * { box-sizing: border-box; }
+<style>
+:root {
+  --cyber-green: #00ffcc;
+}
 
-    body {
-      margin: 0;
-      padding: 60px;
-      font-family: 'Fira Code', monospace;
-      color: #00ffcc;
-      background-image: url("images/Photography.jpg");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      overflow-x: hidden;
-    }
+* { box-sizing: border-box; }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.68);
-      z-index: -1;
-    }
+body {
+  margin: 0;
+  padding: 60px;
+  font-family: 'Fira Code', monospace;
+  color: #fff;
+  background-image: url("images/Photography.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
 
-    nav {
-      margin: 40px 60px;
-    }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.68);
+  z-index: -1;
+}
 
-    nav a {
-      margin-right: 28px;
-      color: #00ffcc;
-      text-decoration: none;
-      font-weight: 500;
-      text-transform: uppercase;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-    }
+/* ---------- GLITCH (HORIZONTAL) ---------- */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
 
-    h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 52px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin: 40px 60px 10px;
-      color: #fff;
-    }
+.glitch:hover::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  top: 0;
+  width: 100%;
+  color: inherit;
+  clip-path: inset(40% 0 45% 0);
+  animation: glitchX 0.25s steps(2) infinite;
+}
 
-    .subtitle {
-      margin-left: 60px;
-      margin-bottom: 60px;
-      color: #aaa;
-      font-size: 16px;
-    }
+@keyframes glitchX {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-3px); }
+  100% { transform: translateX(3px); }
+}
 
-    .intro-section {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin: 60px;
-      gap: 40px;
-    }
+/* ---------- NAV ---------- */
+nav {
+  margin-bottom: 80px;
+}
 
-    /* DESCRIPTION CONTAINER WITH NEON GLOW */
-    .description-container {
-      flex: 1 1 600px;
-      background-color: rgba(0,0,0,0.55);
-      border-left: 2px solid #00ffcc;
-      box-shadow: 0 0 20px #00ffcc55; /* neon glow */
-      padding: 36px;
-      font-size: 17px;
-      line-height: 1.8;
-      overflow: hidden;
-      position: relative;
-      transition: box-shadow 0.3s ease;
-      white-space: pre-line; /* preserves line breaks */
-    }
+nav a {
+  margin-right: 32px;
+  font-size: 15px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyber-green);
+  text-decoration: none;
+}
 
-    .description-container:hover {
-      box-shadow: 0 0 40px #00ffccaa; /* stronger glow on hover */
-    }
+/* ---------- TITLE ---------- */
+h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 52px;
+  letter-spacing: 0.12em;
+  margin-bottom: 10px;
+  color: var(--cyber-green);
+}
 
-    /* INLINE VIDEO */
-    .description-container .inline-video {
-      margin-top: 24px;
-      overflow: hidden;
-    }
+.subtitle {
+  margin-bottom: 60px;
+  font-size: 16px;
+  opacity: 0.7;
+}
 
-    .description-container .inline-video video {
-      width: 100%;       /* fill container */
-      max-width: 900px;  /* bigger resolution */
-      aspect-ratio: 16 / 9;
-      object-fit: cover; /* crop edges neatly */
-      border: 1px solid #00ffcc;
-      display: block;
-    }
+/* ---------- INTRO SECTION ---------- */
+.intro-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+}
 
-    /* SIDE IMAGES/VIDEOS */
-    .side-images {
-      flex: 1 1 420px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
+/* DESCRIPTION CONTAINER */
+.description-container {
+  flex: 1 1 600px;
+  background-color: rgba(0,0,0,0.55);
+  border-left: 2px solid var(--cyber-green);
+  box-shadow: 0 0 20px rgba(0,255,204,0.35);
+  padding: 36px;
+  font-size: 17px;
+  line-height: 1.8;
+  white-space: pre-line;
+  transition: box-shadow 0.3s ease;
+}
 
-    .side-images img,
-    .side-images video {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      max-width: 520px;
-      border: 1px solid #00ffcc;
-      object-fit: cover;
-    }
+.description-container:hover {
+  box-shadow: 0 0 40px rgba(0,255,204,0.6);
+}
 
-    /* SELECTED WORK SECTION */
-    .selected-work {
-      margin: 80px 60px 0;
-    }
+/* INLINE VIDEO */
+.inline-video {
+  margin-top: 24px;
+}
 
-    .selected-work h2 {
-      font-size: 18px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-    }
+.inline-video video {
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid var(--cyber-green);
+}
 
-    .selected-work .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 22px;
-    }
+/* SIDE MEDIA */
+.side-images {
+  flex: 1 1 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
 
-    .selected-work .gallery img {
-      width: 280px;
-      height: 280px;
-      border: 1px solid #00ffcc;
-      object-fit: cover;
-    }
+.side-images img,
+.side-images video {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 520px;
+  border: 1px solid var(--cyber-green);
+  object-fit: cover;
+}
 
-    footer {
-      margin: 120px 60px;
-      font-size: 14px;
-      opacity: 0.7;
-    }
+/* ---------- SELECTED WORK ---------- */
+.selected-work {
+  margin-top: 80px;
+}
 
-    footer a {
-      color: #00ffcc;
-      text-decoration: none;
-      margin-right: 20px;
-    }
+.selected-work h2 {
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
 
-    .fade {
-      opacity: 1;
-      transition: opacity 0.6s ease-out;
-    }
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
 
-    .fade.hidden {
-      opacity: 0;
-    }
-  </style>
+.gallery img {
+  width: 280px;
+  height: 280px;
+  border: 1px solid var(--cyber-green);
+  object-fit: cover;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  margin-top: 120px;
+  font-size: 14px;
+  color: var(--cyber-green);
+}
+
+footer a {
+  margin-right: 20px;
+  color: var(--cyber-green);
+  text-decoration: none;
+}
+
+/* ---------- FADE ---------- */
+.fade {
+  opacity: 1;
+  transition: opacity 0.6s ease-out;
+}
+
+.fade.hidden {
+  opacity: 0;
+}
+</style>
 </head>
 
 <body>
 
 <nav>
-  <a href="index.html">Home</a>
-  <a href="assets.html">3D Assets</a>
-  <a href="unity.html">Unity</a>
-  <a href="av.html">Audiovisual</a>
-  <a href="resume.html">Resume</a>
+  <a class="glitch" data-text="Home" href="index.html">Home</a>
+  <a class="glitch" data-text="3D Assets" href="assets.html">3D Assets</a>
+  <a class="glitch" data-text="Unity" href="unity.html">Unity</a>
+  <a class="glitch" data-text="Audiovisual" href="av.html">Audiovisual</a>
+  <a class="glitch" data-text="Resume" href="resume.html">Resume</a>
 </nav>
 
 <h1>Jewel Lee-Johnson</h1>
 <p class="subtitle">// 3D Artist — Environments, Assets & Characters</p>
 
 <div class="intro-section fade">
-  <div class="description-container" id="descriptionContainer">
+
+  <div class="description-container">
 // :: Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work. She earned a BFA in Film/Animation/Video from the Rhode Island School of Design, focusing on digital animation, 3D modeling, and experimental media, working with tools such as Blender, Unreal Engine, Unity, and the Adobe Creative Suite.
 
 Her experience spans 3D modeling, texturing, rendering, motion capture, and procedural animation, as well as compositing and video/film editing. She has worked with motion capture systems including Perception Neuron and Axis Studio, capturing and troubleshooting movement data for animation and XR projects. She has collaborated with Brown University’s XR Hub and supported students with asset management, color spaces, and interactive workflows in Unity and Marvelous Designer.
@@ -191,39 +214,39 @@ Her experience spans 3D modeling, texturing, rendering, motion capture, and proc
 Jewel aims to create visually compelling, story-driven work, inspired by the electronic and experimental music scene, audio-reactive gaming, and local Black queer experimental performance artists in Philadelphia. Sound drives her approach to 3D modeling, and she seeks to bring BIPOC experimental art into 3D spaces as an underrepresented yet revolutionary outlet.
 
 She actively works in electronic sound and DJing, shaping how she considers motion, timing, and atmosphere in 3D space. She is interested in audio-reactive workflows that allow 3D visuals to respond in gameplay, using tools like Wwise, FMOD, Unreal Engine’s Audio Synesthesia, and Pure Data to translate audio into procedural animation, shader changes, particle systems, and lighting shifts. She also works in performance art and audiovisual installations where animation, sound, and environment converge, exploring hybrid workflows combining TouchDesigner with Unreal or Unity to support live, responsive visuals for performances and cinematic environments. Her focus is on using experimental 3D techniques to expand conventional gaming and VFX workflows. ::.
+
     <div class="inline-video">
       <video src="images/NEORAT - Trim.mp4" autoplay muted loop playsinline></video>
     </div>
   </div>
 
   <div class="side-images">
-    <img src="images/Xcsiber_Front.jpeg" alt="Artwork 1">
+    <img src="images/Xcsiber_Front.jpeg" alt="">
     <video src="images/0001-0250.mov" autoplay muted loop playsinline></video>
-    <img src="images/1final.png" alt="Artwork 2">
+    <img src="images/1final.png" alt="">
   </div>
+
 </div>
 
-<!-- SELECTED WORK BELOW SIDE IMAGES -->
 <div class="selected-work fade">
   <h2>Selected Work</h2>
   <div class="gallery">
-    <img src="images/jewel-johnson-asset4.jpg" alt="Asset 1">
-    <img src="images/jewel-lee-johnson-asset11.jpg" alt="Asset 2">
-    <img src="images/jewel-lee-johnson-asset9.jpg" alt="Asset 3">
+    <img src="images/jewel-johnson-asset4.jpg">
+    <img src="images/jewel-lee-johnson-asset11.jpg">
+    <img src="images/jewel-lee-johnson-asset9.jpg">
   </div>
 </div>
 
 <footer>
   Contact — jewelleejohnson@gmail.com<br><br>
-  <a href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
-  <a href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
-  <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
+  <a class="glitch" data-text="LinkedIn" href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
+  <a class="glitch" data-text="ArtStation" href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
+  <a class="glitch" data-text="Instagram" href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
 </footer>
 
 <script>
 const fadeElements = document.querySelectorAll('.fade');
 
-// Scroll fade effect
 window.addEventListener('scroll', () => {
   fadeElements.forEach(el => {
     const r = el.getBoundingClientRect();
