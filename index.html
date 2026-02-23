@@ -16,25 +16,40 @@
 
 body {
   margin: 0;
-  padding: 60px;
   font-family: 'Fira Code', monospace;
   color: #fff;
-  background-image: url("images/Photography.jpg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background: #000;
   overflow-x: hidden;
 }
 
-body::before {
-  content: "";
+/* ---------- BACKGROUND OVERLAY ---------- */
+.bg-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.68);
+  background: rgba(0,0,0,0.7);
   z-index: -1;
 }
 
-/* ---------- GLITCH (HORIZONTAL) ---------- */
+/* ---------- NAV ---------- */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px 60px;
+  display: flex;
+  z-index: 100;
+  background: rgba(0,0,0,0.4);
+}
+
+nav a {
+  margin-right: 32px;
+  font-size: 15px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyber-green);
+  text-decoration: none;
+}
+
 .glitch {
   position: relative;
   display: inline-block;
@@ -57,21 +72,57 @@ body::before {
   100% { transform: translateX(3px); }
 }
 
-/* ---------- NAV ---------- */
-nav {
-  margin-bottom: 80px;
+/* ---------- HERO GRID ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  gap: 40px;
+  padding: 140px 60px 60px 60px;
 }
 
-nav a {
-  margin-right: 32px;
-  font-size: 15px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--cyber-green);
-  text-decoration: none;
+.side-media {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-/* ---------- TITLE ---------- */
+.side-media img,
+.side-media video {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid var(--cyber-green);
+  box-shadow: 0 0 30px rgba(0,255,204,0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.side-media img:hover,
+.side-media video:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 40px rgba(0,255,204,0.5);
+}
+
+/* ---------- DESCRIPTION OVERLAY ---------- */
+.description-container {
+  position: relative;
+  background-color: rgba(0,0,0,0.55);
+  border-left: 2px solid var(--cyber-green);
+  box-shadow: 0 0 20px rgba(0,255,204,0.35);
+  padding: 36px;
+  font-size: 17px;
+  line-height: 1.8;
+  white-space: pre-line;
+  max-height: 90vh;
+  overflow-y: auto;
+  transition: box-shadow 0.3s ease;
+}
+
+.description-container:hover {
+  box-shadow: 0 0 40px rgba(0,255,204,0.6);
+}
+
+/* ---------- TITLE & SUBTITLE ---------- */
 h1 {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 52px;
@@ -81,69 +132,22 @@ h1 {
 }
 
 .subtitle {
-  margin-bottom: 60px;
+  margin-bottom: 24px;
   font-size: 16px;
   opacity: 0.7;
 }
 
-/* ---------- INTRO SECTION ---------- */
-.intro-section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 40px;
-}
-
-/* DESCRIPTION CONTAINER */
-.description-container {
-  flex: 1 1 600px;
-  background-color: rgba(0,0,0,0.55);
-  border-left: 2px solid var(--cyber-green);
-  box-shadow: 0 0 20px rgba(0,255,204,0.35);
-  padding: 36px;
-  font-size: 17px;
-  line-height: 1.8;
-  white-space: pre-line;
-  transition: box-shadow 0.3s ease;
-}
-
-.description-container:hover {
-  box-shadow: 0 0 40px rgba(0,255,204,0.6);
-}
-
-/* INLINE VIDEO */
-.inline-video {
-  margin-top: 24px;
-}
-
+/* ---------- INLINE VIDEO ---------- */
 .inline-video video {
   width: 100%;
-  max-width: 900px;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   border: 1px solid var(--cyber-green);
 }
 
-/* SIDE MEDIA */
-.side-images {
-  flex: 1 1 420px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.side-images img,
-.side-images video {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  max-width: 520px;
-  border: 1px solid var(--cyber-green);
-  object-fit: cover;
-}
-
 /* ---------- SELECTED WORK ---------- */
 .selected-work {
-  margin-top: 80px;
+  margin: 80px 60px;
 }
 
 .selected-work h2 {
@@ -168,7 +172,7 @@ h1 {
 
 /* ---------- FOOTER ---------- */
 footer {
-  margin-top: 120px;
+  margin: 120px 60px 60px 60px;
   font-size: 14px;
   color: var(--cyber-green);
 }
@@ -188,10 +192,27 @@ footer a {
 .fade.hidden {
   opacity: 0;
 }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 140px 30px 30px 30px;
+  }
+  .side-media {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .side-media img,
+  .side-media video {
+    width: calc(50% - 12px);
+  }
+}
 </style>
 </head>
 
 <body>
+<div class="bg-overlay"></div>
 
 <nav>
   <a class="glitch" data-text="Home" href="index.html">Home</a>
@@ -201,12 +222,12 @@ footer a {
   <a class="glitch" data-text="Resume" href="resume.html">Resume</a>
 </nav>
 
+<div class="hero fade">
+
+  <div class="description-container">
 <h1>Jewel Lee-Johnson</h1>
 <p class="subtitle">// 3D Artist — Environments, Assets & Characters</p>
 
-<div class="intro-section fade">
-
-  <div class="description-container">
 // :: Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work. She earned a BFA in Film/Animation/Video from the Rhode Island School of Design, focusing on digital animation, 3D modeling, and experimental media, working with tools such as Blender, Unreal Engine, Unity, and the Adobe Creative Suite.
 
 Her experience spans 3D modeling, texturing, rendering, motion capture, and procedural animation, as well as compositing and video/film editing. She has worked with motion capture systems including Perception Neuron and Axis Studio, capturing and troubleshooting movement data for animation and XR projects. She has collaborated with Brown University’s XR Hub and supported students with asset management, color spaces, and interactive workflows in Unity and Marvelous Designer.
@@ -220,10 +241,10 @@ She actively works in electronic sound and DJing, shaping how she considers moti
     </div>
   </div>
 
-  <div class="side-images">
-    <img src="images/Xcsiber_Front.jpeg" alt="">
+  <div class="side-media">
+    <img src="images/Xcsiber_Front.jpeg" alt="Side Image 1">
     <video src="images/0001-0250.mov" autoplay muted loop playsinline></video>
-    <img src="images/1final.png" alt="">
+    <img src="images/1final.png" alt="Side Image 2">
   </div>
 
 </div>
@@ -247,16 +268,20 @@ She actively works in electronic sound and DJing, shaping how she considers moti
 <script>
 const fadeElements = document.querySelectorAll('.fade');
 
-window.addEventListener('scroll', () => {
+function handleFade() {
   fadeElements.forEach(el => {
     const r = el.getBoundingClientRect();
-    if (r.bottom < 50 || r.top > window.innerHeight) {
-      el.classList.add('hidden');
-    } else {
+    if (r.top < window.innerHeight - 100) {
       el.classList.remove('hidden');
+    } else {
+      el.classList.add('hidden');
     }
   });
-});
+}
+
+window.addEventListener('scroll', handleFade);
+window.addEventListener('resize', handleFade);
+handleFade();
 </script>
 
 </body>
