@@ -62,63 +62,67 @@
       font-size: 16px;
     }
 
-    .portfolio-section {
+    /* PORTFOLIO LIST */
+    .portfolio {
+      margin: 60px;
       display: flex;
       flex-direction: column;
-      gap: 80px;
-      margin: 60px;
+      gap: 60px;
     }
 
+    /* PROJECT CARD */
     .project {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-    }
-
-    .project-media {
-      flex: 1 1 600px;
       border: 2px solid #00ffcc;
       box-shadow: 0 0 20px #00ffcc55;
-      padding: 12px;
-      overflow: hidden;
+      padding: 24px;
+      cursor: pointer;
       transition: box-shadow 0.3s ease;
+      background: rgba(0,0,0,0.55);
     }
 
-    .project-media:hover {
+    .project:hover {
       box-shadow: 0 0 40px #00ffccaa;
     }
 
-    .project-media img,
-    .project-media video {
+    .project-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      margin: 0 0 12px;
+      letter-spacing: 0.08em;
+      color: #fff;
+    }
+
+    /* HERO MEDIA */
+    .project-media video,
+    .project-media img {
       width: 100%;
       max-width: 900px;
       aspect-ratio: 16 / 9;
       object-fit: cover;
-      display: block;
       border: 1px solid #00ffcc;
+      display: block;
+      margin-bottom: 16px;
     }
 
-    .project-info {
-      flex: 1 1 420px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      font-size: 16px;
-      line-height: 1.6;
+    /* EXPANDABLE CONTENT */
+    .project-details {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease, opacity 0.4s ease;
       white-space: pre-line;
-    }
-
-    .project-info h2 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 28px;
-      margin: 0;
-      color: #fff;
-      letter-spacing: 0.08em;
-    }
-
-    .project-info p {
-      margin: 0;
+      line-height: 1.7;
       color: #aaa;
+    }
+
+    .project.expanded .project-details {
+      max-height: 1200px; /* large enough for content */
+      opacity: 1;
+      margin-top: 16px;
+    }
+
+    .project-details p {
+      margin: 0 0 10px;
     }
 
     footer {
@@ -134,15 +138,11 @@
     }
 
     @media (max-width: 768px) {
-      .project {
-        flex-direction: column;
+      body {
+        padding: 30px;
       }
-      .project-media, .project-info {
-        flex: 1 1 100%;
-      }
-      .project-media img,
-      .project-media video {
-        max-width: 100%;
+      .portfolio {
+        margin: 30px;
       }
     }
   </style>
@@ -159,23 +159,32 @@
 </nav>
 
 <h1>3D Assets</h1>
-<p class="subtitle">// Portfolio of 3D environments, assets, and experimental studies</p>
+<p class="subtitle">// Environments, studies, and experimental builds</p>
 
-<div class="portfolio-section">
-  <!-- Project 1 -->
-  <div class="project">
+<div class="portfolio">
+
+  <!-- CORNER PROJECT -->
+  <div class="project" onclick="toggleProject(this)">
+    <div class="project-header">
+      <h2>Corner</h2>
+    </div>
+
     <div class="project-media">
       <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline></video>
-      <img src="3d-assets/Environment.png" alt="Environment">
+      <img src="3d-assets/Environment.png" alt="Corner environment">
     </div>
-    <div class="project-info">
-      <h2>Corner</h2>
-      <p><strong>Date:</strong> Spring 2025</p>
-      <p><strong>Role:</strong> Environment modeling, sculpting, UVs, texturing</p>
-      <p><strong>Credits:</strong> Substance Painter library for textures</p>
-      <p>This environment study focuses on decayed natural structures. Overgrown ruins with stonework. Inspired by my hometown in Philadelphia, with barbed wire and urban decay masking the neighborhood. There is a sanitation workers’ strike, leading to trash build-up and a raw sense of collapse that would inspire me for future projects. The goal was to push atmosphere through surface storytelling and sculpted rhythm.</p>
+
+    <div class="project-details">
+Date: Spring 2025  
+Role: Environment modeling, sculpting, UVs, texturing  
+Credits: Substance Painter library for textures  
+
+This environment study focuses on decayed natural structures and overgrown ruins with stonework. Inspired by my hometown in Philadelphia, barbed wire and urban decay mask the neighborhood. A sanitation workers’ strike led to trash build-up and a raw sense of collapse that would influence future projects.
+
+The goal was to push atmosphere through surface storytelling and sculpted rhythm.
     </div>
   </div>
+
 </div>
 
 <footer>
@@ -184,6 +193,12 @@
   <a href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
   <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
 </footer>
+
+<script>
+function toggleProject(project) {
+  project.classList.toggle('expanded');
+}
+</script>
 
 </body>
 </html>
