@@ -16,40 +16,25 @@
 
 body {
   margin: 0;
+  padding: 60px;
   font-family: 'Fira Code', monospace;
   color: #fff;
-  background: #000;
+  background-image: url("images/Photography.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   overflow-x: hidden;
 }
 
-/* ---------- BACKGROUND OVERLAY ---------- */
-.bg-overlay {
+body::before {
+  content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.68);
   z-index: -1;
 }
 
-/* ---------- NAV ---------- */
-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 20px 60px;
-  display: flex;
-  z-index: 100;
-  background: rgba(0,0,0,0.4);
-}
-
-nav a {
-  margin-right: 32px;
-  font-size: 15px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--cyber-green);
-  text-decoration: none;
-}
-
+/* ---------- GLITCH (HORIZONTAL) ---------- */
 .glitch {
   position: relative;
   display: inline-block;
@@ -72,57 +57,21 @@ nav a {
   100% { transform: translateX(3px); }
 }
 
-/* ---------- HERO GRID ---------- */
-.hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 100vh;
-  gap: 40px;
-  padding: 140px 60px 60px 60px;
+/* ---------- NAV ---------- */
+nav {
+  margin-bottom: 80px;
 }
 
-.side-media {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+nav a {
+  margin-right: 32px;
+  font-size: 15px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyber-green);
+  text-decoration: none;
 }
 
-.side-media img,
-.side-media video {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border: 1px solid var(--cyber-green);
-  box-shadow: 0 0 30px rgba(0,255,204,0.25);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.side-media img:hover,
-.side-media video:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 40px rgba(0,255,204,0.5);
-}
-
-/* ---------- DESCRIPTION OVERLAY ---------- */
-.description-container {
-  position: relative;
-  background-color: rgba(0,0,0,0.55);
-  border-left: 2px solid var(--cyber-green);
-  box-shadow: 0 0 20px rgba(0,255,204,0.35);
-  padding: 36px;
-  font-size: 17px;
-  line-height: 1.8;
-  white-space: pre-line;
-  max-height: 90vh;
-  overflow-y: auto;
-  transition: box-shadow 0.3s ease;
-}
-
-.description-container:hover {
-  box-shadow: 0 0 40px rgba(0,255,204,0.6);
-}
-
-/* ---------- TITLE & SUBTITLE ---------- */
+/* ---------- TITLE ---------- */
 h1 {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 52px;
@@ -132,22 +81,110 @@ h1 {
 }
 
 .subtitle {
-  margin-bottom: 24px;
+  margin-bottom: 60px;
   font-size: 16px;
   opacity: 0.7;
 }
 
-/* ---------- INLINE VIDEO ---------- */
+/* ---------- INTRO SECTION ---------- */
+.intro-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* DESCRIPTION CONTAINER */
+.description-container {
+  flex: 1 1 600px;
+  background-color: rgba(0,0,0,0.55);
+  border-left: 2px solid var(--cyber-green);
+  box-shadow: 0 0 20px rgba(0,255,204,0.35);
+  padding: 36px;
+  font-size: 17px;
+  line-height: 1.8;
+  white-space: pre-line;
+  transition: box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.description-container:hover {
+  box-shadow: 0 0 40px rgba(0,255,204,0.6);
+}
+
+/* Paragraph fade-in */
+.description-container p {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.description-container p.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* INLINE VIDEO */
+.inline-video {
+  margin-top: 24px;
+}
+
 .inline-video video {
   width: 100%;
+  max-width: 900px;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   border: 1px solid var(--cyber-green);
 }
 
+/* SIDE MEDIA */
+.side-images {
+  flex: 1 1 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.side-images img,
+.side-images video {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 520px;
+  border: 1px solid var(--cyber-green);
+  object-fit: cover;
+}
+
+/* SLIDESHOW PANEL */
+.slideshow {
+  position: absolute;
+  top: 20px;
+  right: -160px;
+  width: 150px;
+  height: 150px;
+  border: 2px solid var(--cyber-green);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slideshow img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slideshow img.active {
+  opacity: 1;
+}
+
 /* ---------- SELECTED WORK ---------- */
 .selected-work {
-  margin: 80px 60px;
+  margin-top: 80px;
 }
 
 .selected-work h2 {
@@ -172,7 +209,7 @@ h1 {
 
 /* ---------- FOOTER ---------- */
 footer {
-  margin: 120px 60px 60px 60px;
+  margin-top: 120px;
   font-size: 14px;
   color: var(--cyber-green);
 }
@@ -192,27 +229,10 @@ footer a {
 .fade.hidden {
   opacity: 0;
 }
-
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 900px) {
-  .hero {
-    grid-template-columns: 1fr;
-    padding: 140px 30px 30px 30px;
-  }
-  .side-media {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  .side-media img,
-  .side-media video {
-    width: calc(50% - 12px);
-  }
-}
 </style>
 </head>
 
 <body>
-<div class="bg-overlay"></div>
 
 <nav>
   <a class="glitch" data-text="Home" href="index.html">Home</a>
@@ -222,29 +242,35 @@ footer a {
   <a class="glitch" data-text="Resume" href="resume.html">Resume</a>
 </nav>
 
-<div class="hero fade">
-
-  <div class="description-container">
 <h1>Jewel Lee-Johnson</h1>
 <p class="subtitle">// 3D Artist — Environments, Assets & Characters</p>
 
-// :: Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work. She earned a BFA in Film/Animation/Video from the Rhode Island School of Design, focusing on digital animation, 3D modeling, and experimental media, working with tools such as Blender, Unreal Engine, Unity, and the Adobe Creative Suite.
+<div class="intro-section fade">
 
-Her experience spans 3D modeling, texturing, rendering, motion capture, and procedural animation, as well as compositing and video/film editing. She has worked with motion capture systems including Perception Neuron and Axis Studio, capturing and troubleshooting movement data for animation and XR projects. She has collaborated with Brown University’s XR Hub and supported students with asset management, color spaces, and interactive workflows in Unity and Marvelous Designer.
+  <div class="description-container">
+    <div class="slideshow">
+      <img src="images/jewel-johnson-asset4.jpg" class="active">
+      <img src="images/jewel-lee-johnson-asset11.jpg">
+      <img src="images/jewel-lee-johnson-asset9.jpg">
+    </div>
 
-Jewel aims to create visually compelling, story-driven work, inspired by the electronic and experimental music scene, audio-reactive gaming, and local Black queer experimental performance artists in Philadelphia. Sound drives her approach to 3D modeling, and she seeks to bring BIPOC experimental art into 3D spaces as an underrepresented yet revolutionary outlet.
+    <p>// :: Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work. She earned a BFA in Film/Animation/Video from the Rhode Island School of Design, focusing on digital animation, 3D modeling, and experimental media, working with tools such as Blender, Unreal Engine, Unity, and the Adobe Creative Suite.</p>
 
-She actively works in electronic sound and DJing, shaping how she considers motion, timing, and atmosphere in 3D space. She is interested in audio-reactive workflows that allow 3D visuals to respond in gameplay, using tools like Wwise, FMOD, Unreal Engine’s Audio Synesthesia, and Pure Data to translate audio into procedural animation, shader changes, particle systems, and lighting shifts. She also works in performance art and audiovisual installations where animation, sound, and environment converge, exploring hybrid workflows combining TouchDesigner with Unreal or Unity to support live, responsive visuals for performances and cinematic environments. Her focus is on using experimental 3D techniques to expand conventional gaming and VFX workflows. ::.
+    <p>Her experience spans 3D modeling, texturing, rendering, motion capture, and procedural animation, as well as compositing and video/film editing. She has worked with motion capture systems including Perception Neuron and Axis Studio, capturing and troubleshooting movement data for animation and XR projects. She has collaborated with Brown University’s XR Hub and supported students with asset management, color spaces, and interactive workflows in Unity and Marvelous Designer.</p>
+
+    <p>Jewel aims to create visually compelling, story-driven work, inspired by the electronic and experimental music scene, audio-reactive gaming, and local Black queer experimental performance artists in Philadelphia. Sound drives her approach to 3D modeling, and she seeks to bring BIPOC experimental art into 3D spaces as an underrepresented yet revolutionary outlet.</p>
+
+    <p>She actively works in electronic sound and DJing, shaping how she considers motion, timing, and atmosphere in 3D space. She is interested in audio-reactive workflows that allow 3D visuals to respond in gameplay, using tools like Wwise, FMOD, Unreal Engine’s Audio Synesthesia, and Pure Data to translate audio into procedural animation, shader changes, particle systems, and lighting shifts. She also works in performance art and audiovisual installations where animation, sound, and environment converge, exploring hybrid workflows combining TouchDesigner with Unreal or Unity to support live, responsive visuals for performances and cinematic environments. Her focus is on using experimental 3D techniques to expand conventional gaming and VFX workflows. ::.</p>
 
     <div class="inline-video">
       <video src="images/NEORAT - Trim.mp4" autoplay muted loop playsinline></video>
     </div>
   </div>
 
-  <div class="side-media">
-    <img src="images/Xcsiber_Front.jpeg" alt="Side Image 1">
+  <div class="side-images">
+    <img src="images/Xcsiber_Front.jpeg" alt="">
     <video src="images/0001-0250.mov" autoplay muted loop playsinline></video>
-    <img src="images/1final.png" alt="Side Image 2">
+    <img src="images/1final.png" alt="">
   </div>
 
 </div>
@@ -266,22 +292,43 @@ She actively works in electronic sound and DJing, shaping how she considers moti
 </footer>
 
 <script>
+/* ---------- FADE ON SCROLL ---------- */
 const fadeElements = document.querySelectorAll('.fade');
-
-function handleFade() {
+window.addEventListener('scroll', () => {
   fadeElements.forEach(el => {
     const r = el.getBoundingClientRect();
-    if (r.top < window.innerHeight - 100) {
-      el.classList.remove('hidden');
-    } else {
+    if (r.bottom < 50 || r.top > window.innerHeight) {
       el.classList.add('hidden');
+    } else {
+      el.classList.remove('hidden');
+    }
+  });
+});
+
+/* ---------- DESCRIPTION PARAGRAPH SCROLL ---------- */
+const paragraphs = document.querySelectorAll('.description-container p');
+
+function showParagraphs() {
+  paragraphs.forEach(p => {
+    const rect = p.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 50) {
+      p.classList.add('visible');
     }
   });
 }
 
-window.addEventListener('scroll', handleFade);
-window.addEventListener('resize', handleFade);
-handleFade();
+window.addEventListener('scroll', showParagraphs);
+window.addEventListener('resize', showParagraphs);
+showParagraphs();
+
+/* ---------- SLIDESHOW ---------- */
+const slides = document.querySelectorAll('.slideshow img');
+let current = 0;
+setInterval(() => {
+  slides[current].classList.remove('active');
+  current = (current + 1) % slides.length;
+  slides[current].classList.add('active');
+}, 3000); // change every 3s
 </script>
 
 </body>
