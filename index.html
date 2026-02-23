@@ -122,30 +122,30 @@ h1 {
   border: 1px solid var(--cyber-green);
 }
 
-/* SIDE IMAGES COLUMN - SMALLER SIZE */
+/* SIDE IMAGES COLUMN - SMALLER WITH SMOOTH TRANSITIONS */
 .side-images {
-  flex: 1 1 140px; /* narrower column */
+  flex: 1 1 160px; /* half width */
   display: flex;
   flex-direction: column;
-  gap: 20px; /* smaller gap */
+  gap: 12px; /* smaller gap */
 }
 
 .side-images .slot {
   position: relative;
   width: 100%;
-  aspect-ratio: 0.9 / 1; /* slightly smaller square */
-  border: 2px solid #fff;
+  aspect-ratio: 0.45 / 1; /* half height */
+  border: 1px solid #fff; /* half border thickness */
   overflow: hidden;
 }
 
 .side-images .slot img,
 .side-images .slot video {
   position: absolute;
-  width: 10%;
-  height: 10%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out; /* smooth fade in/out */
 }
 
 .side-images .slot img.active,
@@ -273,9 +273,9 @@ window.addEventListener('scroll', fadeDescription);
 window.addEventListener('resize', fadeDescription);
 fadeDescription();
 
-/* SIDE IMAGES SHUFFLE */
+/* SIDE IMAGES SHUFFLE WITH EASE-IN-OUT */
 const slots = document.querySelectorAll('.side-images .slot');
-slots.forEach(slot => {
+slots.forEach((slot,index) => {
   const items = JSON.parse(slot.dataset.items);
   let current = 0;
   setInterval(() => {
@@ -295,7 +295,7 @@ slots.forEach(slot => {
       img.src=nextSrc; img.classList.add('active');
       slot.innerHTML=''; slot.appendChild(img);
     }
-  },3000);
+  },3000 + index*500); // stagger slightly for natural shuffle
 });
 </script>
 
