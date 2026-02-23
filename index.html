@@ -8,7 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-:root { --cyber-green: #00ffcc; }
+:root {
+  --cyber-green: #00ffcc;
+}
 
 * { box-sizing: border-box; }
 
@@ -75,7 +77,11 @@ h1 {
   color: var(--cyber-green);
 }
 
-.subtitle { margin-bottom: 60px; font-size: 16px; opacity: 0.7; }
+.subtitle {
+  margin-bottom: 60px;
+  font-size: 16px;
+  opacity: 0.7;
+}
 
 /* ---------- INTRO SECTION ---------- */
 .intro-section {
@@ -122,19 +128,19 @@ h1 {
   border: 1px solid var(--cyber-green);
 }
 
-/* SIDE IMAGES COLUMN - SMALLER WITH SMOOTH TRANSITIONS */
+/* SIDE IMAGES COLUMN */
 .side-images {
-  flex: 1 1 160px; /* half width */
+  flex: 1 1 420px;
   display: flex;
   flex-direction: column;
-  gap: 12px; /* smaller gap */
+  gap: 24px;
 }
 
 .side-images .slot {
   position: relative;
   width: 100%;
-  aspect-ratio: 0.45 / 1; /* half height */
-  border: 1px solid #fff; /* half border thickness */
+  aspect-ratio: 1 / 1;
+  border: 2px solid #fff;
   overflow: hidden;
 }
 
@@ -145,7 +151,7 @@ h1 {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 1s ease-in-out; /* smooth fade in/out */
+  transition: opacity 1s ease-in-out;
 }
 
 .side-images .slot img.active,
@@ -175,8 +181,16 @@ h1 {
 }
 
 /* ---------- FOOTER ---------- */
-footer { margin-top: 120px; font-size: 14px; color: var(--cyber-green); }
-footer a { margin-right: 20px; color: var(--cyber-green); text-decoration: none; }
+footer {
+  margin-top: 120px;
+  font-size: 14px;
+  color: var(--cyber-green);
+}
+footer a {
+  margin-right: 20px;
+  color: var(--cyber-green);
+  text-decoration: none;
+}
 
 /* ---------- FADE ---------- */
 .fade { opacity: 1; transition: opacity 0.6s ease-out; }
@@ -255,49 +269,63 @@ const fadeElements = document.querySelectorAll('.fade');
 window.addEventListener('scroll', () => {
   fadeElements.forEach(el => {
     const r = el.getBoundingClientRect();
-    if (r.bottom < 50 || r.top > window.innerHeight) el.classList.add('hidden');
-    else el.classList.remove('hidden');
+    if (r.bottom < 50 || r.top > window.innerHeight) {
+      el.classList.add('hidden');
+    } else {
+      el.classList.remove('hidden');
+    }
   });
 });
 
-/* DESCRIPTION FADE IN/OUT */
+/* DESCRIPTION PARAGRAPH FADE IN/OUT */
 const paragraphs = document.querySelectorAll('.description-container p');
 function fadeDescription() {
   paragraphs.forEach(p => {
     const rect = p.getBoundingClientRect();
-    if(rect.top < window.innerHeight-50 && rect.bottom > 50) p.classList.add('visible');
-    else p.classList.remove('visible');
+    if(rect.top < window.innerHeight - 50 && rect.bottom > 50){
+      p.classList.add('visible');
+    } else {
+      p.classList.remove('visible');
+    }
   });
 }
 window.addEventListener('scroll', fadeDescription);
 window.addEventListener('resize', fadeDescription);
 fadeDescription();
 
-/* SIDE IMAGES SHUFFLE WITH EASE-IN-OUT */
+/* SIDE IMAGES SHUFFLE */
 const slots = document.querySelectorAll('.side-images .slot');
-slots.forEach((slot,index) => {
+
+slots.forEach(slot => {
   const items = JSON.parse(slot.dataset.items);
   let current = 0;
   setInterval(() => {
+    const children = slot.querySelectorAll('img, video');
+    children.forEach(c => c.classList.remove('active'));
+
     current = (current + 1) % items.length;
     let nextSrc = items[current];
     let ext = nextSrc.split('.').pop().toLowerCase();
-    slot.querySelectorAll('img, video').forEach(el=>el.classList.remove('active'));
 
-    if(ext==="mp4"||ext==="mov"){
+    if(ext === "mp4" || ext === "mov") {
       let video = document.createElement('video');
-      video.src=nextSrc;
-      video.muted=true; video.loop=true; video.autoplay=true; video.playsInline=true;
+      video.src = nextSrc;
+      video.muted = true;
+      video.loop = true;
+      video.autoplay = true;
+      video.playsInline = true;
       video.classList.add('active');
-      slot.innerHTML=''; slot.appendChild(video);
+      slot.innerHTML = '';
+      slot.appendChild(video);
     } else {
       let img = document.createElement('img');
-      img.src=nextSrc; img.classList.add('active');
-      slot.innerHTML=''; slot.appendChild(img);
+      img.src = nextSrc;
+      img.classList.add('active');
+      slot.innerHTML = '';
+      slot.appendChild(img);
     }
-  },3000 + index*500); // stagger slightly for natural shuffle
+  }, 3000);
 });
 </script>
-
 </body>
 </html>
