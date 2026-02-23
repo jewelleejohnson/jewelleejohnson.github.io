@@ -29,7 +29,7 @@ body::before {
   z-index: -1;
 }
 
-/* ---------- GLITCH UI ---------- */
+/* ---------- GLITCH (HORIZONTAL ONLY) ---------- */
 .glitch {
   position: relative;
 }
@@ -58,9 +58,9 @@ nav {
 
 nav a {
   margin-right: 32px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
   font-size: 15px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: #fff;
 }
 
@@ -69,39 +69,45 @@ h1 {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 48px;
   letter-spacing: 0.14em;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 15px;
+  opacity: 0.7;
   margin-bottom: 60px;
 }
 
 /* ---------- GRID ---------- */
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 48px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
 }
 
 .project {
   border: 1px solid #fff;
   aspect-ratio: 1 / 1;
-  padding: 16px;
+  padding: 14px;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
 }
 
 .project:hover {
-  box-shadow: 0 0 24px rgba(255,255,255,0.35);
+  box-shadow: 0 0 22px rgba(255,255,255,0.35);
 }
 
 .project img,
 .project video {
   width: 100%;
-  height: calc(100% - 36px);
+  height: calc(100% - 32px);
   object-fit: cover;
   border: 1px solid #fff;
 }
 
 .project-title {
-  margin-top: 10px;
-  font-size: 18px;
+  margin-top: 8px;
+  font-size: 17px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -156,7 +162,7 @@ h1 {
   cursor: pointer;
 }
 
-/* ---------- FULLSCREEN IMAGE ---------- */
+/* ---------- FULLSCREEN IMAGE VIEWER ---------- */
 .viewer {
   position: fixed;
   inset: 0;
@@ -171,11 +177,16 @@ h1 {
   display: flex;
 }
 
-.viewer img,
-.viewer video {
+.viewer-content img,
+.viewer-content video {
   max-width: 92vw;
   max-height: 92vh;
   border: 1px solid #fff;
+}
+
+.viewer .exit {
+  top: 24px;
+  right: 32px;
 }
 
 /* ---------- FOOTER ---------- */
@@ -202,6 +213,7 @@ footer a {
 </nav>
 
 <h1>3D Assets</h1>
+<p class="subtitle">// Selected environment and material studies</p>
 
 <section class="projects">
 
@@ -231,13 +243,15 @@ footer a {
 </div>
 
 <!-- IMAGE VIEWER -->
-<div class="viewer" id="viewer" onclick="closeViewer()"></div>
+<div class="viewer" id="viewer" onclick="closeViewer(event)">
+  <div class="exit" onclick="closeViewer()">✕</div>
+  <div class="viewer-content" id="viewerContent"></div>
+</div>
 
 <script>
 function openProject(project) {
   const overlay = document.getElementById('overlay');
   const content = document.getElementById('overlayContent');
-
   document.body.style.overflow = 'hidden';
 
   if (project === 'corner') {
@@ -286,13 +300,15 @@ function closeProject(e) {
 
 function openViewer(html) {
   const viewer = document.getElementById('viewer');
-  viewer.innerHTML = html;
+  document.getElementById('viewerContent').innerHTML = html;
   viewer.classList.add('active');
 }
 
-function closeViewer() {
-  document.getElementById('viewer').classList.remove('active');
-  document.getElementById('viewer').innerHTML = '';
+function closeViewer(e) {
+  if (!e || e.target.id === 'viewer') {
+    document.getElementById('viewer').classList.remove('active');
+    document.getElementById('viewerContent').innerHTML = '';
+  }
 }
 
 document.addEventListener('keydown', e => {
