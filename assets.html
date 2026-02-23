@@ -6,11 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
-/* ------------------ BASE ------------------ */
-* {
-  box-sizing: border-box;
-}
+/* ---------- BASE ---------- */
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -19,12 +16,9 @@ body {
   color: #eaeaea;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+a { color: inherit; text-decoration: none; }
 
-/* ------------------ NAV ------------------ */
+/* ---------- NAV ---------- */
 nav {
   padding: 24px;
   display: flex;
@@ -36,60 +30,36 @@ footer a {
   position: relative;
 }
 
-nav a::after,
-footer a::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  pointer-events: none;
-}
-
 nav a:hover,
 footer a:hover {
   animation: glitch 0.35s steps(2) infinite;
 }
 
-/* horizontal glitch */
 @keyframes glitch {
   0% { clip-path: inset(0 0 85% 0); transform: translateX(-2px); }
-  20% { clip-path: inset(15% 0 60% 0); transform: translateX(2px); }
-  40% { clip-path: inset(40% 0 30% 0); transform: translateX(-1px); }
-  60% { clip-path: inset(65% 0 10% 0); transform: translateX(1px); }
+  25% { clip-path: inset(20% 0 55% 0); transform: translateX(2px); }
+  50% { clip-path: inset(45% 0 30% 0); transform: translateX(-1px); }
+  75% { clip-path: inset(70% 0 10% 0); transform: translateX(1px); }
   100% { clip-path: inset(0 0 0 0); transform: none; }
 }
 
-/* ------------------ GRID ------------------ */
+/* ---------- GRID (RESTORED STYLE) ---------- */
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 40px;
-  padding: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 48px;
+  padding: 48px;
 }
 
 .project {
   border: 1px solid #222;
   padding: 16px;
   cursor: pointer;
-  position: relative;
   transition: box-shadow 0.3s ease;
 }
 
 .project:hover {
   box-shadow: 0 0 18px #8fff;
-}
-
-.project-title {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.project:hover .project-title {
-  opacity: 1;
 }
 
 .project video,
@@ -98,13 +68,12 @@ footer a:hover {
   display: block;
 }
 
-/* keep CD images square */
-.square {
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
+.project-title {
+  margin-top: 12px;
+  font-size: 16px;
 }
 
-/* ------------------ OVERLAY ------------------ */
+/* ---------- OVERLAY ---------- */
 .overlay {
   position: fixed;
   inset: 0;
@@ -153,14 +122,18 @@ footer a:hover {
   margin-bottom: 24px;
 }
 
+/* ---------- MEDIA ---------- */
 .overlay-media {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
 }
 
 .overlay-media img {
   width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  cursor: zoom-in;
 }
 
 .overlay-text {
@@ -168,47 +141,57 @@ footer a:hover {
   line-height: 1.6;
 }
 
-/* ------------------ FOOTER ------------------ */
+/* ---------- IMAGE ZOOM ---------- */
+.zoom {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.zoom img {
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+/* ---------- FOOTER ---------- */
 footer {
   padding: 40px;
   text-align: center;
   border-top: 1px solid #222;
 }
 
-footer a {
-  margin: 0 12px;
-}
-
+footer a { margin: 0 12px; }
 </style>
 </head>
 
 <body>
 
 <nav>
-  <a href="index.html" data-text="Home">Home</a>
-  <a href="assets.html" data-text="3D Assets">3D Assets</a>
-  <a href="unity.html" data-text="Unity">Unity</a>
-  <a href="av.html" data-text="Audiovisual">Audiovisual</a>
-  <a href="resume.html" data-text="Resume">Resume</a>
+  <a href="index.html">Home</a>
+  <a href="assets.html">3D Assets</a>
+  <a href="unity.html">Unity</a>
+  <a href="av.html">Audiovisual</a>
+  <a href="resume.html">Resume</a>
 </nav>
 
 <section class="projects">
 
-  <!-- CORNER -->
   <div class="project" onclick="openProject('corner')">
     <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline></video>
     <div class="project-title">Corner</div>
   </div>
 
-  <!-- JEWEL CASE -->
   <div class="project" onclick="openProject('jewel')">
-    <img src="images/CD_1.jpeg" class="square">
+    <img src="images/CD_1.jpeg">
     <div class="project-title">Jewel Case</div>
   </div>
 
 </section>
 
-<!-- OVERLAY -->
 <div class="overlay" id="overlay" onclick="if(event.target.id==='overlay') closeProject()">
   <div class="close" onclick="closeProject()">✕</div>
   <div class="overlay-content" id="overlayContent"></div>
@@ -216,9 +199,9 @@ footer a {
 
 <footer>
   Contact — jewelleejohnson@gmail.com<br><br>
-  <a href="https://www.linkedin.com/in/jleejohnson" target="_blank" data-text="LinkedIn">LinkedIn</a>
-  <a href="https://www.artstation.com/jewelleejohnson" target="_blank" data-text="ArtStation">ArtStation</a>
-  <a href="https://www.instagram.com/jewel.fbx/" target="_blank" data-text="Instagram">Instagram</a>
+  <a href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
+  <a href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
+  <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
 </footer>
 
 <script>
@@ -234,7 +217,7 @@ function openProject(id) {
         <div>
           <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline></video>
           <div class="overlay-media">
-            <img src="3d-assets/Environment.png">
+            <img src="3d-assets/Environment.png" onclick="zoom(this.src)">
           </div>
         </div>
         <div class="overlay-text">
@@ -242,10 +225,9 @@ Date: Spring 2025
 Role: Environment modeling, sculpting, UVs, texturing
 Credits: Substance Painter library
 
-This environment study focuses on decayed natural structures inspired by Philadelphia. Overgrown ruins, barbed wire, and urban collapse informed the atmosphere. The goal was to push surface storytelling through sculpted rhythm and material decay.
+This environment study explores decay, overgrowth, and urban collapse inspired by Philadelphia. The goal was to push atmosphere through sculpted rhythm and surface storytelling.
         </div>
-      </div>
-    `;
+      </div>`;
   }
 
   if (id === 'jewel') {
@@ -253,18 +235,17 @@ This environment study focuses on decayed natural structures inspired by Philade
       <div class="overlay-title">Jewel Case</div>
       <div class="overlay-layout">
         <div class="overlay-media">
-          <img src="images/CD_1.jpeg">
-          <img src="images/CD_2.jpeg">
-          <img src="images/CD_3.png">
+          <img src="images/CD_1.jpeg" onclick="zoom(this.src)">
+          <img src="images/CD_2.jpeg" onclick="zoom(this.src)">
+          <img src="images/CD_3.png" onclick="zoom(this.src)">
         </div>
         <div class="overlay-text">
 Blender
 Geometry Nodes, Cycles
 
-A small passion project studying texture, transparency, and material behavior. Modeled and textured entirely in Blender.
+A small passion project studying transparency, texture layering, and material response. Modeled and textured entirely in Blender.
         </div>
-      </div>
-    `;
+      </div>`;
   }
 
   overlay.classList.add('active');
@@ -273,6 +254,14 @@ A small passion project studying texture, transparency, and material behavior. M
 function closeProject() {
   document.getElementById('overlay').classList.remove('active');
   document.body.style.overflow = '';
+}
+
+function zoom(src) {
+  const z = document.createElement('div');
+  z.className = 'zoom';
+  z.innerHTML = `<img src="${src}">`;
+  z.onclick = () => z.remove();
+  document.body.appendChild(z);
 }
 </script>
 
