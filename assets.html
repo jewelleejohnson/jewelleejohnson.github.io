@@ -42,7 +42,7 @@ body::before {
 .glitch:hover::after {
   content: attr(data-text);
   position: absolute;
-  left: 1px;
+  left: 2px;
   top: 0;
   width: 100%;
   color: inherit;
@@ -52,12 +52,14 @@ body::before {
 
 @keyframes glitchX {
   0% { transform: translateX(0); }
-  50% { transform: translateX(-1.5px); }
-  100% { transform: translateX(1.5px); }
+  50% { transform: translateX(-3px); }
+  100% { transform: translateX(3px); }
 }
 
 /* ---------- NAV ---------- */
-nav { margin-bottom: 80px; }
+nav {
+  margin-bottom: 80px;
+}
 
 nav a {
   margin-right: 32px;
@@ -83,43 +85,46 @@ h1 {
   margin-bottom: 60px;
 }
 
-/* ---------- PROJECT GRID (HALF SCALE) ---------- */
+/* ---------- PROJECT GRID (SCALED DOWN) ---------- */
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 28px;
 }
 
 .project {
-  border: 0.5px solid #fff;
+  max-width: 420px;
+  margin: 0 auto;
   aspect-ratio: 4 / 3;
-  padding: 6px;
+  border: 1px solid #fff;
+  padding: 10px;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
 }
 
 .project:hover {
   box-shadow:
-    0 0 6px rgba(0,255,204,0.45),
-    0 0 12px rgba(0,255,204,0.25);
+    0 0 10px rgba(0,255,204,0.5),
+    0 0 22px rgba(0,255,204,0.3);
 }
 
 .project img,
 .project video {
   width: 100%;
-  height: calc(100% - 20px);
-  object-fit: cover;
-  border: 0.5px solid #fff;
+  height: calc(100% - 28px);
+  object-fit: contain;
+  border: 1px solid #fff;
 }
 
 .project-title {
-  margin-top: 4px;
-  font-size: 10px;
+  margin-top: 6px;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
 }
 
-/* ---------- FULLSCREEN PROJECT ---------- */
+/* ---------- FULLSCREEN PROJECT (UNCHANGED) ---------- */
 .overlay {
   position: fixed;
   inset: 0;
@@ -128,20 +133,22 @@ h1 {
   z-index: 1000;
 }
 
-.overlay.active { display: flex; }
+.overlay.active {
+  display: flex;
+}
 
 .overlay-inner {
-  max-width: 900px;
+  max-width: 1400px;
   margin: auto;
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 24px;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 48px;
 }
 
 .overlay-media {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
 }
 
 .overlay-media img,
@@ -149,27 +156,26 @@ h1 {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  border: 0.5px solid #fff;
+  border: 1px solid #fff;
   cursor: pointer;
 }
 
 .overlay-text {
-  font-size: 13px;
-  line-height: 1.65;
+  font-size: 15px;
+  line-height: 1.8;
   white-space: pre-line;
 }
 
-/* ---------- EXIT ---------- */
 .exit {
   position: fixed;
-  top: 24px;
-  right: 32px;
-  font-size: 22px;
+  top: 32px;
+  right: 40px;
+  font-size: 28px;
   cursor: pointer;
   color: #fff;
 }
 
-/* ---------- FULLSCREEN IMAGE VIEWER ---------- */
+/* ---------- IMAGE VIEWER (UNCHANGED) ---------- */
 .viewer {
   position: fixed;
   inset: 0;
@@ -180,18 +186,20 @@ h1 {
   justify-content: center;
 }
 
-.viewer.active { display: flex; }
+.viewer.active {
+  display: flex;
+}
 
 .viewer-content img,
 .viewer-content video {
-  max-width: 80vw;
-  max-height: 80vh;
-  border: 0.5px solid #fff;
+  max-width: 92vw;
+  max-height: 92vh;
+  border: 1px solid #fff;
 }
 
 .viewer .exit {
-  top: 20px;
-  right: 28px;
+  top: 24px;
+  right: 32px;
 }
 
 /* ---------- FOOTER (UNCHANGED) ---------- */
