@@ -12,8 +12,6 @@
   --cyber-green: #00ffcc;
 }
 
-* { box-sizing: border-box; }
-
 /* ---------- SCALE ENTIRE PAGE ---------- */
 body {
   margin: 0;
@@ -25,8 +23,8 @@ body {
   background-position: center;
   background-attachment: fixed;
   overflow-x: hidden;
-  transform: scale(0.9); /* scale the whole page down */
-  transform-origin: top center; /* keep it centered */
+  transform: scale(0.9); /* overall page scale */
+  transform-origin: top center;
 }
 
 body::before {
@@ -92,26 +90,29 @@ h1 {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 40px;
-  align-items: flex-start; /* align bottom to video */
+  align-items: flex-start; /* align to video bottom */
 }
 
 /* DESCRIPTION CONTAINER */
 .description-container {
   flex: 1 1 600px;
   background-color: rgba(0,0,0,0.55);
-  border-left: 2px solid var(--cyber-green);
-  box-shadow: 0 0 20px rgba(0,255,204,0.35);
+  border-left: 1px solid var(--cyber-green); /* 50% of original */
+  box-shadow: 0 0 10px rgba(0,255,204,0.35); /* 50% of original glow */
   padding: 36px;
   font-size: 17px;
   line-height: 1.8;
   white-space: pre-line;
   transition: box-shadow 0.3s ease;
   overflow: hidden;
-  align-self: stretch; /* stretch to video height */
+  align-self: stretch;
 }
 
-.description-container:hover { box-shadow: 0 0 40px rgba(0,255,204,0.6); }
+.description-container:hover {
+  box-shadow: 0 0 20px rgba(0,255,204,0.6); /* scaled down */
+}
 
+/* DESCRIPTION PARAGRAPH FADE */
 .description-container p {
   opacity: 0;
   transform: translateY(20px);
@@ -130,7 +131,7 @@ h1 {
   max-width: 900px;
   aspect-ratio: 16/9;
   object-fit: cover;
-  border: 1px solid var(--cyber-green);
+  border: 0.5px solid var(--cyber-green); /* 50% border */
 }
 
 /* SIDE IMAGES COLUMN */
@@ -145,7 +146,7 @@ h1 {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  border: 2px solid #fff;
+  border: 1px solid #fff; /* 50% border thickness */
   overflow: hidden;
 }
 
@@ -156,7 +157,7 @@ h1 {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 0.9s ease-in-out; /* fade in/out */
+  transition: opacity 1s ease-in-out;
 }
 
 .side-images .slot img.active,
@@ -165,6 +166,7 @@ h1 {
   position: relative;
 }
 
+/* FADE HELPER */
 .side-images .slot .fading-out {
   opacity: 0;
 }
@@ -244,19 +246,6 @@ footer a {
 </footer>
 
 <script>
-/* FADE ON SCROLL — still works but not required for image ease */
-const fadeElements = document.querySelectorAll('.fade');
-window.addEventListener('scroll', () => {
-  fadeElements.forEach(el => {
-    const r = el.getBoundingClientRect();
-    if (r.bottom < 50 || r.top > window.innerHeight) {
-      el.classList.add('hidden');
-    } else {
-      el.classList.remove('hidden');
-    }
-  });
-});
-
 /* DESCRIPTION PARAGRAPH FADE IN/OUT */
 const paragraphs = document.querySelectorAll('.description-container p');
 function fadeDescription() {
@@ -273,7 +262,7 @@ window.addEventListener('scroll', fadeDescription);
 window.addEventListener('resize', fadeDescription);
 fadeDescription();
 
-/* SIDE IMAGES SHUFFLE — SMOOTH FADE, independent of scroll */
+/* SIDE IMAGES SHUFFLE — fully synchronized, continuous, no scroll dependency */
 const slots = document.querySelectorAll('.side-images .slot');
 
 slots.forEach(slot => {
@@ -292,7 +281,7 @@ slots.forEach(slot => {
       slot.innerHTML = '';
 
       let media;
-      if (ext === "mp4" || ext === "mov") {
+      if(ext === "mp4" || ext === "mov") {
         media = document.createElement('video');
         media.src = nextSrc;
         media.muted = true;
@@ -308,12 +297,13 @@ slots.forEach(slot => {
       media.style.opacity = '0';
       slot.appendChild(media);
 
+      // synchronized fade-in
       requestAnimationFrame(() => {
         media.style.opacity = '1';
       });
 
-    }, 450);
-  }, 3000);
+    }, 500); // fade out duration synced with CSS
+  }, 3000); // same interval for all
 });
 </script>
 </body>
