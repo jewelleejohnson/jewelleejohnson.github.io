@@ -23,7 +23,7 @@ body {
   background-position: center;
   background-attachment: fixed;
   overflow-x: hidden;
-  transform: scale(0.9);
+  transform: scale(0.9); /* overall page scale */
   transform-origin: top center;
 }
 
@@ -90,7 +90,7 @@ h1 {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 40px;
-  align-items: flex-start; 
+  align-items: flex-start;
   position: relative;
 }
 
@@ -176,11 +176,11 @@ h1 {
 .code-overlay {
   position: absolute;
   top: 0;
-  bottom: 0;
+  height: 100%; /* FULL HEIGHT OF INTRO SECTION */
   width: 100px; 
   font-family: 'Fira Code', monospace;
-  font-size: 20px; /* larger letters */
-  color: rgba(0,255,204,0.10); /* 10% opacity */
+  font-size: 20px; 
+  color: rgba(0,255,204,0.10); 
   overflow: hidden;
   white-space: pre;
   pointer-events: none;
@@ -254,7 +254,7 @@ footer a {
     </div>
   </div>
 
-  <!-- Code overlay typewriter on sides -->
+  <!-- Typewriter code overlay -->
   <div class="code-overlay left" id="codeLeft"></div>
   <div class="code-overlay right" id="codeRight"></div>
 
@@ -333,20 +333,17 @@ const leftOverlay = document.getElementById('codeLeft');
 const rightOverlay = document.getElementById('codeRight');
 
 function updateCodeOverlay() {
-  // add one char
   leftOverlay.textContent += codeText[leftIndex];
   leftIndex = (leftIndex + 1) % codeText.length;
   if(leftOverlay.textContent.length > 200) leftOverlay.textContent = leftOverlay.textContent.slice(-200);
 
   rightOverlay.textContent += codeText[rightIndex];
-  rightIndex = (rightIndex + 2) % codeText.length;
+  rightIndex = (rightIndex + 1) % codeText.length;
   if(rightOverlay.textContent.length > 200) rightOverlay.textContent = rightOverlay.textContent.slice(-200);
 }
 
-// initial typing
-setInterval(updateCodeOverlay, 8);
+setInterval(updateCodeOverlay, 50);
 
-// scroll reactive movement
 window.addEventListener('scroll', () => {
   const scrollTop = window.scrollY;
   leftOverlay.style.transform = `translateY(${-scrollTop/2}px)`;
