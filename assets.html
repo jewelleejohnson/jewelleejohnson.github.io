@@ -16,7 +16,7 @@
 
 body {
   margin: 0;
-  padding: 60px;
+  padding: 60px 60px 60px 120px;
   font-family: 'Fira Code', monospace;
   color: #fff;
   background-image: url("images/Photography.jpg");
@@ -57,9 +57,7 @@ body::before {
 }
 
 /* ---------- NAV ---------- */
-nav {
-  margin-bottom: 80px;
-}
+nav { margin-bottom: 80px; }
 
 nav a {
   margin-right: 32px;
@@ -70,71 +68,109 @@ nav a {
   text-decoration: none;
 }
 
-/* ---------- PAGE TITLE (UNCHANGED) ---------- */
-h1 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 48px;
-  letter-spacing: 0.14em;
-  margin-bottom: 10px;
-  color: var(--cyber-green);
-}
-
-.subtitle {
-  font-size: 15px;
-  opacity: 0.7;
-  margin-bottom: 60px;
-}
-
-/* ---------- PROJECT SCALE WRAPPER ---------- */
-.project-scale {
-  transform: scale(0.5);            /* 🔥 THIS IS THE ONLY SCALING */
-  transform-origin: top left;
-  width: 200%;
-}
-
-/* ---------- PROJECT GRID (UNCHANGED) ---------- */
+/* ---------- PROJECT GRID (SAME SCALING) ---------- */
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 18px;
+  max-width: 900px;
 }
 
 .project {
   border: 1px solid #fff;
   aspect-ratio: 4 / 3;
-  padding: 14px;
+  padding: 10px;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
 }
 
 .project:hover {
   box-shadow:
-    0 0 12px rgba(0,255,204,0.6),
-    0 0 28px rgba(0,255,204,0.35);
+    0 0 10px rgba(0,255,204,0.5),
+    0 0 20px rgba(0,255,204,0.25);
 }
 
 .project img,
 .project video {
   width: 100%;
-  height: calc(100% - 32px);
+  height: calc(100% - 26px);
   object-fit: cover;
   border: 1px solid #fff;
 }
 
 .project-title {
-  margin-top: 8px;
-  font-size: 14px;
+  margin-top: 6px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
-/* ---------- FULLSCREEN / OVERLAY (UNCHANGED) ---------- */
-.overlay,
-.overlay-inner,
-.overlay-media,
-.viewer,
-.viewer-content {
-  /* untouched */
+/* ---------- OVERLAY (UNCHANGED) ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  display: none;
+  z-index: 1000;
+}
+
+.overlay.active { display: flex; }
+
+.overlay-inner {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 40px;
+}
+
+.overlay-media {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.overlay-media img,
+.overlay-media video {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+
+.overlay-text {
+  font-size: 14px;
+  line-height: 1.75;
+  white-space: pre-line;
+}
+
+.exit {
+  position: fixed;
+  top: 32px;
+  right: 40px;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* ---------- VIEWER ---------- */
+.viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.97);
+  display: none;
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewer.active { display: flex; }
+
+.viewer-content img,
+.viewer-content video {
+  max-width: 85vw;
+  max-height: 85vh;
+  border: 1px solid #fff;
 }
 
 /* ---------- FOOTER (UNCHANGED) ---------- */
@@ -162,23 +198,17 @@ footer a {
   <a class="glitch" data-text="Resume" href="resume.html">Resume</a>
 </nav>
 
-<h1>3D Assets</h1>
-<p class="subtitle">// Selected environment and material studies</p>
+<section class="projects">
+  <div class="project" onclick="openProject('corner')">
+    <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline></video>
+    <div class="project-title">Corner</div>
+  </div>
 
-<!-- 🔽 ONLY THIS SECTION IS SCALED -->
-<div class="project-scale">
-  <section class="projects">
-    <div class="project" onclick="openProject('corner')">
-      <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline></video>
-      <div class="project-title">Corner</div>
-    </div>
-
-    <div class="project" onclick="openProject('jewel')">
-      <img src="images/CD_1.jpeg" alt="">
-      <div class="project-title">Jewel Case</div>
-    </div>
-  </section>
-</div>
+  <div class="project" onclick="openProject('jewel')">
+    <img src="images/CD_1.jpeg" alt="">
+    <div class="project-title">Jewel Case</div>
+  </div>
+</section>
 
 <footer>
   Contact — jewelleejohnson@gmail.com<br><br>
@@ -186,6 +216,8 @@ footer a {
   <a class="glitch" data-text="ArtStation" href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
   <a class="glitch" data-text="Instagram" href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
 </footer>
+
+<!-- OVERLAY + VIEWER JS STAYS EXACTLY THE SAME -->
 
 </body>
 </html>
