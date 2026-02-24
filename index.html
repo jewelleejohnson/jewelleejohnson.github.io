@@ -8,7 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-:root { --cyber-green: #00ffcc; }
+:root {
+  --cyber-green: #00ffcc;
+}
+
 * { box-sizing: border-box; }
 
 body {
@@ -36,15 +39,18 @@ body::before {
   position: relative;
   display: inline-block;
 }
+
 .glitch:hover::after {
   content: attr(data-text);
   position: absolute;
   left: 2px;
   top: 0;
   width: 100%;
+  color: inherit;
   clip-path: inset(40% 0 45% 0);
   animation: glitchX 0.25s steps(2) infinite;
 }
+
 @keyframes glitchX {
   0% { transform: translateX(0); }
   50% { transform: translateX(-3px); }
@@ -70,13 +76,14 @@ h1 {
   margin-bottom: 10px;
   color: var(--cyber-green);
 }
+
 .subtitle {
   margin-bottom: 60px;
   font-size: 16px;
   opacity: 0.7;
 }
 
-/* ---------- INTRO ---------- */
+/* ---------- INTRO SECTION ---------- */
 .intro-section {
   display: flex;
   flex-wrap: wrap;
@@ -84,23 +91,30 @@ h1 {
   gap: 40px;
 }
 
-/* DESCRIPTION */
+/* DESCRIPTION CONTAINER */
 .description-container {
   flex: 1 1 600px;
-  background: rgba(0,0,0,0.55);
+  background-color: rgba(0,0,0,0.55);
   border-left: 2px solid var(--cyber-green);
   box-shadow: 0 0 20px rgba(0,255,204,0.35);
   padding: 36px;
   font-size: 17px;
   line-height: 1.8;
   white-space: pre-line;
+  transition: box-shadow 0.3s ease;
   overflow: hidden;
 }
+
+.description-container:hover {
+  box-shadow: 0 0 40px rgba(0,255,204,0.6);
+}
+
 .description-container p {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
+
 .description-container p.visible {
   opacity: 1;
   transform: translateY(0);
@@ -112,38 +126,42 @@ h1 {
   width: 100%;
   max-width: 900px;
   aspect-ratio: 16/9;
-  border: 1px solid var(--cyber-green);
   object-fit: cover;
+  border: 1px solid var(--cyber-green);
 }
 
-/* ---------- SIDE IMAGES (SELECTED WORK) ---------- */
+/* ---------- SIDE IMAGES ---------- */
 .side-images {
-  flex: 1 1 420px;
+  flex: 1 1 360px;
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
-.slot {
+
+.side-images .slot {
   position: relative;
+  width: 100%;
   aspect-ratio: 1 / 1;
   border: 2px solid #fff;
   overflow: hidden;
+  transform: scale(0.9);
+  transform-origin: top right;
 }
-.slot img,
-.slot video {
+
+.side-images .slot img,
+.side-images .slot video {
   position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
-.slot .active { opacity: 1; }
 
-/* ---------- FADE ON SCROLL ---------- */
-.fade { transition: opacity 0.6s ease; }
-.fade.hidden { opacity: 0; }
+.side-images .slot img.active,
+.side-images .slot video.active {
+  opacity: 1;
+}
 
 /* ---------- FOOTER ---------- */
 footer {
@@ -151,11 +169,16 @@ footer {
   font-size: 14px;
   color: var(--cyber-green);
 }
+
 footer a {
   margin-right: 20px;
   color: var(--cyber-green);
   text-decoration: none;
 }
+
+/* ---------- FADE ---------- */
+.fade { opacity: 1; transition: opacity 0.6s ease-out; }
+.fade.hidden { opacity: 0; }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width:900px){
@@ -165,7 +188,10 @@ footer a {
     flex-wrap: wrap;
     gap: 12px;
   }
-  .slot { width: calc(50% - 6px); }
+  .side-images .slot {
+    width: calc(50% - 6px);
+    transform: scale(0.95);
+  }
 }
 </style>
 </head>
@@ -186,10 +212,13 @@ footer a {
 <div class="intro-section fade">
 
   <div class="description-container">
-    <p>// :: Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work...</p>
-    <p>Her experience spans 3D modeling, texturing, rendering, motion capture...</p>
-    <p>Jewel aims to create visually compelling, story-driven work...</p>
-    <p>She actively works in electronic sound and DJing...</p>
+    <p>// :: Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work. She earned a BFA in Film/Animation/Video from the Rhode Island School of Design, focusing on digital animation, 3D modeling, and experimental media, working with tools such as Blender, Unreal Engine, Unity, and the Adobe Creative Suite.</p>
+
+    <p>Her experience spans 3D modeling, texturing, rendering, motion capture, and procedural animation, as well as compositing and video/film editing. She has worked with motion capture systems including Perception Neuron and Axis Studio, capturing and troubleshooting movement data for animation and XR projects. She has collaborated with Brown University’s XR Hub and supported students with asset management, color spaces, and interactive workflows in Unity and Marvelous Designer.</p>
+
+    <p>Jewel aims to create visually compelling, story-driven work, inspired by the electronic and experimental music scene, audio-reactive gaming, and local Black queer experimental performance artists in Philadelphia.</p>
+
+    <p>She actively works in electronic sound and DJing, shaping how she considers motion, timing, and atmosphere in 3D space. She is interested in audio-reactive workflows and audiovisual installations where animation, sound, and environment converge. ::.</p>
 
     <div class="inline-video">
       <video src="images/NEORAT - Trim.mp4" autoplay muted loop playsinline></video>
@@ -197,9 +226,15 @@ footer a {
   </div>
 
   <div class="side-images">
-    <div class="slot" data-items='["images/Xcsiber_Front.jpeg","images/0001-0250.mov","images/1final.png"]'></div>
-    <div class="slot" data-items='["images/jewel-johnson-asset4.jpg","images/jewel-lee-johnson-asset11.jpg","images/jewel-lee-johnson-asset9.jpg"]'></div>
-    <div class="slot" data-items='["images/jewel-lee-johnson-asset11.jpg","images/jewel-lee-johnson-asset9.jpg","images/Xcsiber_Front.jpeg"]'></div>
+    <div class="slot" data-items='["images/Xcsiber_Front.jpeg","images/0001-0250.mov","images/1final.png"]'>
+      <img src="images/Xcsiber_Front.jpeg" class="active">
+    </div>
+    <div class="slot" data-items='["images/jewel-johnson-asset4.jpg","images/jewel-lee-johnson-asset11.jpg","images/jewel-lee-johnson-asset9.jpg"]'>
+      <img src="images/jewel-johnson-asset4.jpg" class="active">
+    </div>
+    <div class="slot" data-items='["images/jewel-lee-johnson-asset11.jpg","images/jewel-lee-johnson-asset9.jpg","images/Xcsiber_Front.jpeg"]'>
+      <img src="images/jewel-lee-johnson-asset11.jpg" class="active">
+    </div>
   </div>
 
 </div>
@@ -212,52 +247,70 @@ footer a {
 </footer>
 
 <script>
+/* FADE ON SCROLL */
+const fadeElements = document.querySelectorAll('.fade');
+window.addEventListener('scroll', () => {
+  fadeElements.forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.bottom < 50 || r.top > window.innerHeight) {
+      el.classList.add('hidden');
+    } else {
+      el.classList.remove('hidden');
+    }
+  });
+});
+
 /* DESCRIPTION FADE */
 const paragraphs = document.querySelectorAll('.description-container p');
-function updateParagraphs(){
-  paragraphs.forEach(p=>{
-    const r=p.getBoundingClientRect();
-    p.classList.toggle('visible', r.top < innerHeight-60 && r.bottom>60);
+function fadeDescription() {
+  paragraphs.forEach(p => {
+    const rect = p.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 50 && rect.bottom > 50){
+      p.classList.add('visible');
+    } else {
+      p.classList.remove('visible');
+    }
   });
 }
-addEventListener('scroll',updateParagraphs);
-addEventListener('resize',updateParagraphs);
-updateParagraphs();
+window.addEventListener('scroll', fadeDescription);
+window.addEventListener('resize', fadeDescription);
+fadeDescription();
 
-/* SIDE IMAGE CROSSFADE SHUFFLE */
-document.querySelectorAll('.slot').forEach(slot=>{
+/* SIDE IMAGES SHUFFLE — EASED FADE */
+const slots = document.querySelectorAll('.side-images .slot');
+
+slots.forEach(slot => {
   const items = JSON.parse(slot.dataset.items);
-  let index = 0;
+  let current = 0;
 
-  function createMedia(src){
+  setInterval(() => {
+    const old = slot.querySelector('.active');
+    current = (current + 1) % items.length;
+    const src = items[current];
     const ext = src.split('.').pop().toLowerCase();
+
     let el;
-    if(ext === 'mp4' || ext === 'mov'){
-      el=document.createElement('video');
-      el.src=src; el.autoplay=true; el.loop=true; el.muted=true; el.playsInline=true;
+    if (ext === 'mp4' || ext === 'mov') {
+      el = document.createElement('video');
+      el.src = src;
+      el.autoplay = true;
+      el.loop = true;
+      el.muted = true;
+      el.playsInline = true;
     } else {
-      el=document.createElement('img');
-      el.src=src;
+      el = document.createElement('img');
+      el.src = src;
     }
-    return el;
-  }
 
-  let current = createMedia(items[0]);
-  current.classList.add('active');
-  slot.appendChild(current);
+    slot.appendChild(el);
 
-  setInterval(()=>{
-    index=(index+1)%items.length;
-    const next=createMedia(items[index]);
-    slot.appendChild(next);
-    requestAnimationFrame(()=>next.classList.add('active'));
+    requestAnimationFrame(() => {
+      el.classList.add('active');
+      if (old) old.classList.remove('active');
+      setTimeout(() => old && old.remove(), 1000);
+    });
 
-    setTimeout(()=>{
-      current.classList.remove('active');
-      setTimeout(()=>current.remove(),1000);
-      current=next;
-    },1000);
-  },3000);
+  }, 3000);
 });
 </script>
 
