@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,9 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --cyber-green: #00ffcc;
-}
+:root { --cyber-green: #00ffcc; }
 
 /* ---------- SCALE ENTIRE PAGE ---------- */
 body {
@@ -23,7 +21,7 @@ body {
   background-position: center;
   background-attachment: fixed;
   overflow-x: hidden;
-  transform: scale(0.9); /* overall page scale */
+  transform: scale(0.9);
   transform-origin: top center;
 }
 
@@ -36,11 +34,7 @@ body::before {
 }
 
 /* ---------- GLITCH ---------- */
-.glitch {
-  position: relative;
-  display: inline-block;
-}
-
+.glitch { position: relative; display: inline-block; }
 .glitch:hover::after {
   content: attr(data-text);
   position: absolute;
@@ -51,38 +45,15 @@ body::before {
   clip-path: inset(40% 0 45% 0);
   animation: glitchX 0.25s steps(2) infinite;
 }
-
-@keyframes glitchX {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(-3px); }
-  100% { transform: translateX(3px); }
-}
+@keyframes glitchX { 0% { transform: translateX(0); } 50% { transform: translateX(-3px); } 100% { transform: translateX(3px); } }
 
 /* ---------- NAV ---------- */
 nav { margin-bottom: 80px; }
-nav a {
-  margin-right: 32px;
-  font-size: 15px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--cyber-green);
-  text-decoration: none;
-}
+nav a { margin-right: 32px; font-size: 15px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyber-green); text-decoration: none; }
 
 /* ---------- TITLE ---------- */
-h1 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 52px;
-  letter-spacing: 0.12em;
-  margin-bottom: 10px;
-  color: var(--cyber-green);
-}
-
-.subtitle {
-  margin-bottom: 60px;
-  font-size: 16px;
-  opacity: 0.7;
-}
+h1 { font-family: 'Space Grotesk', sans-serif; font-size: 52px; letter-spacing: 0.12em; margin-bottom: 10px; color: var(--cyber-green); }
+.subtitle { margin-bottom: 60px; font-size: 16px; opacity: 0.7; }
 
 /* ---------- INTRO SECTION ---------- */
 .intro-section {
@@ -98,8 +69,8 @@ h1 {
 .description-container {
   flex: 1 1 600px;
   background-color: rgba(0,0,0,0.55);
-  border-left: 1px solid var(--cyber-green); 
-  box-shadow: 0 0 15px rgba(0,255,204,0.35); 
+  border-left: 1px solid var(--cyber-green);
+  box-shadow: 0 0 15px rgba(0,255,204,0.35);
   padding: 36px;
   font-size: 20px;
   line-height: 1.8;
@@ -108,104 +79,46 @@ h1 {
   overflow: hidden;
   align-self: stretch;
 }
-
-/* Glow only on hover */
-.description-container:hover {
-  box-shadow: 0 0 25px rgba(0,255,204,0.6);
-}
-
-/* DESCRIPTION PARAGRAPH FADE */
-.description-container p {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.description-container p.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.description-container:hover { box-shadow: 0 0 25px rgba(0,255,204,0.6); }
+.description-container p { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+.description-container p.visible { opacity: 1; transform: translateY(0); }
 
 /* INLINE VIDEO */
 .inline-video { margin-top: 24px; }
-.inline-video video {
-  width: 100%;
-  max-width: 900px;
-  aspect-ratio: 16/9;
-  object-fit: cover;
-  border: 0.5px solid var(--cyber-green);
-}
+.inline-video video { width: 100%; max-width: 900px; aspect-ratio: 16/9; object-fit: cover; border: 0.5px solid var(--cyber-green); }
 
 /* SIDE IMAGES COLUMN */
-.side-images {
-  flex: 1 1 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
+.side-images { flex: 1 1 320px; display: flex; flex-direction: column; gap: 24px; }
+.side-images .slot { position: relative; width: 63%; aspect-ratio: 1 / 1; border: 1px solid #fff; overflow: hidden; }
+.side-images .slot img, .side-images .slot video { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s ease-in-out; }
+.side-images .slot img.active, .side-images .slot video.active { opacity: 1; position: relative; }
+.side-images .slot .fading-out { opacity: 0; }
 
-.side-images .slot {
-  position: relative;
-  width: 63%;
-  aspect-ratio: 1 / 1;
-  border: 1px solid #fff;
-  overflow: hidden;
-}
-
-.side-images .slot img,
-.side-images .slot video {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-.side-images .slot img.active,
-.side-images .slot video.active {
-  opacity: 1;
-  position: relative;
-}
-
-.side-images .slot .fading-out {
-  opacity: 0;
-}
-
-/* ---------- CODE OVERLAY AS BACKGROUND ---------- */
+/* ---------- TYPEWRITER CODE OVERLAY ---------- */
 .code-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
-  height: 100%; /* FULL HEIGHT OF INTRO SECTION */
-  width: 100px; 
+  width: 100px;
+  height: 100vh; /* FULL SCREEN */
   font-family: 'Fira Code', monospace;
-  font-size: 20px; 
-  color: rgba(0,255,204,0.10); 
+  font-size: 20px;
+  color: rgba(0,255,204,0.1);
   overflow: hidden;
   white-space: pre;
   pointer-events: none;
+  z-index: 0;
 }
-
+.code-overlay.right { left: auto; right: 0; }
 .code-overlay.left { left: 0; }
-.code-overlay.right { right: 0; }
 
 /* ---------- FOOTER ---------- */
-footer {
-  margin-top: 120px;
-  font-size: 14px;
-  color: var(--cyber-green);
-}
-footer a {
-  margin-right: 20px;
-  color: var(--cyber-green);
-  text-decoration: none;
-}
+footer { margin-top: 120px; font-size: 14px; color: var(--cyber-green); }
+footer a { margin-right: 20px; color: var(--cyber-green); text-decoration: none; }
 
 /* ---------- FADE ---------- */
 .fade { opacity: 1; transition: opacity 0.6s ease-out; }
 .fade.hidden { opacity: 0; }
 
-/* ---------- RESPONSIVE ---------- */
 @media (max-width:900px){
   .intro-section{flex-direction:column;}
   .side-images{flex-direction:row; flex-wrap:wrap; gap:12px;}
@@ -229,14 +142,7 @@ footer a {
 <div class="intro-section fade">
 
   <div class="description-container">
-    <p>// :: Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work. She earned a BFA in Film/Animation/Video from the Rhode Island School of Design, focusing on digital animation, 3D modeling, and experimental media, working with tools such as Blender, Unreal Engine, Unity, and the Adobe Creative Suite.</p>
-
-    <p>Her experience spans 3D modeling, texturing, rendering, motion capture, and procedural animation, as well as compositing and video/film editing. She has worked with motion capture systems including Perception Neuron and Axis Studio, capturing and troubleshooting movement data for animation and XR projects. She has collaborated with Brown University’s XR Hub and supported students with asset management, color spaces, and interactive workflows in Unity and Marvelous Designer.</p>
-
-    <p>Jewel aims to create visually compelling, story-driven work, inspired by the electronic and experimental music scene, audio-reactive gaming, and local Black queer experimental performance artists in Philadelphia. Sound drives her approach to 3D modeling, and she seeks to bring BIPOC experimental art into 3D spaces as an underrepresented yet revolutionary outlet.</p>
-
-    <p>She actively works in electronic sound and DJing, shaping how she considers motion, timing, and atmosphere in 3D space. She is interested in audio-reactive workflows that allow 3D visuals to respond in gameplay, using tools like Wwise, FMOD, Unreal Engine’s Audio Synesthesia, and Pure Data to translate audio into procedural animation, shader changes, particle systems, and lighting shifts. She also works in performance art and audiovisual installations where animation, sound, and environment converge, exploring hybrid workflows combining TouchDesigner with Unreal or Unity to support live, responsive visuals for performances and cinematic environments. Her focus is on using experimental 3D techniques to expand conventional gaming and VFX workflows. ::.</p>
-
+    <p>// :: Jewel Lee-Johnson has a strong background in animation and visual arts through both academic training and hands-on production work...</p>
     <div class="inline-video">
       <video src="images/NEORAT - Trim.mp4" autoplay muted loop playsinline></video>
     </div>
@@ -254,7 +160,7 @@ footer a {
     </div>
   </div>
 
-  <!-- Typewriter code overlay -->
+  <!-- Typewriter overlays -->
   <div class="code-overlay left" id="codeLeft"></div>
   <div class="code-overlay right" id="codeRight"></div>
 
@@ -268,7 +174,7 @@ footer a {
 </footer>
 
 <script>
-/* DESCRIPTION PARAGRAPH FADE IN/OUT */
+/* DESCRIPTION PARAGRAPH FADE */
 const paragraphs = document.querySelectorAll('.description-container p');
 function fadeDescription() {
   paragraphs.forEach(p => {
@@ -292,14 +198,11 @@ slots.forEach(slot => {
   setInterval(() => {
     const currentMedia = slot.querySelector('img, video');
     if (currentMedia) currentMedia.classList.add('fading-out');
-
     setTimeout(() => {
       current = (current + 1) % items.length;
       const nextSrc = items[current];
       const ext = nextSrc.split('.').pop().toLowerCase();
-
       slot.innerHTML = '';
-
       let media;
       if(ext === "mp4" || ext === "mov") {
         media = document.createElement('video');
@@ -312,20 +215,15 @@ slots.forEach(slot => {
         media = document.createElement('img');
         media.src = nextSrc;
       }
-
       media.classList.add('active');
       media.style.opacity = '0';
       slot.appendChild(media);
-
-      requestAnimationFrame(() => {
-        media.style.opacity = '1';
-      });
-
+      requestAnimationFrame(() => { media.style.opacity = '1'; });
     }, 500);
   }, 3000);
 });
 
-/* ---------- TYPEWRITER CODE OVERLAY ---------- */
+/* TYPEWRITER CODE OVERLAY */
 const codeText = `const x = 42;\nfunction test() {\n  console.log("Hello World");\n}\nfor(let i=0;i<10;i++){console.log(i);}\n`;
 let leftIndex = Math.floor(codeText.length/2);
 let rightIndex = Math.floor(codeText.length/2);
@@ -335,14 +233,15 @@ const rightOverlay = document.getElementById('codeRight');
 function updateCodeOverlay() {
   leftOverlay.textContent += codeText[leftIndex];
   leftIndex = (leftIndex + 1) % codeText.length;
-  if(leftOverlay.textContent.length > 200) leftOverlay.textContent = leftOverlay.textContent.slice(-200);
+  if(leftOverlay.textContent.length > 400) leftOverlay.textContent = leftOverlay.textContent.slice(-400);
 
   rightOverlay.textContent += codeText[rightIndex];
   rightIndex = (rightIndex + 1) % codeText.length;
-  if(rightOverlay.textContent.length > 200) rightOverlay.textContent = rightOverlay.textContent.slice(-200);
+  if(rightOverlay.textContent.length > 400) rightOverlay.textContent = rightOverlay.textContent.slice(-400);
 }
 
-setInterval(updateCodeOverlay, 50);
+// much faster typing speed
+setInterval(updateCodeOverlay, 10);
 
 window.addEventListener('scroll', () => {
   const scrollTop = window.scrollY;
