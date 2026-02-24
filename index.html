@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -174,16 +174,17 @@ h1 {
 
 /* ---------- CODE OVERLAY AS BACKGROUND ---------- */
 .code-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   width: 100px; 
   font-family: 'Fira Code', monospace;
-  font-size: 20px; /* larger letters */
-  color: rgba(0,255,204,0.10); /* 10% opacity */
+  font-size: 20px;
+  color: rgba(0,255,204,0.10);
   overflow: hidden;
   white-space: pre;
   pointer-events: none;
+  z-index: 0; /* behind content */
 }
 
 .code-overlay.left { left: 0; }
@@ -214,6 +215,10 @@ footer a {
 </style>
 </head>
 <body>
+
+<!-- Code overlay typewriter on sides -->
+<div class="code-overlay left" id="codeLeft"></div>
+<div class="code-overlay right" id="codeRight"></div>
 
 <nav>
   <a class="glitch" data-text="Home" href="index.html">Home</a>
@@ -253,10 +258,6 @@ footer a {
       <img src="images/jewel-lee-johnson-asset11.jpg" class="active">
     </div>
   </div>
-
-  <!-- Code overlay typewriter on sides -->
-  <div class="code-overlay left" id="codeLeft"></div>
-  <div class="code-overlay right" id="codeRight"></div>
 
 </div>
 
@@ -333,7 +334,6 @@ const leftOverlay = document.getElementById('codeLeft');
 const rightOverlay = document.getElementById('codeRight');
 
 function updateCodeOverlay() {
-  // add one char
   leftOverlay.textContent += codeText[leftIndex];
   leftIndex = (leftIndex + 1) % codeText.length;
   if(leftOverlay.textContent.length > 200) leftOverlay.textContent = leftOverlay.textContent.slice(-200);
@@ -343,10 +343,8 @@ function updateCodeOverlay() {
   if(rightOverlay.textContent.length > 200) rightOverlay.textContent = rightOverlay.textContent.slice(-200);
 }
 
-// initial typing
 setInterval(updateCodeOverlay, 50);
 
-// scroll reactive movement
 window.addEventListener('scroll', () => {
   const scrollTop = window.scrollY;
   leftOverlay.style.transform = `translateY(${-scrollTop/2}px)`;
