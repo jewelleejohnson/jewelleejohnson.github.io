@@ -177,10 +177,10 @@ h1 {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 50px;
+  width: 80px; /* bigger text area */
   font-family: 'Fira Code', monospace;
-  font-size: 10px;
-  color: rgba(0,255,204,0.08);
+  font-size: 14px; /* larger letters */
+  color: rgba(0,255,204,0.10); /* 10% opacity */
   overflow: hidden;
   white-space: pre;
   pointer-events: none;
@@ -319,7 +319,6 @@ slots.forEach(slot => {
       media.style.opacity = '0';
       slot.appendChild(media);
 
-      // synchronized fade-in
       requestAnimationFrame(() => {
         media.style.opacity = '1';
       });
