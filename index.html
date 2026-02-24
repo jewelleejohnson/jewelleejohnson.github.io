@@ -15,7 +15,7 @@
 /* ---------- SCALE ENTIRE PAGE ---------- */
 body {
   margin: 0;
-  padding: 60px;
+  padding: 80px;
   font-family: 'Fira Code', monospace;
   color: #fff;
   background-image: url("images/Photography.jpg");
@@ -334,7 +334,7 @@ const rightOverlay = document.getElementById('codeRight');
 
 function updateCodeOverlay() {
   leftOverlay.textContent += codeText[leftIndex];
-  leftIndex = (leftIndex + 1) % codeText.length;
+  leftIndex = (leftIndex + 2) % codeText.length;
   if(leftOverlay.textContent.length > 200) leftOverlay.textContent = leftOverlay.textContent.slice(-200);
 
   rightOverlay.textContent += codeText[rightIndex];
