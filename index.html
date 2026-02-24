@@ -109,7 +109,7 @@ h1 {
   align-self: stretch;
 }
 
-/* Glow only when hovering text */
+/* Glow only on hover */
 .description-container:hover {
   box-shadow: 0 0 25px rgba(0,255,204,0.6);
 }
@@ -174,18 +174,16 @@ h1 {
 
 /* ---------- CODE OVERLAY AS BACKGROUND ---------- */
 .code-overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   bottom: 0;
-  width: 80px;
+  width: 100px; 
   font-family: 'Fira Code', monospace;
   font-size: 20px; /* larger letters */
   color: rgba(0,255,204,0.10); /* 10% opacity */
   overflow: hidden;
   white-space: pre;
   pointer-events: none;
-  display: flex;
-  flex-direction: column;
 }
 
 .code-overlay.left { left: 0; }
@@ -286,7 +284,7 @@ window.addEventListener('scroll', fadeDescription);
 window.addEventListener('resize', fadeDescription);
 fadeDescription();
 
-/* SIDE IMAGES SHUFFLE — fully synchronized, continuous, no scroll dependency */
+/* SIDE IMAGES SHUFFLE */
 const slots = document.querySelectorAll('.side-images .slot');
 slots.forEach(slot => {
   const items = JSON.parse(slot.dataset.items);
@@ -301,6 +299,7 @@ slots.forEach(slot => {
       const ext = nextSrc.split('.').pop().toLowerCase();
 
       slot.innerHTML = '';
+
       let media;
       if(ext === "mp4" || ext === "mov") {
         media = document.createElement('video');
@@ -313,50 +312,45 @@ slots.forEach(slot => {
         media = document.createElement('img');
         media.src = nextSrc;
       }
+
       media.classList.add('active');
       media.style.opacity = '0';
       slot.appendChild(media);
-      requestAnimationFrame(() => { media.style.opacity = '1'; });
+
+      requestAnimationFrame(() => {
+        media.style.opacity = '1';
+      });
+
     }, 500);
   }, 3000);
 });
 
 /* ---------- TYPEWRITER CODE OVERLAY ---------- */
 const codeText = `const x = 42;\nfunction test() {\n  console.log("Hello World");\n}\nfor(let i=0;i<10;i++){console.log(i);}\n`;
-let leftIndex = 0, rightIndex = 0;
+let leftIndex = Math.floor(codeText.length/2);
+let rightIndex = Math.floor(codeText.length/2);
 const leftOverlay = document.getElementById('codeLeft');
 const rightOverlay = document.getElementById('codeRight');
-let offset = 0; // vertical movement offset
 
-// Typewriter effect
-setInterval(() => {
+function updateCodeOverlay() {
+  // add one char
   leftOverlay.textContent += codeText[leftIndex];
   leftIndex = (leftIndex + 1) % codeText.length;
-  if(leftOverlay.textContent.length > 500) leftOverlay.textContent = leftOverlay.textContent.slice(-500);
+  if(leftOverlay.textContent.length > 200) leftOverlay.textContent = leftOverlay.textContent.slice(-200);
 
   rightOverlay.textContent += codeText[rightIndex];
   rightIndex = (rightIndex + 1) % codeText.length;
-  if(rightOverlay.textContent.length > 500) rightOverlay.textContent = rightOverlay.textContent.slice(-500);
-}, 50);
-
-// Vertical scroll animation
-function updateCodeOffset() {
-  leftOverlay.style.transform = `translateY(${offset}px)`;
-  rightOverlay.style.transform = `translateY(${offset}px)`;
+  if(rightOverlay.textContent.length > 200) rightOverlay.textContent = rightOverlay.textContent.slice(-200);
 }
 
-// Continuous subtle downward movement
-setInterval(() => {
-  offset += 0.3; // slow downward flow
-  updateCodeOffset();
-}, 30);
+// initial typing
+setInterval(updateCodeOverlay, 50);
 
-// Move opposite to scroll
+// scroll reactive movement
 window.addEventListener('scroll', () => {
-  const scrollDelta = window.scrollY - (window.lastScrollY || 0);
-  offset -= scrollDelta * 0.5; // opposite direction
-  window.lastScrollY = window.scrollY;
-  updateCodeOffset();
+  const scrollTop = window.scrollY;
+  leftOverlay.style.transform = `translateY(${-scrollTop/2}px)`;
+  rightOverlay.style.transform = `translateY(${-scrollTop/2}px)`;
 });
 </script>
 </body>
