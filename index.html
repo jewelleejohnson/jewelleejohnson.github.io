@@ -89,6 +89,7 @@ h1 {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 40px;
+  align-items: flex-start; /* align bottom to video */
 }
 
 /* DESCRIPTION CONTAINER */
@@ -103,6 +104,7 @@ h1 {
   white-space: pre-line;
   transition: box-shadow 0.3s ease;
   overflow: hidden;
+  align-self: stretch; /* stretch to video height */
 }
 
 .description-container:hover { box-shadow: 0 0 40px rgba(0,255,204,0.6); }
@@ -151,13 +153,17 @@ h1 {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.9s ease-in-out; /* fade in/out */
 }
 
 .side-images .slot img.active,
 .side-images .slot video.active {
   opacity: 1;
   position: relative;
+}
+
+.side-images .slot .fading-out {
+  opacity: 0;
 }
 
 /* ---------- FOOTER ---------- */
@@ -264,37 +270,46 @@ window.addEventListener('scroll', fadeDescription);
 window.addEventListener('resize', fadeDescription);
 fadeDescription();
 
-/* SIDE IMAGES SHUFFLE */
+/* SIDE IMAGES SHUFFLE — SMOOTH FADE */
 const slots = document.querySelectorAll('.side-images .slot');
 
 slots.forEach(slot => {
   const items = JSON.parse(slot.dataset.items);
   let current = 0;
+
   setInterval(() => {
-    const children = slot.querySelectorAll('img, video');
-    children.forEach(c => c.classList.remove('active'));
+    const currentMedia = slot.querySelector('img, video');
+    if (currentMedia) currentMedia.classList.add('fading-out');
 
-    current = (current + 1) % items.length;
-    let nextSrc = items[current];
-    let ext = nextSrc.split('.').pop().toLowerCase();
+    setTimeout(() => {
+      current = (current + 1) % items.length;
+      const nextSrc = items[current];
+      const ext = nextSrc.split('.').pop().toLowerCase();
 
-    if(ext === "mp4" || ext === "mov") {
-      let video = document.createElement('video');
-      video.src = nextSrc;
-      video.muted = true;
-      video.loop = true;
-      video.autoplay = true;
-      video.playsInline = true;
-      video.classList.add('active');
       slot.innerHTML = '';
-      slot.appendChild(video);
-    } else {
-      let img = document.createElement('img');
-      img.src = nextSrc;
-      img.classList.add('active');
-      slot.innerHTML = '';
-      slot.appendChild(img);
-    }
+
+      let media;
+      if (ext === "mp4" || ext === "mov") {
+        media = document.createElement('video');
+        media.src = nextSrc;
+        media.muted = true;
+        media.loop = true;
+        media.autoplay = true;
+        media.playsInline = true;
+      } else {
+        media = document.createElement('img');
+        media.src = nextSrc;
+      }
+
+      media.classList.add('active');
+      media.style.opacity = '0';
+      slot.appendChild(media);
+
+      requestAnimationFrame(() => {
+        media.style.opacity = '1';
+      });
+
+    }, 450);
   }, 3000);
 });
 </script>
