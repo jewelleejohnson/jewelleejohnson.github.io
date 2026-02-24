@@ -23,7 +23,7 @@ body {
   background-position: center;
   background-attachment: fixed;
   overflow-x: hidden;
-  transform: scale(0.9); /* overall page scale */
+  transform: scale(0.9);
   transform-origin: top center;
 }
 
@@ -90,15 +90,16 @@ h1 {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 40px;
-  align-items: flex-start; /* align to video bottom */
+  align-items: flex-start; 
+  position: relative;
 }
 
-/* DESCRIPTION CONTAINER */
+/* ---------- DESCRIPTION CONTAINER ---------- */
 .description-container {
   flex: 1 1 600px;
   background-color: rgba(0,0,0,0.55);
-  border-left: 1px solid var(--cyber-green); /* 50% of original */
-  box-shadow: 0 0 15px rgba(0,255,204,0.35); /* 50% of original glow */
+  border-left: 1px solid var(--cyber-green); 
+  box-shadow: 0 0 15px rgba(0,255,204,0.35); 
   padding: 36px;
   font-size: 20px;
   line-height: 1.8;
@@ -108,8 +109,9 @@ h1 {
   align-self: stretch;
 }
 
+/* Glow only when hovering text */
 .description-container:hover {
-  box-shadow: 0 0 2px rgba(0,255,204,0.6); /* scaled down */
+  box-shadow: 0 0 25px rgba(0,255,204,0.6);
 }
 
 /* DESCRIPTION PARAGRAPH FADE */
@@ -131,7 +133,7 @@ h1 {
   max-width: 900px;
   aspect-ratio: 16/9;
   object-fit: cover;
-  border: 0.5px solid var(--cyber-green); /* 50% border */
+  border: 0.5px solid var(--cyber-green);
 }
 
 /* SIDE IMAGES COLUMN */
@@ -146,7 +148,7 @@ h1 {
   position: relative;
   width: 63%;
   aspect-ratio: 1 / 1;
-  border: 1px solid #fff; /* 50% border thickness */
+  border: 1px solid #fff;
   overflow: hidden;
 }
 
@@ -166,10 +168,26 @@ h1 {
   position: relative;
 }
 
-/* FADE HELPER */
 .side-images .slot .fading-out {
   opacity: 0;
 }
+
+/* ---------- CODE OVERLAY AS BACKGROUND ---------- */
+.code-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  color: rgba(0,255,204,0.08);
+  overflow: hidden;
+  white-space: pre;
+  pointer-events: none;
+}
+
+.code-overlay.left { left: 0; }
+.code-overlay.right { right: 0; }
 
 /* ---------- FOOTER ---------- */
 footer {
@@ -235,6 +253,10 @@ footer a {
       <img src="images/jewel-lee-johnson-asset11.jpg" class="active">
     </div>
   </div>
+
+  <!-- Code overlay typewriter on sides -->
+  <div class="code-overlay left" id="codeLeft"></div>
+  <div class="code-overlay right" id="codeRight"></div>
 
 </div>
 
@@ -302,9 +324,25 @@ slots.forEach(slot => {
         media.style.opacity = '1';
       });
 
-    }, 500); // fade out duration synced with CSS
-  }, 3000); // same interval for all
+    }, 500);
+  }, 3000);
 });
+
+/* ---------- TYPEWRITER CODE OVERLAY ---------- */
+const codeText = `const x = 42;\nfunction test() {\n  console.log("Hello World");\n}\nfor(let i=0;i<10;i++){console.log(i);}\n`;
+let leftIndex = 0, rightIndex = 0;
+const leftOverlay = document.getElementById('codeLeft');
+const rightOverlay = document.getElementById('codeRight');
+
+setInterval(() => {
+  leftOverlay.textContent += codeText[leftIndex];
+  leftIndex = (leftIndex + 1) % codeText.length;
+  if(leftOverlay.textContent.length > 500) leftOverlay.textContent = leftOverlay.textContent.slice(-500);
+
+  rightOverlay.textContent += codeText[rightIndex];
+  rightIndex = (rightIndex + 1) % codeText.length;
+  if(rightOverlay.textContent.length > 500) rightOverlay.textContent = rightOverlay.textContent.slice(-500);
+}, 50);
 </script>
 </body>
 </html>
