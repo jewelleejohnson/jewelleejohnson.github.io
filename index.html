@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -101,18 +101,16 @@ h1 {
   font-size: 17px;
   line-height: 1.8;
   white-space: pre-line;
-  transition: box-shadow 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease;
   overflow: hidden;
 }
 
-.description-container:hover {
-  box-shadow: 0 0 40px rgba(0,255,204,0.6);
-}
+.description-container:hover { box-shadow: 0 0 40px rgba(0,255,204,0.6); }
 
 .description-container p {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .description-container p.visible {
@@ -149,45 +147,63 @@ h1 {
 .side-images .slot img,
 .side-images .slot video {
   position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 1.2s ease-in-out;
+  transition: opacity 1s ease-in-out;
 }
 
 .side-images .slot img.active,
 .side-images .slot video.active {
   opacity: 1;
+  position: relative;
+}
+
+/* ---------- SELECTED WORK ---------- */
+.selected-work { margin-top: 80px; }
+.selected-work h2 {
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+.gallery img {
+  width: 280px;
+  height: 280px;
+  border: 1px solid var(--cyber-green);
+  object-fit: cover;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  margin-top: 120px;
+  font-size: 14px;
+  color: var(--cyber-green);
+}
+footer a {
+  margin-right: 20px;
+  color: var(--cyber-green);
+  text-decoration: none;
 }
 
 /* ---------- FADE ---------- */
-.fade {
-  opacity: 1;
-  transition: opacity 0.8s ease-in-out;
-}
-
-.fade.hidden {
-  opacity: 0;
-}
+.fade { opacity: 1; transition: opacity 0.6s ease-out; }
+.fade.hidden { opacity: 0; }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width:900px){
-  .intro-section { flex-direction: column; }
-  .side-images {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .side-images .slot {
-    width: calc(50% - 6px);
-    aspect-ratio: 1 / 1;
-  }
+  .intro-section{flex-direction:column;}
+  .side-images{flex-direction:row; flex-wrap:wrap; gap:12px;}
+  .side-images .slot{width:calc(50% - 6px); aspect-ratio:1/1;}
 }
 </style>
 </head>
-
 <body>
 
 <nav>
@@ -218,11 +234,26 @@ h1 {
   </div>
 
   <div class="side-images">
-    <div class="slot" data-items='["images/Xcsiber_Front.jpeg","images/0001-0250.mov","images/1final.png"]'></div>
-    <div class="slot" data-items='["images/jewel-johnson-asset4.jpg","images/jewel-lee-johnson-asset11.jpg","images/jewel-lee-johnson-asset9.jpg"]'></div>
-    <div class="slot" data-items='["images/jewel-lee-johnson-asset11.jpg","images/jewel-lee-johnson-asset9.jpg","images/Xcsiber_Front.jpeg"]'></div>
+    <div class="slot" data-items='["images/Xcsiber_Front.jpeg","images/0001-0250.mov","images/1final.png"]'>
+      <img src="images/Xcsiber_Front.jpeg" class="active">
+    </div>
+    <div class="slot" data-items='["images/jewel-johnson-asset4.jpg","images/jewel-lee-johnson-asset11.jpg","images/jewel-lee-johnson-asset9.jpg"]'>
+      <img src="images/jewel-johnson-asset4.jpg" class="active">
+    </div>
+    <div class="slot" data-items='["images/jewel-lee-johnson-asset11.jpg","images/jewel-lee-johnson-asset9.jpg","images/Xcsiber_Front.jpeg"]'>
+      <img src="images/jewel-lee-johnson-asset11.jpg" class="active">
+    </div>
   </div>
 
+</div>
+
+<div class="selected-work fade">
+  <h2>Selected Work</h2>
+  <div class="gallery">
+    <img src="images/jewel-johnson-asset4.jpg">
+    <img src="images/jewel-lee-johnson-asset11.jpg">
+    <img src="images/jewel-lee-johnson-asset9.jpg">
+  </div>
 </div>
 
 <footer>
@@ -238,22 +269,24 @@ const fadeElements = document.querySelectorAll('.fade');
 window.addEventListener('scroll', () => {
   fadeElements.forEach(el => {
     const r = el.getBoundingClientRect();
-    el.classList.toggle(
-      'hidden',
-      r.bottom < 60 || r.top > window.innerHeight - 60
-    );
+    if (r.bottom < 50 || r.top > window.innerHeight) {
+      el.classList.add('hidden');
+    } else {
+      el.classList.remove('hidden');
+    }
   });
 });
 
-/* DESCRIPTION PARAGRAPH FADE */
+/* DESCRIPTION PARAGRAPH FADE IN/OUT */
 const paragraphs = document.querySelectorAll('.description-container p');
 function fadeDescription() {
   paragraphs.forEach(p => {
     const rect = p.getBoundingClientRect();
-    p.classList.toggle(
-      'visible',
-      rect.top < window.innerHeight - 50 && rect.bottom > 50
-    );
+    if(rect.top < window.innerHeight - 50 && rect.bottom > 50){
+      p.classList.add('visible');
+    } else {
+      p.classList.remove('visible');
+    }
   });
 }
 window.addEventListener('scroll', fadeDescription);
@@ -261,32 +294,38 @@ window.addEventListener('resize', fadeDescription);
 fadeDescription();
 
 /* SIDE IMAGES SHUFFLE */
-document.querySelectorAll('.side-images .slot').forEach(slot => {
+const slots = document.querySelectorAll('.side-images .slot');
+
+slots.forEach(slot => {
   const items = JSON.parse(slot.dataset.items);
   let current = 0;
-
-  function showItem(src) {
-    slot.innerHTML = '';
-    const ext = src.split('.').pop().toLowerCase();
-
-    const el = ext === 'mp4' || ext === 'mov'
-      ? Object.assign(document.createElement('video'), {
-          src, muted: true, loop: true, autoplay: true, playsInline: true
-        })
-      : Object.assign(document.createElement('img'), { src });
-
-    el.classList.add('active');
-    slot.appendChild(el);
-  }
-
-  showItem(items[0]);
-
   setInterval(() => {
+    const children = slot.querySelectorAll('img, video');
+    children.forEach(c => c.classList.remove('active'));
+
     current = (current + 1) % items.length;
-    showItem(items[current]);
+    let nextSrc = items[current];
+    let ext = nextSrc.split('.').pop().toLowerCase();
+
+    if(ext === "mp4" || ext === "mov") {
+      let video = document.createElement('video');
+      video.src = nextSrc;
+      video.muted = true;
+      video.loop = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      video.classList.add('active');
+      slot.innerHTML = '';
+      slot.appendChild(video);
+    } else {
+      let img = document.createElement('img');
+      img.src = nextSrc;
+      img.classList.add('active');
+      slot.innerHTML = '';
+      slot.appendChild(img);
+    }
   }, 3000);
 });
 </script>
-
 </body>
 </html>
