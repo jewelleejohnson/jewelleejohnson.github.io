@@ -30,7 +30,7 @@ body::before {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.68);
-  z-index: -1;
+  z-index: -2;
 }
 
 /* ---------- GLITCH ---------- */
@@ -63,6 +63,7 @@ h1 { font-family: 'Space Grotesk', sans-serif; font-size: 52px; letter-spacing: 
   gap: 40px;
   align-items: flex-start;
   position: relative;
+  z-index: 1;
 }
 
 /* ---------- DESCRIPTION CONTAINER ---------- */
@@ -94,12 +95,12 @@ h1 { font-family: 'Space Grotesk', sans-serif; font-size: 52px; letter-spacing: 
 .side-images .slot img.active, .side-images .slot video.active { opacity: 1; position: relative; }
 .side-images .slot .fading-out { opacity: 0; }
 
-/* ---------- TYPEWRITER CODE OVERLAY ---------- */
+/* ---------- TYPEWRITER CODE OVERLAY (FULL HEIGHT, INDEPENDENT) ---------- */
 .code-overlay {
   position: fixed;
   top: 0;
+  bottom: 0; /* fills from top to bottom */
   width: 100px;
-  height: 100vh; /* FULL SCREEN */
   font-family: 'Fira Code', monospace;
   font-size: 20px;
   color: rgba(0,255,204,0.1);
@@ -109,7 +110,6 @@ h1 { font-family: 'Space Grotesk', sans-serif; font-size: 52px; letter-spacing: 
   z-index: 0;
 }
 .code-overlay.right { left: auto; right: 0; }
-.code-overlay.left { left: 0; }
 
 /* ---------- FOOTER ---------- */
 footer { margin-top: 120px; font-size: 14px; color: var(--cyber-green); }
@@ -160,11 +160,11 @@ footer a { margin-right: 20px; color: var(--cyber-green); text-decoration: none;
     </div>
   </div>
 
-  <!-- Typewriter overlays -->
-  <div class="code-overlay left" id="codeLeft"></div>
-  <div class="code-overlay right" id="codeRight"></div>
-
 </div>
+
+<!-- TYPEWRITER CODE OUTSIDE EVERYTHING -->
+<div class="code-overlay left" id="codeLeft"></div>
+<div class="code-overlay right" id="codeRight"></div>
 
 <footer>
   Contact — jewelleejohnson@gmail.com<br><br>
@@ -240,9 +240,10 @@ function updateCodeOverlay() {
   if(rightOverlay.textContent.length > 400) rightOverlay.textContent = rightOverlay.textContent.slice(-400);
 }
 
-// much faster typing speed
+// FAST TYPING
 setInterval(updateCodeOverlay, 10);
 
+// SCROLL moves code overlay oppositely
 window.addEventListener('scroll', () => {
   const scrollTop = window.scrollY;
   leftOverlay.style.transform = `translateY(${-scrollTop/2}px)`;
