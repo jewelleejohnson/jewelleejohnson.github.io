@@ -339,7 +339,7 @@ function updateCodeOverlay() {
   if(leftOverlay.textContent.length > 200) leftOverlay.textContent = leftOverlay.textContent.slice(-200);
 
   rightOverlay.textContent += codeText[rightIndex];
-  rightIndex = (rightIndex + 1) % codeText.length;
+  rightIndex = (rightIndex + 2) % codeText.length;
   if(rightOverlay.textContent.length > 200) rightOverlay.textContent = rightOverlay.textContent.slice(-200);
 }
 
