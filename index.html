@@ -14,6 +14,7 @@
 
 * { box-sizing: border-box; }
 
+/* ---------- SCALE ENTIRE PAGE ---------- */
 body {
   margin: 0;
   padding: 60px;
@@ -24,6 +25,8 @@ body {
   background-position: center;
   background-attachment: fixed;
   overflow-x: hidden;
+  transform: scale(0.9); /* scale the whole page down */
+  transform-origin: top center; /* keep it centered */
 }
 
 body::before {
@@ -241,7 +244,7 @@ footer a {
 </footer>
 
 <script>
-/* FADE ON SCROLL */
+/* FADE ON SCROLL — still works but not required for image ease */
 const fadeElements = document.querySelectorAll('.fade');
 window.addEventListener('scroll', () => {
   fadeElements.forEach(el => {
@@ -270,7 +273,7 @@ window.addEventListener('scroll', fadeDescription);
 window.addEventListener('resize', fadeDescription);
 fadeDescription();
 
-/* SIDE IMAGES SHUFFLE — SMOOTH FADE */
+/* SIDE IMAGES SHUFFLE — SMOOTH FADE, independent of scroll */
 const slots = document.querySelectorAll('.side-images .slot');
 
 slots.forEach(slot => {
