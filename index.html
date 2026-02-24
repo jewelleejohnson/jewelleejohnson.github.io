@@ -80,7 +80,7 @@ h1 {
 
 .subtitle {
   margin-bottom: 60px;
-  font-size: 20px; /* match 3D assets page sizing */
+  font-size: 16px;
   opacity: 0.7;
 }
 
@@ -91,6 +91,34 @@ h1 {
   justify-content: space-between;
   gap: 40px;
   align-items: flex-start;
+  position: relative; /* for overlay glow */
+}
+
+/* ---------- INTRO GLOW HOVER ---------- */
+.intro-section::before,
+.intro-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(0,255,204,0.15), transparent 50%, rgba(0,255,204,0.15));
+  animation: sideGlow 3s infinite alternate;
+}
+
+.intro-section::before { left: -10px; }
+.intro-section::after { right: -10px; }
+
+@keyframes sideGlow {
+  0% { opacity: 0.1; transform: translateY(0); }
+  50% { opacity: 0.15; transform: translateY(5px); }
+  100% { opacity: 0.1; transform: translateY(0); }
+}
+
+.intro-section:hover {
+  box-shadow: 0 0 25px rgba(0,255,204,0.6);
 }
 
 /* DESCRIPTION CONTAINER */
@@ -109,9 +137,10 @@ h1 {
 }
 
 .description-container:hover {
-  box-shadow: 0 0 2px rgba(0,255,204,0.6);
+  box-shadow: 0 0 20px rgba(0,255,204,0.6);
 }
 
+/* DESCRIPTION PARAGRAPH FADE */
 .description-container p {
   opacity: 0;
   transform: translateY(20px);
@@ -139,24 +168,6 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  position: relative;
-}
-
-/* Slot overlays (tech/code subtle effect) */
-.side-images .slot::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    45deg,
-    rgba(0,255,204,0.05),
-    rgba(0,255,204,0.05) 1px,
-    transparent 1px,
-    transparent 4px
-  );
-  z-index: 2;
-  opacity: 0.3; /* subtle overlay */
 }
 
 .side-images .slot {
@@ -181,14 +192,13 @@ h1 {
 .side-images .slot video.active {
   opacity: 1;
   position: relative;
-  z-index: 1;
 }
 
 .side-images .slot .fading-out {
   opacity: 0;
 }
 
-/* FOOTER */
+/* ---------- FOOTER ---------- */
 footer {
   margin-top: 120px;
   font-size: 14px;
@@ -200,10 +210,11 @@ footer a {
   text-decoration: none;
 }
 
-/* FADE */
+/* ---------- FADE ---------- */
 .fade { opacity: 1; transition: opacity 0.6s ease-out; }
 .fade.hidden { opacity: 0; }
 
+/* ---------- RESPONSIVE ---------- */
 @media (max-width:900px){
   .intro-section{flex-direction:column;}
   .side-images{flex-direction:row; flex-wrap:wrap; gap:12px;}
@@ -262,6 +273,7 @@ footer a {
 </footer>
 
 <script>
+/* DESCRIPTION PARAGRAPH FADE IN/OUT */
 const paragraphs = document.querySelectorAll('.description-container p');
 function fadeDescription() {
   paragraphs.forEach(p => {
@@ -277,8 +289,9 @@ window.addEventListener('scroll', fadeDescription);
 window.addEventListener('resize', fadeDescription);
 fadeDescription();
 
-/* SIDE IMAGES SHUFFLE — synchronized fade with subtle overlay */
+/* SIDE IMAGES SHUFFLE — fully synchronized, continuous, no scroll dependency */
 const slots = document.querySelectorAll('.side-images .slot');
+
 slots.forEach(slot => {
   const items = JSON.parse(slot.dataset.items);
   let current = 0;
@@ -311,6 +324,7 @@ slots.forEach(slot => {
       media.style.opacity = '0';
       slot.appendChild(media);
 
+      // synchronized fade-in
       requestAnimationFrame(() => {
         media.style.opacity = '1';
       });
