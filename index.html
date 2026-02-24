@@ -23,7 +23,7 @@ body {
   background-position: center;
   background-attachment: fixed;
   overflow-x: hidden;
-  transform: scale(0.9);
+  transform: scale(0.9); /* overall page scale */
   transform-origin: top center;
 }
 
@@ -90,43 +90,15 @@ h1 {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 40px;
-  align-items: flex-start;
-  position: relative; /* for overlay glow */
-}
-
-/* ---------- INTRO GLOW HOVER ---------- */
-.intro-section::before,
-.intro-section::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 50px;
-  opacity: 0;
-  pointer-events: none;
-  background: linear-gradient(to bottom, rgba(0,255,204,0.15), transparent 50%, rgba(0,255,204,0.15));
-  animation: sideGlow 3s infinite alternate;
-}
-
-.intro-section::before { left: -10px; }
-.intro-section::after { right: -10px; }
-
-@keyframes sideGlow {
-  0% { opacity: 0.1; transform: translateY(0); }
-  50% { opacity: 0.15; transform: translateY(5px); }
-  100% { opacity: 0.1; transform: translateY(0); }
-}
-
-.intro-section:hover {
-  box-shadow: 0 0 25px rgba(0,255,204,0.6);
+  align-items: flex-start; /* align to video bottom */
 }
 
 /* DESCRIPTION CONTAINER */
 .description-container {
   flex: 1 1 600px;
   background-color: rgba(0,0,0,0.55);
-  border-left: 1px solid var(--cyber-green);
-  box-shadow: 0 0 15px rgba(0,255,204,0.35);
+  border-left: 1px solid var(--cyber-green); /* 50% of original */
+  box-shadow: 0 0 15px rgba(0,255,204,0.35); /* 50% of original glow */
   padding: 36px;
   font-size: 20px;
   line-height: 1.8;
@@ -137,7 +109,7 @@ h1 {
 }
 
 .description-container:hover {
-  box-shadow: 0 0 20px rgba(0,255,204,0.6);
+  box-shadow: 0 0 2px rgba(0,255,204,0.6); /* scaled down */
 }
 
 /* DESCRIPTION PARAGRAPH FADE */
@@ -159,7 +131,7 @@ h1 {
   max-width: 900px;
   aspect-ratio: 16/9;
   object-fit: cover;
-  border: 0.5px solid var(--cyber-green);
+  border: 0.5px solid var(--cyber-green); /* 50% border */
 }
 
 /* SIDE IMAGES COLUMN */
@@ -174,7 +146,7 @@ h1 {
   position: relative;
   width: 63%;
   aspect-ratio: 1 / 1;
-  border: 1px solid #fff;
+  border: 1px solid #fff; /* 50% border thickness */
   overflow: hidden;
 }
 
@@ -194,6 +166,7 @@ h1 {
   position: relative;
 }
 
+/* FADE HELPER */
 .side-images .slot .fading-out {
   opacity: 0;
 }
@@ -329,8 +302,8 @@ slots.forEach(slot => {
         media.style.opacity = '1';
       });
 
-    }, 500);
-  }, 3000);
+    }, 500); // fade out duration synced with CSS
+  }, 3000); // same interval for all
 });
 </script>
 </body>
