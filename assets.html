@@ -42,7 +42,7 @@ body::before {
 .glitch:hover::after {
   content: attr(data-text);
   position: absolute;
-  left: 2px;
+  left: 1px;
   top: 0;
   width: 100%;
   color: inherit;
@@ -52,8 +52,8 @@ body::before {
 
 @keyframes glitchX {
   0% { transform: translateX(0); }
-  50% { transform: translateX(-3px); }
-  100% { transform: translateX(3px); }
+  50% { transform: translateX(-1.5px); }
+  100% { transform: translateX(1.5px); }
 }
 
 /* ---------- NAV ---------- */
@@ -83,38 +83,38 @@ h1 {
   margin-bottom: 60px;
 }
 
-/* ---------- PROJECT GRID (SCALED DOWN) ---------- */
+/* ---------- PROJECT GRID (HALF SCALE) ---------- */
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 12px;
 }
 
 .project {
-  border: 0.75px solid #fff;
+  border: 0.5px solid #fff;
   aspect-ratio: 4 / 3;
-  padding: 10px;
+  padding: 6px;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
 }
 
 .project:hover {
   box-shadow:
-    0 0 10px rgba(0,255,204,0.55),
-    0 0 20px rgba(0,255,204,0.3);
+    0 0 6px rgba(0,255,204,0.45),
+    0 0 12px rgba(0,255,204,0.25);
 }
 
 .project img,
 .project video {
   width: 100%;
-  height: calc(100% - 26px);
+  height: calc(100% - 20px);
   object-fit: cover;
-  border: 0.75px solid #fff;
+  border: 0.5px solid #fff;
 }
 
 .project-title {
-  margin-top: 6px;
-  font-size: 12px;
+  margin-top: 4px;
+  font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -131,17 +131,17 @@ h1 {
 .overlay.active { display: flex; }
 
 .overlay-inner {
-  max-width: 1200px;
+  max-width: 900px;
   margin: auto;
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 24px;
 }
 
 .overlay-media {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
 }
 
 .overlay-media img,
@@ -149,21 +149,22 @@ h1 {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  border: 0.75px solid #fff;
+  border: 0.5px solid #fff;
   cursor: pointer;
 }
 
 .overlay-text {
-  font-size: 14px;
-  line-height: 1.75;
+  font-size: 13px;
+  line-height: 1.65;
   white-space: pre-line;
 }
 
+/* ---------- EXIT ---------- */
 .exit {
   position: fixed;
-  top: 32px;
-  right: 40px;
-  font-size: 26px;
+  top: 24px;
+  right: 32px;
+  font-size: 22px;
   cursor: pointer;
   color: #fff;
 }
@@ -183,14 +184,14 @@ h1 {
 
 .viewer-content img,
 .viewer-content video {
-  max-width: 85vw;
-  max-height: 85vh;
-  border: 0.75px solid #fff;
+  max-width: 80vw;
+  max-height: 80vh;
+  border: 0.5px solid #fff;
 }
 
 .viewer .exit {
-  top: 24px;
-  right: 32px;
+  top: 20px;
+  right: 28px;
 }
 
 /* ---------- FOOTER (UNCHANGED) ---------- */
