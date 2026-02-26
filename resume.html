@@ -19,13 +19,24 @@ body {
   padding: 60px;
   font-family: 'Fira Code', monospace;
   color: #fff;
-  background-image: url("images/WET_FLOOR.mp4");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  overflow-x: hidden;
 }
 
-/* Dark overlay */
+/* ---------- VIDEO BACKGROUND ---------- */
+.video-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.video-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- DARK OVERLAY ---------- */
 body::before {
   content: "";
   position: fixed;
@@ -144,6 +155,13 @@ footer a {
 </head>
 
 <body>
+
+<!-- VIDEO BACKGROUND -->
+<div class="video-bg">
+  <video autoplay muted loop playsinline>
+    <source src="images/WET_FLOOR.mp4" type="video/mp4">
+  </video>
+</div>
 
 <nav>
   <a class="glitch" data-text="Home" href="index.html">Home</a>
