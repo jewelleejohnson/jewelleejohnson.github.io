@@ -1,197 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Jewel Lee-Johnson | Resume</title>
+<meta charset="UTF-8">
+<title>Resume | Jewel Lee-Johnson</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --cyber-green: #00ffcc;
+}
 
-  <style>
-    /* Tech/Code Aesthetic Overrides */
-    * {
-      box-sizing: border-box;
-    }
+* { box-sizing: border-box; }
 
-    body {
-      color: #00ffcc;
-      background-image: url("images/WET_FLOOR.mp4");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      font-family: 'Fira Code', monospace;
-      padding: 60px;
-      margin: 0;
-      overflow-x: hidden;
-    }
+body {
+  margin: 0;
+  padding: 60px;
+  font-family: 'Fira Code', monospace;
+  color: #fff;
+  background-image: url("images/WET_FLOOR.mp4");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
 
-    /* Dark overlay */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.65);
-      z-index: -1;
-    }
+/* Dark overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: -1;
+}
 
-    nav {
-      margin: 40px 60px;
-    }
+/* ---------- GLITCH ---------- */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
 
-    nav a {
-      margin-right: 28px;
-      color: #00ffcc;
-      text-decoration: none;
-      font-weight: 500;
-      text-transform: uppercase;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-    }
+.glitch:hover::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  top: 0;
+  width: 100%;
+  color: inherit;
+  clip-path: inset(40% 0 45% 0);
+  animation: glitchX 0.25s steps(2) infinite;
+}
 
-    nav a:hover {
-      opacity: 0.6;
-    }
+@keyframes glitchX {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-3px); }
+  100% { transform: translateX(3px); }
+}
 
-    h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 42px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin: 40px 60px 20px;
-      color: #ffffff; /* White clickable title */
-    }
+/* ---------- NAV ---------- */
+nav {
+  margin-bottom: 80px;
+}
 
-    h1 a {
-      text-decoration: none;
-      color: #ffffff; /* Keep link white */
-      transition: all 0.3s ease;
-    }
+nav a {
+  margin-right: 32px;
+  font-size: 15px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyber-green);
+  text-decoration: none;
+}
 
-    h1 a:hover {
-      opacity: 0.7;
-      transform: scale(1.02);
-    }
+/* ---------- PAGE TITLE ---------- */
+h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 48px;
+  letter-spacing: 0.14em;
+  margin-bottom: 10px;
+  color: var(--cyber-green);
+}
 
-    main {
-      max-width: 700px;
-      margin: 0 60px 120px;
-      background-color: rgba(0,0,0,0.5);
-      border-left: 2px solid #00ffcc;
-      padding: 30px;
-      font-size: 15px;
-      line-height: 1.7;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s ease-out;
-      color: #00ffcc;
-    }
+.subtitle {
+  font-size: 15px;
+  opacity: 0.7;
+  margin-bottom: 60px;
+}
 
-    main.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* ---------- RESUME BLOCK ---------- */
+.resume {
+  max-width: 900px;
+  border: 1px solid #fff;
+  padding: 32px;
+  background: rgba(0,0,0,0.45);
+}
 
-    a.download-link {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 24px;
-      border: 1px solid #00ffcc;
-      border-radius: 4px;
-      text-decoration: none;
-      color: #00ffcc;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      font-size: 16px;
-    }
+.resume p {
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
 
-    a.download-link:hover {
-      background-color: rgba(0, 255, 204, 0.1);
-      transform: scale(1.02);
-    }
+.download-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 14px 28px;
+  border: 1px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: box-shadow 0.3s ease;
+}
 
-    /* Portfolio Image */
-    img.portfolio-img {
-      display: block;
-      width: 100%;
-      max-width: 500px;
-      margin-top: 30px;
-      border: 2px solid #00ffcc;
-      border-radius: 4px;
-    }
+.download-link:hover {
+  box-shadow:
+    0 0 10px rgba(0,255,204,0.5),
+    0 0 20px rgba(0,255,204,0.25);
+}
 
-    footer {
-      margin: 60px;
-      font-size: 14px;
-      opacity: 0.7;
-      color: #00ffcc;
-    }
+/* ---------- IMAGE ---------- */
+.resume img {
+  display: block;
+  margin-top: 40px;
+  max-width: 520px;
+  width: 100%;
+  border: 1px solid #fff;
+}
 
-    footer a {
-      color: #00ffcc;
-      text-decoration: none;
-      margin-right: 20px;
-    }
+/* ---------- FOOTER ---------- */
+footer {
+  margin-top: 140px;
+  font-size: 16px;
+  color: var(--cyber-green);
+}
 
-    footer a:hover {
-      opacity: 0.6;
-    }
-  </style>
+footer a {
+  margin-right: 24px;
+  color: var(--cyber-green);
+  text-decoration: none;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="assets.html">3D Assets</a>
-    <a href="unity.html">Unity</a>
-    <a href="av.html">Audiovisual</a>
-    <a href="resume.html">Resume</a>
-  </nav>
+<nav>
+  <a class="glitch" data-text="Home" href="index.html">Home</a>
+  <a class="glitch" data-text="3D Assets" href="assets.html">3D Assets</a>
+  <a class="glitch" data-text="Unity" href="unity.html">Unity</a>
+  <a class="glitch" data-text="Audiovisual" href="av.html">Audiovisual</a>
+  <a class="glitch" data-text="Resume" href="resume.html">Resume</a>
+</nav>
 
-  <!-- MAIN CONTENT -->
-  <main id="resumeMain">
-    <h1>
-      <a href="resume/Jewel_Lee_Johnson_Resume.pdf" target="_blank">Resume</a>
-    </h1>
+<h1>Resume</h1>
+<p class="subtitle">// Downloadable CV and selected overview</p>
 
-    <p>
-      Click the title above or the button below to download my resume (PDF):
-    </p>
+<section class="resume">
+  <p>
+    Click below to download my resume (PDF).
+  </p>
 
-    <p>
-      <a href="resume/Jewel_Lee_Johnson_Resume.pdf" target="_blank" class="download-link">
-        Download Resume
-      </a>
-    </p>
+  <a href="resume/Jewel_Lee_Johnson_Resume.pdf" target="_blank" class="download-link">
+    Download Resume
+  </a>
 
-    <!-- Portfolio Image -->
-    <img src="images/JewelWhiteBackground3.jpg" alt="Jewel Lee-Johnson Portfolio" class="portfolio-img">
-  </main>
+  <img src="images/JewelWhiteBackground3.jpg" alt="Jewel Lee-Johnson">
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    Contact — jewelleejohnson@gmail.com
-    <br>
-    <a href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
-    <a href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
-    <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
-  </footer>
-
-  <!-- SCROLL FADE SCRIPT -->
-  <script>
-    const resumeMain = document.getElementById('resumeMain');
-    window.addEventListener('scroll', () => {
-      const rect = resumeMain.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 100) {
-        resumeMain.classList.add('show');
-      }
-    });
-  </script>
+<footer>
+  Contact — jewelleejohnson@gmail.com<br><br>
+  <a class="glitch" data-text="LinkedIn" href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
+  <a class="glitch" data-text="ArtStation" href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
+  <a class="glitch" data-text="Instagram" href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
+</footer>
 
 </body>
 </html>
