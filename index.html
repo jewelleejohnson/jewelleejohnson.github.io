@@ -109,12 +109,10 @@ h1 {
   align-self: stretch;
 }
 
-/* Glow only on hover */
 .description-container:hover {
   box-shadow: 0 0 25px rgba(0,255,204,0.6);
 }
 
-/* DESCRIPTION PARAGRAPH FADE */
 .description-container p {
   opacity: 0;
   transform: translateY(20px);
@@ -160,6 +158,7 @@ h1 {
   object-fit: cover;
   opacity: 0;
   transition: opacity 1s ease-in-out;
+  will-change: opacity;
 }
 
 .side-images .slot img.active,
@@ -172,19 +171,19 @@ h1 {
   opacity: 0;
 }
 
-/* ---------- CODE OVERLAY AS BACKGROUND ---------- */
+/* ---------- CODE OVERLAY ---------- */
 .code-overlay {
   position: fixed;
   top: 0;
   bottom: 0;
-  width: 100px; 
+  width: 100px;
   font-family: 'Fira Code', monospace;
   font-size: 20px;
   color: rgba(0,255,204,0.10);
   overflow: hidden;
   white-space: pre;
   pointer-events: none;
-  z-index: 0; /* behind content */
+  z-index: 0;
 }
 
 .code-overlay.left { left: 0; }
@@ -196,15 +195,12 @@ footer {
   font-size: 14px;
   color: var(--cyber-green);
 }
+
 footer a {
   margin-right: 20px;
   color: var(--cyber-green);
   text-decoration: none;
 }
-
-/* ---------- FADE ---------- */
-.fade { opacity: 1; transition: opacity 0.6s ease-out; }
-.fade.hidden { opacity: 0; }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width:900px){
@@ -216,7 +212,6 @@ footer a {
 </head>
 <body>
 
-<!-- Code overlay typewriter on sides -->
 <div class="code-overlay left" id="codeLeft"></div>
 <div class="code-overlay right" id="codeRight"></div>
 
@@ -238,9 +233,9 @@ footer a {
 
     <p>Her experience spans 3D modeling, texturing, rendering, motion capture, and procedural animation, as well as compositing and video/film editing. She has worked with motion capture systems including Perception Neuron and Axis Studio, capturing and troubleshooting movement data for animation and XR projects. She has collaborated with Brown University’s XR Hub and supported students with asset management, color spaces, and interactive workflows in Unity and Marvelous Designer.</p>
 
-    <p>Jewel aims to create visually compelling, story-driven work, inspired by the electronic and experimental music scene, audio-reactive gaming, and local Black queer experimental performance artists in Philadelphia. Sound drives her approach to 3D modeling, and she seeks to bring BIPOC experimental art into 3D spaces as an underrepresented yet revolutionary outlet.</p>
+    <p>Jewel aims to create visually compelling, story-driven work, inspired by the electronic and experimental music scene, audio-reactive gaming, and local Black queer experimental performance artists in Philadelphia.</p>
 
-    <p>She actively works in electronic sound and DJing, shaping how she considers motion, timing, and atmosphere in 3D space. She is interested in audio-reactive workflows that allow 3D visuals to respond in gameplay, using tools like Wwise, FMOD, Unreal Engine’s Audio Synesthesia, and Pure Data to translate audio into procedural animation, shader changes, particle systems, and lighting shifts. She also works in performance art and audiovisual installations where animation, sound, and environment converge, exploring hybrid workflows combining TouchDesigner with Unreal or Unity to support live, responsive visuals for performances and cinematic environments. Her focus is on using experimental 3D techniques to expand conventional gaming and VFX workflows. ::.</p>
+    <p>She actively works in electronic sound and DJing, shaping how she considers motion, timing, and atmosphere in 3D space.</p>
 
     <div class="inline-video">
       <video src="images/NEORAT - Trim.mp4" autoplay muted loop playsinline></video>
@@ -269,7 +264,7 @@ footer a {
 </footer>
 
 <script>
-/* DESCRIPTION PARAGRAPH FADE IN/OUT */
+/* DESCRIPTION PARAGRAPH FADE */
 const paragraphs = document.querySelectorAll('.description-container p');
 function fadeDescription() {
   paragraphs.forEach(p => {
@@ -285,71 +280,70 @@ window.addEventListener('scroll', fadeDescription);
 window.addEventListener('resize', fadeDescription);
 fadeDescription();
 
-/* SIDE IMAGES SHUFFLE */
+/* SIDE IMAGES SHUFFLE (FIXED FADE) */
 const slots = document.querySelectorAll('.side-images .slot');
 slots.forEach(slot => {
   const items = JSON.parse(slot.dataset.items);
   let current = 0;
+
   setInterval(() => {
-    const currentMedia = slot.querySelector('img, video');
-    if (currentMedia) currentMedia.classList.add('fading-out');
+    current = (current + 1) % items.length;
+    const nextSrc = items[current];
+    const ext = nextSrc.split('.').pop().toLowerCase();
 
-    setTimeout(() => {
-      current = (current + 1) % items.length;
-      const nextSrc = items[current];
-      const ext = nextSrc.split('.').pop().toLowerCase();
+    slot.innerHTML = '';
 
-      slot.innerHTML = '';
+    let media;
+    if(ext === "mp4" || ext === "mov") {
+      media = document.createElement('video');
+      media.src = nextSrc;
+      media.muted = true;
+      media.loop = true;
+      media.autoplay = true;
+      media.playsInline = true;
+    } else {
+      media = document.createElement('img');
+      media.src = nextSrc;
+    }
 
-      let media;
-      if(ext === "mp4" || ext === "mov") {
-        media = document.createElement('video');
-        media.src = nextSrc;
-        media.muted = true;
-        media.loop = true;
-        media.autoplay = true;
-        media.playsInline = true;
-      } else {
-        media = document.createElement('img');
-        media.src = nextSrc;
-      }
+    media.classList.add('active');
+    media.style.opacity = '0';
+    slot.appendChild(media);
 
-      media.classList.add('active');
-      media.style.opacity = '0';
-      slot.appendChild(media);
+    media.getBoundingClientRect(); // force reflow
+    media.style.opacity = '1';
 
-      requestAnimationFrame(() => {
-        media.style.opacity = '1';
-      });
-
-    }, 500);
   }, 3000);
 });
 
-/* ---------- TYPEWRITER CODE OVERLAY ---------- */
-const codeText = `const x = 42;\nfunction test() {\n  console.log("Hello World");\n}\nfor(let i=0;i<10;i++){console.log(i);}\n`;
-let leftIndex = Math.floor(codeText.length/2);
-let rightIndex = Math.floor(codeText.length/2);
+/* TYPEWRITER CODE OVERLAY — FULL HEIGHT */
+const codeText = `const x = 42;
+function test() {
+  console.log("Hello World");
+}
+for(let i=0;i<10;i++){
+  console.log(i);
+}
+`;
+
 const leftOverlay = document.getElementById('codeLeft');
 const rightOverlay = document.getElementById('codeRight');
 
-function updateCodeOverlay() {
-  leftOverlay.textContent += codeText[leftIndex];
-  leftIndex = (leftIndex + 1) % codeText.length;
-  if(leftOverlay.textContent.length > 200) leftOverlay.textContent = leftOverlay.textContent.slice(-200);
-
-  rightOverlay.textContent += codeText[rightIndex];
-  rightIndex = (rightIndex + 1) % codeText.length;
-  if(rightOverlay.textContent.length > 200) rightOverlay.textContent = rightOverlay.textContent.slice(-200);
+function fillOverlay(overlay) {
+  overlay.textContent += codeText;
+  while (overlay.scrollHeight < window.innerHeight * 1.2) {
+    overlay.textContent += codeText;
+  }
+  if (overlay.textContent.length > 2000) {
+    overlay.textContent = overlay.textContent.slice(500);
+  }
 }
 
-setInterval(updateCodeOverlay, 50);
-
-window.addEventListener('scroll', () => {
-  const scrollTop = window.scrollY;
-  leftOverlay.style.transform = `translateY(${-scrollTop/2}px)`;
-  rightOverlay.style.transform = `translateY(${-scrollTop/2}px)`;
-});
+setInterval(() => {
+  fillOverlay(leftOverlay);
+  fillOverlay(rightOverlay);
+}, 50);
 </script>
+
 </body>
 </html>
