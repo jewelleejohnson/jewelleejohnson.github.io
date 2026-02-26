@@ -243,6 +243,11 @@ footer a {
     <img src="images/teeth_full.png" alt="">
     <div class="project-title">Teeth</div>
   </div>
+
+  <div class="project" onclick="openProject('cyborg')">
+    <video src="images/Cyborg.mov" autoplay muted loop playsinline></video>
+    <div class="project-title">Cyborg</div>
+  </div>
 </section>
 
 <footer>
@@ -318,6 +323,24 @@ Teeth
 Blender
 
 An exploratory study focused on form, repetition, and surface tension using dental motifs and material contrast.
+      </div>`;
+  }
+
+  if (project === 'cyborg') {
+    content.innerHTML = `
+      <div class="overlay-media">
+        <video src="images/Cyborg.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <img src="images/headphonefinal.PNG" onclick="openViewer(this.outerHTML)">
+        <img src="images/image01.jpg" onclick="openViewer(this.outerHTML)">
+        <video src="images/0001-0250.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+      </div>
+      <div class="overlay-text">
+Cyborg
+
+Blender
+Eevee, Geometry Nodes
+
+Modeled and composited in Blender.
       </div>`;
   }
 
