@@ -238,6 +238,11 @@ footer a {
     <img src="images/CD_1.jpeg" alt="">
     <div class="project-title">Jewel Case</div>
   </div>
+
+  <div class="project" onclick="openProject('teeth')">
+    <img src="images/teeth_full.png" alt="">
+    <div class="project-title">Teeth</div>
+  </div>
 </section>
 
 <footer>
@@ -270,7 +275,6 @@ function openProject(project) {
       <div class="overlay-media">
         <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
         <img src="3d-assets/Environment.png" onclick="openViewer(this.outerHTML)">
-        <img src="images/teeth_typ.png" onclick="openViewer(this.outerHTML)">
       </div>
       <div class="overlay-text">
 Corner
@@ -298,6 +302,22 @@ Blender
 Geometry Nodes, Cycles
 
 A small study exploring transparency, material layering, and surface behavior.
+      </div>`;
+  }
+
+  if (project === 'teeth') {
+    content.innerHTML = `
+      <div class="overlay-media">
+        <img src="images/teeth_typ.png" onclick="openViewer(this.outerHTML)">
+        <img src="images/teeth_full.png" onclick="openViewer(this.outerHTML)">
+        <img src="images/jewel-lee-johnson-asset11.jpg" onclick="openViewer(this.outerHTML)">
+      </div>
+      <div class="overlay-text">
+Teeth
+
+Blender
+
+An exploratory study focused on form, repetition, and surface tension using dental motifs and material contrast.
       </div>`;
   }
 
