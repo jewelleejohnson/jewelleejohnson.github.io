@@ -173,7 +173,7 @@ h1 {
   color: #fff;
 }
 
-/* ---------- VIEWER ---------- */
+/* ---------- IMAGE VIEWER ---------- */
 .viewer {
   position: fixed;
   inset: 0;
@@ -247,11 +247,13 @@ footer a {
   <a class="glitch" data-text="Instagram" href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
 </footer>
 
+<!-- PROJECT OVERLAY -->
 <div class="overlay" id="overlay" onclick="closeProject(event)">
   <div class="exit" onclick="closeProject()">✕</div>
   <div class="overlay-inner" id="overlayContent"></div>
 </div>
 
+<!-- IMAGE VIEWER -->
 <div class="viewer" id="viewer" onclick="closeViewer(event)">
   <div class="exit" onclick="closeViewer()">✕</div>
   <div class="viewer-content" id="viewerContent"></div>
@@ -268,7 +270,7 @@ function openProject(project) {
       <div class="overlay-media">
         <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
         <img src="3d-assets/Environment.png" onclick="openViewer(this.outerHTML)">
-        <img src="images/cd_typ.png" onclick="openViewer(this.outerHTML)">
+        <img src="images/teeth_typ.png" onclick="openViewer(this.outerHTML)">
       </div>
       <div class="overlay-text">
 Corner
@@ -287,7 +289,7 @@ An environment study focused on decayed urban structures inspired by Philadelphi
         <img src="images/CD_1.jpeg" onclick="openViewer(this.outerHTML)">
         <img src="images/CD_2.jpeg" onclick="openViewer(this.outerHTML)">
         <img src="images/CD_3.png" onclick="openViewer(this.outerHTML)">
-        <img src="images/teeth_typ.png" onclick="openViewer(this.outerHTML)">
+        <img src="images/cd_typ.png" onclick="openViewer(this.outerHTML)">
       </div>
       <div class="overlay-text">
 Jewel Case
