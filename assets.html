@@ -85,12 +85,15 @@ h1 {
   margin-bottom: 60px;
 }
 
-/* ---------- PROJECT GRID ---------- */
+/* ---------- PROJECT GRID (ONLY CHANGE) ---------- */
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, 1fr);
   gap: 18px;
-  max-width: 900px;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 20px;
 }
 
 .project {
@@ -248,11 +251,6 @@ footer a {
     <video src="images/Cyborg.mov" autoplay muted loop playsinline></video>
     <div class="project-title">Cyborg</div>
   </div>
-
-  <div class="project" onclick="openProject('lamb')">
-    <img src="images/1final.png" alt="">
-    <div class="project-title">Lamb</div>
-  </div>
 </section>
 
 <footer>
@@ -346,28 +344,6 @@ Blender
 Eevee, Geometry Nodes
 
 Modeled and composited in Blender.
-      </div>`;
-  }
-
-  if (project === 'lamb') {
-    content.innerHTML = `
-      <div class="overlay-media">
-        <img src="images/1final.png" onclick="openViewer(this.outerHTML)">
-        <img src="images/2final.png" onclick="openViewer(this.outerHTML)">
-        <img src="images/4final.png" onclick="openViewer(this.outerHTML)">
-        <img src="images/LAMB_2.jpg" onclick="openViewer(this.outerHTML)">
-        <img src="images/jewel-johnson-asset8.jpg" onclick="openViewer(this.outerHTML)">
-      </div>
-      <div class="overlay-text">
-Lamb
-July 2025
-
-Role: Modeling, sculpting, UVs, texturing, lookdev
-Credits: Textures sourced from Substance 3D Painter Library
-
-Exploring anatomical distortion through a surreal two-headed lamb. I focused on skin surface, asymmetry, and creature form to create a design that feels unsettling but grounded in real-world anatomy.
-
-Sculpted and modeled in Blender, with textures painted in Substance Painter. While I chose not to use a particle system for fur due to workflow challenges, I emphasized surface storytelling to suggest a lamb that is exposed, vulnerable, and eerie in its stillness.
       </div>`;
   }
 
