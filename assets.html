@@ -86,9 +86,10 @@ h1 {
 }
 
 /* ---------- PROJECT GRID ---------- */
-  .projects {
+.projects {
   display: grid;
-  grid-template-columns: repeat(2, minmax(400px, 1fr));
+  grid-template-rows: repeat(2, auto);
+  grid-auto-flow: column;
   gap: 18px;
   max-width: 100%;
 }
