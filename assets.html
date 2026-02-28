@@ -88,9 +88,12 @@ h1 {
 /* ---------- PROJECT GRID ---------- */
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, 1fr);
   gap: 18px;
-  max-width: 900px;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 20px;
 }
 
 .project {
