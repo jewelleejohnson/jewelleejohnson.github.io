@@ -86,14 +86,11 @@ h1 {
 }
 
 /* ---------- PROJECT GRID ---------- */
-.projects {
+  .projects {
   display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(400px, 1fr));
   gap: 18px;
   max-width: 100%;
-  overflow-x: auto;
-  padding-bottom: 20px;
 }
 
 .project {
