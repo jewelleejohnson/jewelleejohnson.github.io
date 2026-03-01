@@ -229,9 +229,9 @@ footer a {
 <p class="subtitle">// Experimental, XR, and motion-based work</p>
 
 <section class="projects">
-  <div class="project" onclick="openProject('av')">
-    <img src="images/av01.jpg" alt="">
-    <div class="project-title">Experimental & XR</div>
+  <div class="project" onclick="openProject('glitchjungle')">
+    <img src="AVImage/GlitchJungle_Linedup.png" alt="">
+    <div class="project-title">Glitch Jungle Commission</div>
   </div>
 </section>
 
@@ -242,13 +242,11 @@ footer a {
   <a class="glitch" data-text="Instagram" href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
 </footer>
 
-<!-- OVERLAY -->
 <div class="overlay" id="overlay" onclick="closeProject(event)">
   <div class="exit" onclick="closeProject()">✕</div>
   <div class="overlay-inner" id="overlayContent"></div>
 </div>
 
-<!-- VIEWER -->
 <div class="viewer" id="viewer" onclick="closeViewer(event)">
   <div class="exit" onclick="closeViewer()">✕</div>
   <div class="viewer-content" id="viewerContent"></div>
@@ -260,16 +258,21 @@ function openProject(project) {
   const content = document.getElementById('overlayContent');
   document.body.style.overflow = 'hidden';
 
-  if (project === 'av') {
+  if (project === 'glitchjungle') {
     content.innerHTML = `
       <div class="overlay-media">
-        <img src="images/av01.jpg" onclick="openViewer(this.outerHTML)">
+        <img src="AVImage/2Dtypeface.png" onclick="openViewer(this.outerHTML)">
+        <img src="AVImage/GlitchJungle_Linedup.png" onclick="openViewer(this.outerHTML)">
+        <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <img src="AVImage/Stacked.png" onclick="openViewer(this.outerHTML)">
       </div>
       <div class="overlay-text">
-Experimental & XR
+Glitch Jungle Commission
 
-Audiovisual, XR, and motion-based work combining sound,
-visuals, and interactive systems.
+Tools: ZBrush, Blender, Substance 3D Painter
+Techniques: Procedural modeling
+
+Commissioned audiovisual work exploring dense, layered digital ecosystems through typography, motion, and form.
       </div>`;
   }
 
