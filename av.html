@@ -233,6 +233,11 @@ footer a {
     <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline></video>
     <div class="project-title">Glitch Jungle Commission</div>
   </div>
+
+  <div class="project" onclick="openProject('openstudios')">
+    <img src="AVImage/Alex01.jpg" alt="">
+    <div class="project-title">Open Studios at RISD</div>
+  </div>
 </section>
 
 <footer>
@@ -273,6 +278,25 @@ Tools: ZBrush, Blender, Substance 3D Painter
 Techniques: Procedural modeling
 
 Commissioned audiovisual work exploring dense, layered digital ecosystems through typography, motion, and form.
+      </div>`;
+  }
+
+  if (project === 'openstudios') {
+    content.innerHTML = `
+      <div class="overlay-media">
+        <img src="AVImage/Alex01.jpg" onclick="openViewer(this.outerHTML)">
+        <img src="AVImage/Alex02.jpg" onclick="openViewer(this.outerHTML)">
+        <video src="AVImage/Dp.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <video src="AVImage/Projectfinal - Trim.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <img src="AVImage/Sky.JPG" onclick="openViewer(this.outerHTML)">
+        <video src="AVImage/Soul.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+      </div>
+      <div class="overlay-text">
+Open Studios at RISD
+
+Installation-based audiovisual work presented during RISD Open Studios,
+exploring motion, projection, and spatial digital form.
       </div>`;
   }
 
