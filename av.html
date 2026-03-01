@@ -230,7 +230,7 @@ footer a {
 
 <section class="projects">
   <div class="project" onclick="openProject('glitchjungle')">
-    <img src="AVImage/GlitchJungle_Linedup.png" alt="">
+    <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline></video>
     <div class="project-title">Glitch Jungle Commission</div>
   </div>
 </section>
@@ -261,9 +261,9 @@ function openProject(project) {
   if (project === 'glitchjungle') {
     content.innerHTML = `
       <div class="overlay-media">
+        <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
         <img src="AVImage/2Dtypeface.png" onclick="openViewer(this.outerHTML)">
         <img src="AVImage/GlitchJungle_Linedup.png" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
         <img src="AVImage/Stacked.png" onclick="openViewer(this.outerHTML)">
       </div>
       <div class="overlay-text">
