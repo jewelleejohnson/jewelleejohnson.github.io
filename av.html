@@ -238,6 +238,11 @@ footer a {
     <img src="AVImage/Alex01.jpg" alt="">
     <div class="project-title">Open Studios at RISD</div>
   </div>
+
+  <div class="project" onclick="openProject('congee')">
+    <img src="AVImage/000000.jpg" alt="">
+    <div class="project-title">Congee Studios</div>
+  </div>
 </section>
 
 <footer>
@@ -296,6 +301,25 @@ Open Studios at RISD
 
 Installation-based audiovisual work presented during RISD Open Studios,
 exploring motion, projection, and spatial digital form.
+      </div>`;
+  }
+
+  if (project === 'congee') {
+    content.innerHTML = `
+      <div class="overlay-media">
+        <img src="AVImage/000000.jpg" onclick="openViewer(this.outerHTML)">
+        <img src="AVImage/123.jpg" onclick="openViewer(this.outerHTML)">
+        <video src="AVImage/Congee (2).mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <img src="AVImage/XCSIBER01.jpg" onclick="openViewer(this.outerHTML)">
+        <video src="AVImage/turnaround.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <img src="AVImage/IMG_7083.png" onclick="openViewer(this.outerHTML)">
+      </div>
+      <div class="overlay-text">
+CONGEE STUDIOS Presents
+PARASITE CHAMBER: A Halloween Experience
+
+Blender, ZBrush, Adobe Premiere Pro
+Audio-Visual Installation
       </div>`;
   }
 
