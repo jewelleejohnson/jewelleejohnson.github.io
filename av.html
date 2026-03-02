@@ -8,210 +8,120 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --cyber-green: #00ffcc;
+:root { --cyber-green:#00ffcc; }
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  padding:60px;
+  font-family:'Fira Code',monospace;
+  color:#fff;
+  background:url("AVImage/XCSIBER01.jpg") center/cover fixed;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  z-index:-1;
 }
 
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  padding: 60px;
-  font-family: 'Fira Code', monospace;
-  color: #fff;
-  background-image: url("images/jewel-johnson-asset4.jpg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  overflow-x: hidden;
+/* NAV */
+nav{margin-bottom:80px;}
+nav a{
+  margin-right:32px;
+  font-size:15px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--cyber-green);
+  text-decoration:none;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  z-index: -1;
+/* TITLES */
+h1{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:48px;
+  letter-spacing:.14em;
+  color:var(--cyber-green);
+}
+.subtitle{opacity:.7;margin-bottom:60px;}
+
+/* PROJECT GRID */
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(400px,1fr));
+  gap:18px;
+  max-width:900px;
+}
+.project{
+  border:1px solid #fff;
+  aspect-ratio:4/3;
+  padding:10px;
+  cursor:pointer;
+}
+.project img, .project video{
+  width:100%;
+  height:calc(100% - 26px);
+  object-fit:cover;
+  border:1px solid #fff;
+}
+.project-title{
+  margin-top:6px;
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
 }
 
-/* ---------- GLITCH ---------- */
-.glitch {
-  position: relative;
-  display: inline-block;
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.95);
+  display:none;
+  z-index:1000;
 }
-
-.glitch:hover::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 2px;
-  top: 0;
-  width: 100%;
-  color: inherit;
-  clip-path: inset(40% 0 45% 0);
-  animation: glitchX 0.25s steps(2) infinite;
+.overlay.active{display:flex;}
+.overlay-inner{
+  max-width:1700px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.6fr 1fr;
+  gap:48px;
 }
-
-@keyframes glitchX {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(-3px); }
-  100% { transform: translateX(3px); }
+.overlay-media{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
 }
-
-/* ---------- NAV ---------- */
-nav {
-  margin-bottom: 80px;
-}
-
-nav a {
-  margin-right: 32px;
-  font-size: 15px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--cyber-green);
-  text-decoration: none;
-}
-
-/* ---------- PAGE TITLE ---------- */
-h1 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 48px;
-  letter-spacing: 0.14em;
-  margin-bottom: 10px;
-  color: var(--cyber-green);
-}
-
-.subtitle {
-  font-size: 15px;
-  opacity: 0.7;
-  margin-bottom: 60px;
-}
-
-/* ---------- PROJECT GRID ---------- */
-.projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 18px;
-  max-width: 900px;
-}
-
-.project {
-  border: 1px solid #fff;
-  aspect-ratio: 4 / 3;
-  padding: 10px;
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
-}
-
-.project:hover {
-  box-shadow:
-    0 0 10px rgba(0,255,204,0.5),
-    0 0 20px rgba(0,255,204,0.25);
-}
-
-.project img,
-.project video {
-  width: 100%;
-  height: calc(100% - 26px);
-  object-fit: cover;
-  border: 1px solid #fff;
-}
-
-.project-title {
-  margin-top: 6px;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-/* ---------- OVERLAY ---------- */
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.95);
-  display: none;
-  z-index: 1000;
-}
-
-.overlay.active {
-  display: flex;
-}
-
-.overlay-inner {
-  max-width: 1700px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: 1.6fr 1fr;
-  gap: 48px;
-}
-
-.overlay-media {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-}
-
 .overlay-media img,
-.overlay-media video {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border: 1px solid #fff;
-  cursor: pointer;
+.overlay-media video,
+.overlay-media iframe{
+  width:100%;
+  aspect-ratio:16/9;
+  border:1px solid #fff;
+}
+.overlay-text{
+  white-space:pre-line;
+  line-height:1.8;
+}
+.exit{
+  position:fixed;
+  top:32px;
+  right:40px;
+  font-size:28px;
+  cursor:pointer;
 }
 
-.overlay-text {
-  font-size: 15px;
-  line-height: 1.8;
-  white-space: pre-line;
+/* FOOTER */
+footer{
+  margin-top:140px;
+  color:var(--cyber-green);
 }
-
-.exit {
-  position: fixed;
-  top: 32px;
-  right: 40px;
-  font-size: 28px;
-  cursor: pointer;
-  color: #fff;
-}
-
-/* ---------- VIEWER ---------- */
-.viewer {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.97);
-  display: none;
-  z-index: 2000;
-  align-items: center;
-  justify-content: center;
-}
-
-.viewer.active {
-  display: flex;
-}
-
-.viewer-content img,
-.viewer-content video {
-  max-width: 92vw;
-  max-height: 92vh;
-  border: 1px solid #fff;
-}
-
-.viewer .exit {
-  top: 24px;
-  right: 32px;
-}
-
-/* ---------- FOOTER ---------- */
-footer {
-  margin-top: 140px;
-  font-size: 16px;
-  color: var(--cyber-green);
-}
-
-footer a {
-  margin-right: 24px;
-  color: var(--cyber-green);
-  text-decoration: none;
+footer a{
+  margin-right:24px;
+  color:var(--cyber-green);
+  text-decoration:none;
 }
 </style>
 </head>
@@ -219,10 +129,10 @@ footer a {
 <body>
 
 <nav>
-  <a class="glitch" data-text="Home" href="index.html">Home</a>
-  <a class="glitch" data-text="3D Assets" href="assets.html">3D Assets</a>
-  <a class="glitch" data-text="Audiovisual" href="av.html">Audiovisual</a>
-  <a class="glitch" data-text="Resume" href="resume.html">Resume</a>
+  <a href="index.html">Home</a>
+  <a href="assets.html">3D Assets</a>
+  <a href="av.html">Audiovisual</a>
+  <a href="resume.html">Resume</a>
 </nav>
 
 <h1>Audiovisual</h1>
@@ -235,21 +145,26 @@ footer a {
   </div>
 
   <div class="project" onclick="openProject('openstudios')">
-    <img src="AVImage/Alex01.jpg" alt="">
+    <img src="AVImage/Alex01.jpg">
     <div class="project-title">Open Studios at RISD</div>
   </div>
 
-  <div class="project" onclick="openProject('congee')">
-    <img src="AVImage/XCSIBER01.jpg" alt="">
-    <div class="project-title">Congee Studios</div>
+  <div class="project" onclick="openProject('neorat')">
+    <img src="AVImage/XCSIBER01.jpg">
+    <div class="project-title">NEORAT</div>
+  </div>
+
+  <div class="project" onclick="openProject('dystopia')">
+    <img src="AVImage/XCSIBER01.jpg">
+    <div class="project-title">Dystopia</div>
   </div>
 </section>
 
 <footer>
   Contact — jewelleejohnson@gmail.com<br><br>
-  <a class="glitch" data-text="LinkedIn" href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
-  <a class="glitch" data-text="ArtStation" href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
-  <a class="glitch" data-text="Instagram" href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
+  <a href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
+  <a href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
+  <a href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
 </footer>
 
 <div class="overlay" id="overlay" onclick="closeProject(event)">
@@ -257,100 +172,55 @@ footer a {
   <div class="overlay-inner" id="overlayContent"></div>
 </div>
 
-<div class="viewer" id="viewer" onclick="closeViewer(event)">
-  <div class="exit" onclick="closeViewer()">✕</div>
-  <div class="viewer-content" id="viewerContent"></div>
-</div>
-
 <script>
-function openProject(project) {
-  const overlay = document.getElementById('overlay');
-  const content = document.getElementById('overlayContent');
-  document.body.style.overflow = 'hidden';
+function openProject(p){
+  const o=document.getElementById('overlay');
+  const c=document.getElementById('overlayContent');
+  document.body.style.overflow='hidden';
 
-  if (project === 'glitchjungle') {
-    content.innerHTML = `
+  if(p==='neorat'){
+    c.innerHTML=`
       <div class="overlay-media">
-        <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/2Dtypeface.png" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/GlitchJungle_Linedup.png" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/Stacked.png" onclick="openViewer(this.outerHTML)">
+        <iframe src="https://player.vimeo.com/video/1169447886?autoplay=1&muted=1"
+        frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
       </div>
       <div class="overlay-text">
-Glitch Jungle Commission
+NEORAT
 
-Tools: ZBrush, Blender, Substance 3D Painter
-Techniques: Procedural modeling
-
-Commissioned audiovisual work exploring dense, layered digital ecosystems through typography, motion, and form.
+Audiovisual work exploring synthetic organisms and urban decay.
       </div>`;
   }
 
-  if (project === 'openstudios') {
-    content.innerHTML = `
+  if(p==='dystopia'){
+    c.innerHTML=`
       <div class="overlay-media">
-        <img src="AVImage/Alex01.jpg" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/Alex02.jpg" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/Dp.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <video src="AVImage/Projectfinal - Trim.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/Sky.JPG" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/Soul.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <iframe src="https://player.vimeo.com/video/1169447859?autoplay=1&muted=1"
+        frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
       </div>
       <div class="overlay-text">
-Open Studios at RISD
+Dystopia
 
-Installation-based audiovisual work presented during RISD Open Studios,
-exploring motion, projection, and spatial digital form.
+Experimental moving image focused on repetition and collapse.
       </div>`;
   }
 
-  if (project === 'congee') {
-    content.innerHTML = `
-      <div class="overlay-media">
-        <img src="AVImage/000000.jpg" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/123.jpg" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/Congee (2).mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/XCSIBER01.jpg" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/turnaround.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/IMG_7083.png" onclick="openViewer(this.outerHTML)">
-      </div>
-      <div class="overlay-text">
-CONGEE STUDIOS Presents
-PARASITE CHAMBER: A Halloween Experience
-
-Blender, ZBrush, Adobe Premiere Pro
-Audio-Visual Installation
-      </div>`;
+  if(p==='glitchjungle'){
+    c.innerHTML=`<div class="overlay-text">Glitch Jungle</div>`;
   }
 
-  overlay.classList.add('active');
+  if(p==='openstudios'){
+    c.innerHTML=`<div class="overlay-text">Open Studios at RISD</div>`;
+  }
+
+  o.classList.add('active');
 }
 
-function closeProject(e) {
-  if (!e || e.target.id === 'overlay') {
-    document.getElementById('overlay').classList.remove('active');
-    document.body.style.overflow = '';
+function closeProject(e){
+  if(!e||e.target.id==='overlay'){
+    overlay.classList.remove('active');
+    document.body.style.overflow='';
   }
 }
-
-function openViewer(html) {
-  document.getElementById('viewerContent').innerHTML = html;
-  document.getElementById('viewer').classList.add('active');
-}
-
-function closeViewer(e) {
-  if (!e || e.target.id === 'viewer') {
-    document.getElementById('viewer').classList.remove('active');
-    document.getElementById('viewerContent').innerHTML = '';
-  }
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    closeViewer();
-    closeProject();
-  }
-});
 </script>
 
 </body>
