@@ -16,7 +16,10 @@ body{
   padding:60px;
   font-family:'Fira Code',monospace;
   color:#fff;
-  background:url("AVImage/XCSIBER01.jpg") center/cover fixed;
+  background-image:url("images/jewel-johnson-asset4.jpg");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
   overflow-x:hidden;
 }
 body::before{
@@ -43,6 +46,7 @@ h1{
   font-family:'Space Grotesk',sans-serif;
   font-size:48px;
   letter-spacing:.14em;
+  margin-bottom:10px;
   color:var(--cyber-green);
 }
 .subtitle{opacity:.7;margin-bottom:60px;}
@@ -60,7 +64,7 @@ h1{
   padding:10px;
   cursor:pointer;
 }
-.project img, .project video{
+.project img,.project video{
   width:100%;
   height:calc(100% - 26px);
   object-fit:cover;
@@ -69,8 +73,8 @@ h1{
 .project-title{
   margin-top:6px;
   font-size:12px;
-  letter-spacing:.08em;
   text-transform:uppercase;
+  letter-spacing:.08em;
 }
 
 /* OVERLAY */
@@ -99,11 +103,13 @@ h1{
 .overlay-media iframe{
   width:100%;
   aspect-ratio:16/9;
+  object-fit:cover;
   border:1px solid #fff;
 }
 .overlay-text{
-  white-space:pre-line;
+  font-size:15px;
   line-height:1.8;
+  white-space:pre-line;
 }
 .exit{
   position:fixed;
@@ -139,6 +145,7 @@ footer a{
 <p class="subtitle">// Experimental, XR, and motion-based work</p>
 
 <section class="projects">
+
   <div class="project" onclick="openProject('glitchjungle')">
     <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline></video>
     <div class="project-title">Glitch Jungle Commission</div>
@@ -147,6 +154,11 @@ footer a{
   <div class="project" onclick="openProject('openstudios')">
     <img src="AVImage/Alex01.jpg">
     <div class="project-title">Open Studios at RISD</div>
+  </div>
+
+  <div class="project" onclick="openProject('congee')">
+    <img src="AVImage/XCSIBER01.jpg">
+    <div class="project-title">Congee Studios</div>
   </div>
 
   <div class="project" onclick="openProject('neorat')">
@@ -158,6 +170,7 @@ footer a{
     <img src="AVImage/XCSIBER01.jpg">
     <div class="project-title">Dystopia</div>
   </div>
+
 </section>
 
 <footer>
@@ -173,13 +186,13 @@ footer a{
 </div>
 
 <script>
-function openProject(p){
-  const o=document.getElementById('overlay');
-  const c=document.getElementById('overlayContent');
+function openProject(project){
+  const overlay=document.getElementById('overlay');
+  const content=document.getElementById('overlayContent');
   document.body.style.overflow='hidden';
 
-  if(p==='neorat'){
-    c.innerHTML=`
+  if(project==='neorat'){
+    content.innerHTML=`
       <div class="overlay-media">
         <iframe src="https://player.vimeo.com/video/1169447886?autoplay=1&muted=1"
         frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
@@ -187,12 +200,12 @@ function openProject(p){
       <div class="overlay-text">
 NEORAT
 
-Audiovisual work exploring synthetic organisms and urban decay.
+Long-form audiovisual work.
       </div>`;
   }
 
-  if(p==='dystopia'){
-    c.innerHTML=`
+  if(project==='dystopia'){
+    content.innerHTML=`
       <div class="overlay-media">
         <iframe src="https://player.vimeo.com/video/1169447859?autoplay=1&muted=1"
         frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
@@ -200,23 +213,42 @@ Audiovisual work exploring synthetic organisms and urban decay.
       <div class="overlay-text">
 Dystopia
 
-Experimental moving image focused on repetition and collapse.
+Experimental moving image.
       </div>`;
   }
 
-  if(p==='glitchjungle'){
-    c.innerHTML=`<div class="overlay-text">Glitch Jungle</div>`;
+  if(project==='congee'){
+    content.innerHTML=`
+      <div class="overlay-media">
+        <img src="AVImage/000000.jpg">
+        <img src="AVImage/123.jpg">
+        <video src="AVImage/Congee (2).mp4" autoplay muted loop playsinline></video>
+        <img src="AVImage/XCSIBER01.jpg">
+        <video src="AVImage/turnaround.mov" autoplay muted loop playsinline></video>
+        <img src="AVImage/IMG_7083.png">
+      </div>
+      <div class="overlay-text">
+CONGEE STUDIOS Presents
+PARASITE CHAMBER: A Halloween Experience
+
+Blender, ZBrush, Adobe Premiere Pro
+Audio-Visual Installation
+      </div>`;
   }
 
-  if(p==='openstudios'){
-    c.innerHTML=`<div class="overlay-text">Open Studios at RISD</div>`;
+  if(project==='glitchjungle'){
+    content.innerHTML=`<div class="overlay-text">Glitch Jungle Commission</div>`;
   }
 
-  o.classList.add('active');
+  if(project==='openstudios'){
+    content.innerHTML=`<div class="overlay-text">Open Studios at RISD</div>`;
+  }
+
+  overlay.classList.add('active');
 }
 
 function closeProject(e){
-  if(!e||e.target.id==='overlay'){
+  if(!e || e.target.id==='overlay'){
     overlay.classList.remove('active');
     document.body.style.overflow='';
   }
