@@ -89,9 +89,10 @@ h1 {
 /* ---------- PROJECT GRID ---------- */
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: 18px;
-  max-width: 900px;
+  height: calc(100vh - 340px);
 }
 
 .project {
@@ -150,7 +151,6 @@ h1 {
   gap: 24px;
 }
 
-/* ADDED iframe support */
 .overlay-media img,
 .overlay-media video,
 .overlay-media iframe {
@@ -192,7 +192,8 @@ h1 {
 }
 
 .viewer-content img,
-.viewer-content video {
+.viewer-content video,
+.viewer-content iframe {
   max-width: 92vw;
   max-height: 92vh;
   border: 1px solid #fff;
@@ -246,16 +247,14 @@ footer a {
     <div class="project-title">Congee Studios</div>
   </div>
 
-  <!-- NEW PROJECT -->
-  <div class="project" onclick="openProject('neorat')">
+  <div class="project" onclick="openProject('rat')">
     <img src="AVImage/rat.jpg" alt="">
-    <div class="project-title">NEORAT</div>
+    <div class="project-title">Rat</div>
   </div>
 
-  <!-- NEW PROJECT -->
-  <div class="project" onclick="openProject('dystopia')">
+  <div class="project" onclick="openProject('chan')">
     <img src="AVImage/CHAN.PNG" alt="">
-    <div class="project-title">Dystopia</div>
+    <div class="project-title">Chan</div>
   </div>
 </section>
 
@@ -282,38 +281,68 @@ function openProject(project) {
   const content = document.getElementById('overlayContent');
   document.body.style.overflow = 'hidden';
 
-  /* your original 3 blocks stay unchanged */
-
-  if (project === 'neorat') {
+  if (project === 'rat') {
     content.innerHTML = `
       <div class="overlay-media">
-        <iframe src="https://player.vimeo.com/video/1169447886?autoplay=1&muted=1"
-        frameborder="0"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1169447886?muted=1&autoplay=1&loop=1"
+                frameborder="0"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+                onclick="openViewer(this.outerHTML)">
+        </iframe>
       </div>
       <div class="overlay-text">
-NEORAT
+Rat
+
+Audiovisual experiment exploring digital distortion and movement.
       </div>`;
   }
 
-  if (project === 'dystopia') {
+  if (project === 'chan') {
     content.innerHTML = `
       <div class="overlay-media">
-        <iframe src="https://player.vimeo.com/video/1169447859?autoplay=1&muted=1"
-        frameborder="0"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1169447859?muted=1&autoplay=1&loop=1"
+                frameborder="0"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+                onclick="openViewer(this.outerHTML)">
+        </iframe>
       </div>
       <div class="overlay-text">
-Dystopia
+Chan
+
+Motion-based audiovisual exploration.
       </div>`;
   }
 
   overlay.classList.add('active');
 }
 
-/* rest of your JS unchanged */
+function closeProject(e) {
+  if (!e || e.target.id === 'overlay') {
+    document.getElementById('overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function openViewer(html) {
+  document.getElementById('viewerContent').innerHTML = html;
+  document.getElementById('viewer').classList.add('active');
+}
+
+function closeViewer(e) {
+  if (!e || e.target.id === 'viewer') {
+    document.getElementById('viewer').classList.remove('active');
+    document.getElementById('viewerContent').innerHTML = '';
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeViewer();
+    closeProject();
+  }
+});
 </script>
 
 </body>
