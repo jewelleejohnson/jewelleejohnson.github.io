@@ -89,9 +89,11 @@ h1 {
 /* ---------- PROJECT GRID ---------- */
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: 18px;
-  max-width: 900px;
+  width: 100%;
+  height: calc(100vh - 320px);
 }
 
 .project {
@@ -191,8 +193,7 @@ h1 {
 }
 
 .viewer-content img,
-.viewer-content video,
-.viewer-content iframe {
+.viewer-content video {
   max-width: 92vw;
   max-height: 92vh;
   border: 1px solid #fff;
@@ -246,17 +247,17 @@ footer a {
     <div class="project-title">Congee Studios</div>
   </div>
 
-  <!-- NEW PROJECT 1 -->
   <div class="project" onclick="openProject('rat')">
     <img src="AVImage/rat.jpg" alt="">
     <div class="project-title">Rat</div>
   </div>
 
-  <!-- NEW PROJECT 2 -->
   <div class="project" onclick="openProject('chan')">
     <img src="AVImage/CHAN.PNG" alt="">
     <div class="project-title">Chan</div>
   </div>
+
+  <div></div>
 </section>
 
 <footer>
@@ -282,37 +283,82 @@ function openProject(project) {
   const content = document.getElementById('overlayContent');
   document.body.style.overflow = 'hidden';
 
+  if (project === 'glitchjungle') {
+    content.innerHTML = `
+      <div class="overlay-media">
+        <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <img src="AVImage/2Dtypeface.png" onclick="openViewer(this.outerHTML)">
+        <img src="AVImage/GlitchJungle_Linedup.png" onclick="openViewer(this.outerHTML)">
+        <img src="AVImage/Stacked.png" onclick="openViewer(this.outerHTML)">
+      </div>
+      <div class="overlay-text">
+Glitch Jungle Commission
+
+Tools: ZBrush, Blender, Substance 3D Painter
+Techniques: Procedural modeling
+
+Commissioned audiovisual work exploring dense, layered digital ecosystems through typography, motion, and form.
+      </div>`;
+  }
+
+  if (project === 'openstudios') {
+    content.innerHTML = `
+      <div class="overlay-media">
+        <img src="AVImage/Alex01.jpg" onclick="openViewer(this.outerHTML)">
+        <img src="AVImage/Alex02.jpg" onclick="openViewer(this.outerHTML)">
+        <video src="AVImage/Dp.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <video src="AVImage/Projectfinal - Trim.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <img src="AVImage/Sky.JPG" onclick="openViewer(this.outerHTML)">
+        <video src="AVImage/Soul.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+      </div>
+      <div class="overlay-text">
+Open Studios at RISD
+
+Installation-based audiovisual work presented during RISD Open Studios,
+exploring motion, projection, and spatial digital form.
+      </div>`;
+  }
+
+  if (project === 'congee') {
+    content.innerHTML = `
+      <div class="overlay-media">
+        <img src="AVImage/000000.jpg" onclick="openViewer(this.outerHTML)">
+        <img src="AVImage/123.jpg" onclick="openViewer(this.outerHTML)">
+        <video src="AVImage/Congee (2).mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <img src="AVImage/XCSIBER01.jpg" onclick="openViewer(this.outerHTML)">
+        <video src="AVImage/turnaround.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <img src="AVImage/IMG_7083.png" onclick="openViewer(this.outerHTML)">
+      </div>
+      <div class="overlay-text">
+CONGEE STUDIOS Presents
+PARASITE CHAMBER: A Halloween Experience
+
+Blender, ZBrush, Adobe Premiere Pro
+Audio-Visual Installation
+      </div>`;
+  }
+
   if (project === 'rat') {
     content.innerHTML = `
       <div class="overlay-media">
-        <iframe src="https://player.vimeo.com/video/1169447886?muted=1&autoplay=1&loop=1"
-                frameborder="0"
-                allow="autoplay; fullscreen"
-                allowfullscreen
-                onclick="openViewer(this.outerHTML)">
-        </iframe>
+        <iframe src="https://player.vimeo.com/video/1169447886?muted=1&autoplay=1&loop=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
       </div>
       <div class="overlay-text">
 Rat
 
-Audiovisual experiment.
+Audiovisual motion work.
       </div>`;
   }
 
   if (project === 'chan') {
     content.innerHTML = `
       <div class="overlay-media">
-        <iframe src="https://player.vimeo.com/video/1169447859?muted=1&autoplay=1&loop=1"
-                frameborder="0"
-                allow="autoplay; fullscreen"
-                allowfullscreen
-                onclick="openViewer(this.outerHTML)">
-        </iframe>
+        <iframe src="https://player.vimeo.com/video/1169447859?muted=1&autoplay=1&loop=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
       </div>
       <div class="overlay-text">
 Chan
 
-Motion-based audiovisual exploration.
+Audiovisual motion work.
       </div>`;
   }
 
