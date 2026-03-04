@@ -151,7 +151,8 @@ h1 {
 }
 
 .overlay-media img,
-.overlay-media video {
+.overlay-media video,
+.overlay-media iframe {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
@@ -190,7 +191,8 @@ h1 {
 }
 
 .viewer-content img,
-.viewer-content video {
+.viewer-content video,
+.viewer-content iframe {
   max-width: 92vw;
   max-height: 92vh;
   border: 1px solid #fff;
@@ -243,6 +245,18 @@ footer a {
     <img src="AVImage/XCSIBER01.jpg" alt="">
     <div class="project-title">Congee Studios</div>
   </div>
+
+  <!-- NEW PROJECT 1 -->
+  <div class="project" onclick="openProject('rat')">
+    <img src="AVImage/rat.jpg" alt="">
+    <div class="project-title">Rat</div>
+  </div>
+
+  <!-- NEW PROJECT 2 -->
+  <div class="project" onclick="openProject('chan')">
+    <img src="AVImage/CHAN.PNG" alt="">
+    <div class="project-title">Chan</div>
+  </div>
 </section>
 
 <footer>
@@ -268,58 +282,37 @@ function openProject(project) {
   const content = document.getElementById('overlayContent');
   document.body.style.overflow = 'hidden';
 
-  if (project === 'glitchjungle') {
+  if (project === 'rat') {
     content.innerHTML = `
       <div class="overlay-media">
-        <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/2Dtypeface.png" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/GlitchJungle_Linedup.png" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/Stacked.png" onclick="openViewer(this.outerHTML)">
+        <iframe src="https://player.vimeo.com/video/1169447886?muted=1&autoplay=1&loop=1"
+                frameborder="0"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+                onclick="openViewer(this.outerHTML)">
+        </iframe>
       </div>
       <div class="overlay-text">
-Glitch Jungle Commission
+Rat
 
-Tools: ZBrush, Blender, Substance 3D Painter
-Techniques: Procedural modeling
-
-Commissioned audiovisual work exploring dense, layered digital ecosystems through typography, motion, and form.
+Audiovisual experiment.
       </div>`;
   }
 
-  if (project === 'openstudios') {
+  if (project === 'chan') {
     content.innerHTML = `
       <div class="overlay-media">
-        <img src="AVImage/Alex01.jpg" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/Alex02.jpg" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/Dp.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <video src="AVImage/Projectfinal - Trim.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/Sky.JPG" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/Soul.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <iframe src="https://player.vimeo.com/video/1169447859?muted=1&autoplay=1&loop=1"
+                frameborder="0"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+                onclick="openViewer(this.outerHTML)">
+        </iframe>
       </div>
       <div class="overlay-text">
-Open Studios at RISD
+Chan
 
-Installation-based audiovisual work presented during RISD Open Studios,
-exploring motion, projection, and spatial digital form.
-      </div>`;
-  }
-
-  if (project === 'congee') {
-    content.innerHTML = `
-      <div class="overlay-media">
-        <img src="AVImage/000000.jpg" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/123.jpg" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/Congee (2).mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/XCSIBER01.jpg" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/turnaround.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/IMG_7083.png" onclick="openViewer(this.outerHTML)">
-      </div>
-      <div class="overlay-text">
-CONGEE STUDIOS Presents
-PARASITE CHAMBER: A Halloween Experience
-
-Blender, ZBrush, Adobe Premiere Pro
-Audio-Visual Installation
+Motion-based audiovisual exploration.
       </div>`;
   }
 
@@ -355,5 +348,3 @@ document.addEventListener('keydown', e => {
 
 </body>
 </html>
-
-
