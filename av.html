@@ -151,7 +151,8 @@ h1 {
 }
 
 .overlay-media img,
-.overlay-media video {
+.overlay-media video,
+.overlay-media iframe {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
@@ -243,6 +244,16 @@ footer a {
     <img src="AVImage/XCSIBER01.jpg" alt="">
     <div class="project-title">Congee Studios</div>
   </div>
+
+  <div class="project" onclick="openProject('neorat')">
+    <img src="AVImage/XCSIBER01.jpg" alt="">
+    <div class="project-title">NEORAT</div>
+  </div>
+
+  <div class="project" onclick="openProject('dystopia')">
+    <img src="AVImage/XCSIBER01.jpg" alt="">
+    <div class="project-title">Dystopia</div>
+  </div>
 </section>
 
 <footer>
@@ -323,6 +334,36 @@ Audio-Visual Installation
       </div>`;
   }
 
+  if (project === 'neorat') {
+    content.innerHTML = `
+      <div class="overlay-media">
+        <iframe src="https://player.vimeo.com/video/1169447886?autoplay=1&muted=1"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen></iframe>
+      </div>
+      <div class="overlay-text">
+NEORAT
+
+Long-form audiovisual work.
+      </div>`;
+  }
+
+  if (project === 'dystopia') {
+    content.innerHTML = `
+      <div class="overlay-media">
+        <iframe src="https://player.vimeo.com/video/1169447859?autoplay=1&muted=1"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen></iframe>
+      </div>
+      <div class="overlay-text">
+Dystopia
+
+Long-form audiovisual work.
+      </div>`;
+  }
+
   overlay.classList.add('active');
 }
 
@@ -355,5 +396,3 @@ document.addEventListener('keydown', e => {
 
 </body>
 </html>
-
-
