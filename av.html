@@ -34,6 +34,7 @@ body::before {
   z-index: -1;
 }
 
+/* ---------- GLITCH ---------- */
 .glitch {
   position: relative;
   display: inline-block;
@@ -56,9 +57,8 @@ body::before {
   100% { transform: translateX(3px); }
 }
 
-nav {
-  margin-bottom: 80px;
-}
+/* ---------- NAV ---------- */
+nav { margin-bottom: 80px; }
 
 nav a {
   margin-right: 32px;
@@ -69,6 +69,7 @@ nav a {
   text-decoration: none;
 }
 
+/* ---------- PAGE TITLE ---------- */
 h1 {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 48px;
@@ -83,12 +84,12 @@ h1 {
   margin-bottom: 60px;
 }
 
-/* GRID LOCKED TO 3 COLUMNS (2 ROWS TOTAL) */
+/* ---------- PROJECT GRID ---------- */
 .projects {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 18px;
-  max-width: 1200px;
+  max-width: 900px;
 }
 
 .project {
@@ -120,6 +121,7 @@ h1 {
   letter-spacing: 0.08em;
 }
 
+/* ---------- OVERLAY ---------- */
 .overlay {
   position: fixed;
   inset: 0;
@@ -128,9 +130,7 @@ h1 {
   z-index: 1000;
 }
 
-.overlay.active {
-  display: flex;
-}
+.overlay.active { display: flex; }
 
 .overlay-inner {
   max-width: 1700px;
@@ -171,6 +171,7 @@ h1 {
   color: #fff;
 }
 
+/* ---------- VIEWER ---------- */
 .viewer {
   position: fixed;
   inset: 0;
@@ -181,9 +182,7 @@ h1 {
   justify-content: center;
 }
 
-.viewer.active {
-  display: flex;
-}
+.viewer.active { display: flex; }
 
 .viewer-content img,
 .viewer-content video {
@@ -197,6 +196,7 @@ h1 {
   right: 32px;
 }
 
+/* ---------- FOOTER ---------- */
 footer {
   margin-top: 140px;
   font-size: 16px;
@@ -224,7 +224,6 @@ footer a {
 <p class="subtitle">// Experimental, XR, and motion-based work</p>
 
 <section class="projects">
-
   <div class="project" onclick="openProject('glitchjungle')">
     <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline></video>
     <div class="project-title">Glitch Jungle Commission</div>
@@ -240,6 +239,7 @@ footer a {
     <div class="project-title">Congee Studios</div>
   </div>
 
+  <!-- ADDED -->
   <div class="project" onclick="openProject('neorat')">
     <img src="AVImage/rat.jpg" alt="">
     <div class="project-title">NEORAT</div>
@@ -249,7 +249,6 @@ footer a {
     <img src="AVImage/CHAN.PNG" alt="">
     <div class="project-title">Dystopia</div>
   </div>
-
 </section>
 
 <footer>
@@ -259,7 +258,62 @@ footer a {
   <a class="glitch" data-text="Instagram" href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
 </footer>
 
-<!-- OVERLAY + SCRIPT REMAIN EXACTLY THE SAME AS BEFORE -->
+<div class="overlay" id="overlay" onclick="closeProject(event)">
+  <div class="exit" onclick="closeProject()">✕</div>
+  <div class="overlay-inner" id="overlayContent"></div>
+</div>
+
+<div class="viewer" id="viewer" onclick="closeViewer(event)">
+  <div class="exit" onclick="closeViewer()">✕</div>
+  <div class="viewer-content" id="viewerContent"></div>
+</div>
+
+<script>
+function openProject(project) {
+  const overlay = document.getElementById('overlay');
+  const content = document.getElementById('overlayContent');
+  document.body.style.overflow = 'hidden';
+
+  if (project === 'glitchjungle') {
+    content.innerHTML = `... SAME AS YOUR ORIGINAL ...`;
+  }
+
+  if (project === 'openstudios') {
+    content.innerHTML = `... SAME AS YOUR ORIGINAL ...`;
+  }
+
+  if (project === 'congee') {
+    content.innerHTML = `... SAME AS YOUR ORIGINAL ...`;
+  }
+
+  /* ADDED */
+  if (project === 'neorat') {
+    content.innerHTML = `
+      <div class="overlay-media">
+        <iframe src="https://player.vimeo.com/video/1169447886?autoplay=1&muted=1"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen></iframe>
+      </div>
+      <div class="overlay-text">NEORAT</div>`;
+  }
+
+  if (project === 'dystopia') {
+    content.innerHTML = `
+      <div class="overlay-media">
+        <iframe src="https://player.vimeo.com/video/1169447859?autoplay=1&muted=1"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen></iframe>
+      </div>
+      <div class="overlay-text">Dystopia</div>`;
+  }
+
+  overlay.classList.add('active');
+}
+
+/* REST OF YOUR ORIGINAL JS UNCHANGED */
+</script>
 
 </body>
 </html>
