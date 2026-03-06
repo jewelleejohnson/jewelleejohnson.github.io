@@ -256,7 +256,10 @@ footer a {
     <div class="project-title">Chan</div>
   </div>
 
-  <div></div>
+  <div class="project" onclick="openProject('darkness')">
+    <img src="AVImage/Cig.png" alt="">
+    <div class="project-title">A Great Darkness</div>
+  </div>
 </section>
 
 <footer>
@@ -361,6 +364,18 @@ Audiovisual motion work.
       </div>`;
   }
 
+  if (project === 'darkness') {
+    content.innerHTML = `
+      <div class="overlay-media">
+        <iframe src="https://player.vimeo.com/video/1171141225?muted=1&autoplay=1&loop=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      </div>
+      <div class="overlay-text">
+A Great Darkness
+
+Audiovisual motion work.
+      </div>`;
+  }
+
   overlay.classList.add('active');
 }
 
@@ -393,5 +408,3 @@ document.addEventListener('keydown', e => {
 
 </body>
 </html>
-
-
