@@ -89,11 +89,10 @@ h1 {
 /* ---------- PROJECT GRID ---------- */
 .projects {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  grid-auto-flow: column;
   gap: 18px;
-  width: 100%;
-  height: calc(100vh - 320px);
+  max-width: 100%;
 }
 
 .project {
