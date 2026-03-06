@@ -100,17 +100,38 @@ h1 {
 /* ---------- LAYOUT ---------- */
 .page {
   display: flex;
-  gap: 60px;
+  gap: 160px;
+  align-items: flex-start;
 }
 
-/* ---------- RESUME BLOCK ---------- */
 .resume {
-  max-width: 900px;
+  flex: 0 0 600px;
   border: 1px solid #fff;
   padding: 32px;
   background: rgba(0,0,0,0.45);
 }
 
+.middle-text {
+  max-width: 400px;
+  line-height: 1.8;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.video-column {
+  margin-left: auto;
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.video-column video {
+  width: 100%;
+  border: 1px solid #fff;
+}
+
+/* ---------- RESUME TEXT ---------- */
 .resume p {
   font-size: 15px;
   line-height: 1.8;
@@ -141,19 +162,6 @@ h1 {
   display: block;
   margin-top: 40px;
   max-width: 520px;
-  width: 100%;
-  border: 1px solid #fff;
-}
-
-/* ---------- RIGHT VIDEO COLUMN ---------- */
-.video-column {
-  width: 360px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.video-column video {
   width: 100%;
   border: 1px solid #fff;
 }
@@ -205,6 +213,18 @@ footer a {
 
   <img src="images/JewelWhiteBackground3.jpg" alt="Jewel Lee-Johnson">
 </section>
+
+<div class="middle-text">
+  <p>
+    Lorem ipsum creative coding visual design generative art procedural surfaces shader studies cinematic lighting realtime rendering.
+  </p>
+  <p>
+    Exploration of materials, environments, and motion through 3D workflows, audiovisual experiments, and digital sculpture pipelines.
+  </p>
+  <p>
+    Blender Houdini Unreal workflows texture systems lighting rigs simulation studies and experimental visual storytelling.
+  </p>
+</div>
 
 <div class="video-column">
 
