@@ -1,396 +1,296 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Audiovisual | Jewel Lee-Johnson</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<title>Audiovisual</title>
 
 <style>
-:root {
-  --cyber-green: #00ffcc;
-}
-
-* { box-sizing: border-box; }
 
 body {
-  margin: 0;
-  padding: 60px;
-  font-family: 'Fira Code', monospace;
+  font-family: Arial, sans-serif;
+  margin: 40px;
+  background: #000;
   color: #fff;
-  background-image: url("images/jewel-johnson-asset4.jpg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  overflow-x: hidden;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  z-index: -1;
-}
+/* Header */
 
-/* ---------- GLITCH ---------- */
-.glitch {
-  position: relative;
-  display: inline-block;
-}
-
-.glitch:hover::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 2px;
-  top: 0;
-  width: 100%;
-  color: inherit;
-  clip-path: inset(40% 0 45% 0);
-  animation: glitchX 0.25s steps(2) infinite;
-}
-
-@keyframes glitchX {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(-3px); }
-  100% { transform: translateX(3px); }
-}
-
-/* ---------- NAV ---------- */
-nav {
-  margin-bottom: 80px;
-}
-
-nav a {
-  margin-right: 32px;
-  font-size: 15px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--cyber-green);
-  text-decoration: none;
-}
-
-/* ---------- PAGE TITLE ---------- */
-h1 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 48px;
-  letter-spacing: 0.14em;
-  margin-bottom: 10px;
-  color: var(--cyber-green);
-}
-
-.subtitle {
-  font-size: 15px;
-  opacity: 0.7;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 60px;
 }
 
-/* ---------- PROJECT GRID ---------- */
+.header h1 {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.nav a {
+  margin-left: 20px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+/* Projects grid */
+
 .projects {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  grid-auto-flow: column;
   gap: 18px;
-  width: 100%;
-  height: calc(100vh - 320px);
+  max-width: 100%;
 }
 
 .project {
-  border: 1px solid #fff;
-  aspect-ratio: 4 / 3;
-  padding: 10px;
+  position: relative;
   cursor: pointer;
-  transition: box-shadow 0.3s ease;
 }
 
-.project:hover {
-  box-shadow:
-    0 0 10px rgba(0,255,204,0.5),
-    0 0 20px rgba(0,255,204,0.25);
-}
-
-.project img,
-.project video {
+.project img {
   width: 100%;
-  height: calc(100% - 26px);
+  aspect-ratio: 1 / 1;
   object-fit: cover;
+  display: block;
   border: 1px solid #fff;
 }
 
 .project-title {
   margin-top: 6px;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-size: 13px;
 }
 
-/* ---------- OVERLAY ---------- */
+/* Overlay */
+
 .overlay {
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.95);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
   display: none;
-  z-index: 1000;
-}
-
-.overlay.active {
-  display: flex;
+  overflow: auto;
 }
 
 .overlay-inner {
-  max-width: 1700px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: 1.6fr 1fr;
-  gap: 48px;
+  max-width: 1100px;
+  margin: 80px auto;
+  padding: 40px;
 }
 
-.overlay-media {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
+.overlay-close {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  font-size: 22px;
+  cursor: pointer;
 }
+
+/* Media */
 
 .overlay-media img,
 .overlay-media video,
 .overlay-media iframe {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border: 1px solid #fff;
-  cursor: pointer;
 }
+
+/* Text */
 
 .overlay-text {
-  font-size: 15px;
-  line-height: 1.8;
-  white-space: pre-line;
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
-.exit {
-  position: fixed;
-  top: 32px;
-  right: 40px;
-  font-size: 28px;
-  cursor: pointer;
-  color: #fff;
+/* Footer */
+
+.footer {
+  margin-top: 80px;
+  font-size: 13px;
 }
 
-/* ---------- VIEWER ---------- */
-.viewer {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.97);
-  display: none;
-  z-index: 2000;
-  align-items: center;
-  justify-content: center;
-}
-
-.viewer.active {
-  display: flex;
-}
-
-.viewer-content img,
-.viewer-content video {
-  max-width: 92vw;
-  max-height: 92vh;
-  border: 1px solid #fff;
-}
-
-.viewer .exit {
-  top: 24px;
-  right: 32px;
-}
-
-/* ---------- FOOTER ---------- */
-footer {
-  margin-top: 140px;
-  font-size: 16px;
-  color: var(--cyber-green);
-}
-
-footer a {
-  margin-right: 24px;
-  color: var(--cyber-green);
-  text-decoration: none;
-}
 </style>
 </head>
 
 <body>
 
-<nav>
-  <a class="glitch" data-text="Home" href="index.html">Home</a>
-  <a class="glitch" data-text="3D Assets" href="assets.html">3D Assets</a>
-  <a class="glitch" data-text="Audiovisual" href="av.html">Audiovisual</a>
-  <a class="glitch" data-text="Resume" href="resume.html">Resume</a>
-</nav>
+<div class="header">
+  <h1>Audiovisual</h1>
 
-<h1>Audiovisual</h1>
-<p class="subtitle">// Experimental, XR, and motion-based work</p>
-
-<section class="projects">
-  <div class="project" onclick="openProject('glitchjungle')">
-    <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline></video>
-    <div class="project-title">Glitch Jungle Commission</div>
+  <div class="nav">
+    <a href="index.html">Home</a>
+    <a href="3d.html">3D Assets</a>
+    <a href="audiovisual.html">Audiovisual</a>
   </div>
-
-  <div class="project" onclick="openProject('openstudios')">
-    <img src="AVImage/Alex01.jpg" alt="">
-    <div class="project-title">Open Studios at RISD</div>
-  </div>
-
-  <div class="project" onclick="openProject('congee')">
-    <img src="AVImage/XCSIBER01.jpg" alt="">
-    <div class="project-title">Congee Studios</div>
-  </div>
-
-  <div class="project" onclick="openProject('rat')">
-    <img src="AVImage/rat.jpg" alt="">
-    <div class="project-title">Rat</div>
-  </div>
-
-  <div class="project" onclick="openProject('chan')">
-    <img src="AVImage/CHAN.PNG" alt="">
-    <div class="project-title">Chan</div>
-  </div>
-
-  <div></div>
-</section>
-
-<footer>
-  Contact — jewelleejohnson@gmail.com<br><br>
-  <a class="glitch" data-text="LinkedIn" href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
-  <a class="glitch" data-text="ArtStation" href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
-  <a class="glitch" data-text="Instagram" href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
-</footer>
-
-<div class="overlay" id="overlay" onclick="closeProject(event)">
-  <div class="exit" onclick="closeProject()">✕</div>
-  <div class="overlay-inner" id="overlayContent"></div>
 </div>
 
-<div class="viewer" id="viewer" onclick="closeViewer(event)">
-  <div class="exit" onclick="closeViewer()">✕</div>
-  <div class="viewer-content" id="viewerContent"></div>
+<section class="projects">
+
+<div class="project" onclick="openProject('glitch')">
+  <img src="AVImage/glitch.jpg">
+  <div class="project-title">Glitch Jungle</div>
+</div>
+
+<div class="project" onclick="openProject('openstudios')">
+  <img src="AVImage/openstudios.jpg">
+  <div class="project-title">Open Studios</div>
+</div>
+
+<div class="project" onclick="openProject('congee')">
+  <img src="AVImage/congee.jpg">
+  <div class="project-title">Congee Studios</div>
+</div>
+
+<div class="project" onclick="openProject('rat')">
+  <img src="AVImage/rat.jpg">
+  <div class="project-title">Rat</div>
+</div>
+
+<div class="project" onclick="openProject('chan')">
+  <img src="AVImage/CHAN.PNG">
+  <div class="project-title">Chan</div>
+</div>
+
+</section>
+
+<div class="footer">
+© 2026
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="overlay-close" onclick="closeOverlay()">✕</div>
+  <div class="overlay-inner" id="overlay-content"></div>
 </div>
 
 <script>
+
 function openProject(project) {
-  const overlay = document.getElementById('overlay');
-  const content = document.getElementById('overlayContent');
-  document.body.style.overflow = 'hidden';
 
-  if (project === 'glitchjungle') {
-    content.innerHTML = `
-      <div class="overlay-media">
-        <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/2Dtypeface.png" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/GlitchJungle_Linedup.png" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/Stacked.png" onclick="openViewer(this.outerHTML)">
-      </div>
-      <div class="overlay-text">
-Glitch Jungle Commission
+const overlay = document.getElementById("overlay");
+const content = document.getElementById("overlay-content");
 
-Tools: ZBrush, Blender, Substance 3D Painter
-Techniques: Procedural modeling
+overlay.style.display = "block";
 
-Commissioned audiovisual work exploring dense, layered digital ecosystems through typography, motion, and form.
-      </div>`;
-  }
+/* Glitch */
 
-  if (project === 'openstudios') {
-    content.innerHTML = `
-      <div class="overlay-media">
-        <img src="AVImage/Alex01.jpg" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/Alex02.jpg" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/Dp.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <video src="AVImage/Projectfinal - Trim.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/Sky.JPG" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/Soul.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-      </div>
-      <div class="overlay-text">
-Open Studios at RISD
+if (project === "glitch") {
 
-Installation-based audiovisual work presented during RISD Open Studios,
-exploring motion, projection, and spatial digital form.
-      </div>`;
-  }
+content.innerHTML = `
+<div class="overlay-media">
+<video src="videos/glitch.mp4" autoplay loop muted controls></video>
+</div>
 
-  if (project === 'congee') {
-    content.innerHTML = `
-      <div class="overlay-media">
-        <img src="AVImage/000000.jpg" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/123.jpg" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/Congee (2).mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/XCSIBER01.jpg" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/turnaround.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/IMG_7083.png" onclick="openViewer(this.outerHTML)">
-      </div>
-      <div class="overlay-text">
-CONGEE STUDIOS Presents
-PARASITE CHAMBER: A Halloween Experience
+<div class="overlay-text">
+Glitch Jungle
 
-Blender, ZBrush, Adobe Premiere Pro
-Audio-Visual Installation
-      </div>`;
-  }
+Audiovisual experiment exploring digital distortion and rhythmic motion.
+</div>
+`;
 
-  if (project === 'rat') {
-    content.innerHTML = `
-      <div class="overlay-media">
-        <iframe src="https://player.vimeo.com/video/1169447886?muted=1&autoplay=1&loop=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-      </div>
-      <div class="overlay-text">
+}
+
+/* Open Studios */
+
+if (project === "openstudios") {
+
+content.innerHTML = `
+<div class="overlay-media">
+<video src="videos/openstudios.mp4" autoplay loop muted controls></video>
+</div>
+
+<div class="overlay-text">
+Open Studios
+
+Documentation and visual composition created for the Open Studios event.
+</div>
+`;
+
+}
+
+/* Congee */
+
+if (project === "congee") {
+
+content.innerHTML = `
+<div class="overlay-media">
+<video src="videos/congee.mp4" autoplay loop muted controls></video>
+</div>
+
+<div class="overlay-text">
+Congee Studios
+
+Audiovisual work produced for Congee Studios.
+</div>
+`;
+
+}
+
+/* Rat */
+
+if (project === "rat") {
+
+content.innerHTML = `
+<div class="overlay-media">
+<iframe 
+src="https://player.vimeo.com/video/1169447886?muted=1&autoplay=1&loop=1&title=0&byline=0&portrait=0" 
+frameborder="0" 
+allow="autoplay; fullscreen" 
+allowfullscreen>
+</iframe>
+</div>
+
+<div class="overlay-text">
 Rat
 
 Audiovisual motion work.
-      </div>`;
-  }
+</div>
+`;
 
-  if (project === 'chan') {
-    content.innerHTML = `
-      <div class="overlay-media">
-        <iframe src="https://player.vimeo.com/video/1169447859?muted=1&autoplay=1&loop=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-      </div>
-      <div class="overlay-text">
+}
+
+/* Chan */
+
+if (project === "chan") {
+
+content.innerHTML = `
+<div class="overlay-media">
+<iframe 
+src="https://player.vimeo.com/video/1169447859?muted=1&autoplay=1&loop=1&title=0&byline=0&portrait=0" 
+frameborder="0" 
+allow="autoplay; fullscreen" 
+allowfullscreen>
+</iframe>
+</div>
+
+<div class="overlay-text">
 Chan
 
 Audiovisual motion work.
-      </div>`;
-  }
+</div>
+`;
 
-  overlay.classList.add('active');
 }
 
-function closeProject(e) {
-  if (!e || e.target.id === 'overlay') {
-    document.getElementById('overlay').classList.remove('active');
-    document.body.style.overflow = '';
-  }
 }
 
-function openViewer(html) {
-  document.getElementById('viewerContent').innerHTML = html;
-  document.getElementById('viewer').classList.add('active');
+function closeOverlay() {
+
+document.getElementById("overlay").style.display = "none";
+
 }
 
-function closeViewer(e) {
-  if (!e || e.target.id === 'viewer') {
-    document.getElementById('viewer').classList.remove('active');
-    document.getElementById('viewerContent').innerHTML = '';
-  }
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    closeViewer();
-    closeProject();
-  }
-});
 </script>
 
 </body>
 </html>
+```
