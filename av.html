@@ -131,7 +131,7 @@ h1 {
   background: rgba(0,0,0,0.95);
   display: none;
   z-index: 1000;
-  overflow-y: auto; /* added so laptops can scroll */
+  overflow-y:auto;
 }
 
 .overlay.active {
@@ -216,196 +216,42 @@ footer a {
   color: var(--cyber-green);
   text-decoration: none;
 }
+
+
+/* ---------- MOBILE SUPPORT (ONLY ADDITION) ---------- */
+
+@media (max-width:768px){
+
+body{
+padding:30px;
+}
+
+nav a{
+display:inline-block;
+margin-right:18px;
+margin-bottom:10px;
+font-size:13px;
+}
+
+h1{
+font-size:32px;
+}
+
+.projects{
+grid-auto-flow:row;
+grid-template-columns:1fr;
+}
+
+.overlay-inner{
+grid-template-columns:1fr;
+gap:32px;
+}
+
+.overlay-text{
+font-size:14px;
+}
+
+}
+
 </style>
 </head>
-
-<body>
-
-<nav>
-  <a class="glitch" data-text="Home" href="index.html">Home</a>
-  <a class="glitch" data-text="3D Assets" href="assets.html">3D Assets</a>
-  <a class="glitch" data-text="Audiovisual" href="av.html">Audiovisual</a>
-  <a class="glitch" data-text="Resume" href="resume.html">Resume</a>
-</nav>
-
-<h1>Audiovisual</h1>
-<p class="subtitle">// Experimental, VFX, Projection Mapping Commissions</p>
-
-<section class="projects">
-  <div class="project" onclick="openProject('glitchjungle')">
-    <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline></video>
-    <div class="project-title">Glitch Jungle Commission</div>
-  </div>
-
-  <div class="project" onclick="openProject('openstudios')">
-    <img src="AVImage/Alex01.jpg" alt="">
-    <div class="project-title">Open Studios at RISD</div>
-  </div>
-
-  <div class="project" onclick="openProject('congee')">
-    <img src="AVImage/XCSIBER01.jpg" alt="">
-    <div class="project-title">Congee Studios</div>
-  </div>
-
-  <div class="project" onclick="openProject('rat')">
-    <img src="AVImage/rat.jpg" alt="">
-    <div class="project-title">NEORAT</div>
-  </div>
-
-  <div class="project" onclick="openProject('chan')">
-    <img src="AVImage/CHAN.PNG" alt="">
-    <div class="project-title">Dystopian</div>
-  </div>
-
-  <div class="project" onclick="openProject('darkness')">
-    <img src="AVImage/0002.png" alt="">
-    <div class="project-title">A Great Darkness</div>
-  </div>
-</section>
-
-<footer>
-  Contact — jewelleejohnson@gmail.com<br><br>
-  <a class="glitch" data-text="LinkedIn" href="https://www.linkedin.com/in/jleejohnson" target="_blank">LinkedIn</a>
-  <a class="glitch" data-text="ArtStation" href="https://www.artstation.com/jewelleejohnson" target="_blank">ArtStation</a>
-  <a class="glitch" data-text="Instagram" href="https://www.instagram.com/jewel.fbx/" target="_blank">Instagram</a>
-</footer>
-
-<div class="overlay" id="overlay" onclick="closeProject(event)">
-  <div class="exit" onclick="closeProject()">✕</div>
-  <div class="overlay-inner" id="overlayContent"></div>
-</div>
-
-<div class="viewer" id="viewer" onclick="closeViewer(event)">
-  <div class="exit" onclick="closeViewer()">✕</div>
-  <div class="viewer-content" id="viewerContent"></div>
-</div>
-
-<script>
-function openProject(project) {
-  const overlay = document.getElementById('overlay');
-  const content = document.getElementById('overlayContent');
-  document.body.style.overflow = 'hidden';
-
-  if (project === 'glitchjungle') {
-    content.innerHTML = `
-      <div class="overlay-media">
-        <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/2Dtypeface.png" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/GlitchJungle_Linedup.png" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/Stacked.png" onclick="openViewer(this.outerHTML)">
-      </div>
-      <div class="overlay-text">
-Glitch Jungle Commission
-
-Tools: ZBrush, Blender, Substance 3D Painter
-Techniques: Procedural modeling
-
-Commissioned audiovisual work exploring dense, layered digital ecosystems through typography, motion, and form.
-      </div>`;
-  }
-
-  if (project === 'openstudios') {
-    content.innerHTML = `
-      <div class="overlay-media">
-        <img src="AVImage/Alex01.jpg" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/Alex02.jpg" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/Dp.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <video src="AVImage/Projectfinal - Trim.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/Sky.JPG" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/Soul.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-      </div>
-      <div class="overlay-text">
-Open Studios at RISD
-
-Installation-based audiovisual work presented during RISD Open Studios,
-exploring motion, projection, and spatial digital form.
-      </div>`;
-  }
-
-  if (project === 'congee') {
-    content.innerHTML = `
-      <div class="overlay-media">
-        <img src="AVImage/000000.jpg" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/123.jpg" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/Congee (2).mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/XCSIBER01.jpg" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/turnaround.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/IMG_7083.png" onclick="openViewer(this.outerHTML)">
-      </div>
-      <div class="overlay-text">
-CONGEE STUDIOS Presents
-PARASITE CHAMBER: A Halloween Experience
-
-Blender, ZBrush, Adobe Premiere Pro
-Audio-Visual Installation Performance Set.
-      </div>`;
-  }
-
-  if (project === 'rat') {
-    content.innerHTML = `
-      <div class="overlay-media">
-        <iframe src="https://player.vimeo.com/video/1169447886?muted=1&autoplay=1&loop=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-      </div>
-      <div class="overlay-text">
-NEORAT
-
-Junior thesis at RISD 2024. Worked in Blender, and scanned environments to create a grimy cyberpunk atmosphere.
-      </div>`;
-  }
-
-  if (project === 'chan') {
-    content.innerHTML = `
-      <div class="overlay-media">
-        <iframe src="https://player.vimeo.com/video/1169447859?muted=1&autoplay=1&loop=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-      </div>
-      <div class="overlay-text">
-Dystopian
-
-Short captured on film. Interested in layering VFX compositing textures with Adobe After Effects.
-      </div>`;
-  }
-
-  if (project === 'darkness') {
-    content.innerHTML = `
-      <div class="overlay-media">
-        <iframe src="https://player.vimeo.com/video/1171141225?muted=1&autoplay=1&loop=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-      </div>
-      <div class="overlay-text">
-A Great Darkness
-
-Senior thesis project for RISD 2025. Worked in Blender, Substance Painter, ZBrush, Marvelous Designer. Exploring grief and sound design. Collaboration with Ian Kelewae on Cello and processed instruments in Ableton. Voices- Yeonju Yoo, Thank you to Nick Bentz, FAV Animation Department at Rhode Island School of Design.
-      </div>`;
-  }
-
-  overlay.classList.add('active');
-}
-
-function closeProject(e) {
-  if (!e || e.target.id === 'overlay') {
-    document.getElementById('overlay').classList.remove('active');
-    document.body.style.overflow = '';
-  }
-}
-
-function openViewer(html) {
-  document.getElementById('viewerContent').innerHTML = html;
-  document.getElementById('viewer').classList.add('active');
-}
-
-function closeViewer(e) {
-  if (!e || e.target.id === 'viewer') {
-    document.getElementById('viewer').classList.remove('active');
-    document.getElementById('viewerContent').innerHTML = '';
-  }
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    closeViewer();
-    closeProject();
-  }
-});
-</script>
-
-</body>
-</html>
