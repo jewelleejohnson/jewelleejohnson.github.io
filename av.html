@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Audiovisual | Jewel Lee-Johnson</title>
+<title>3D Assets | Jewel Lee-Johnson</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -19,11 +19,10 @@ body {
   padding: 60px;
   font-family: 'Fira Code', monospace;
   color: #fff;
-  background-image: url("images/jewel-johnson-asset4.jpg");
+  background-image: url("images/jewel-johnson-asset8.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  overflow-x: hidden;
 }
 
 body::before {
@@ -92,7 +91,7 @@ h1 {
   grid-template-rows: repeat(2, auto);
   grid-auto-flow: column;
   gap: 18px;
-  max-width: 95%;
+  max-width: 100%;
 }
 
 .project {
@@ -124,14 +123,13 @@ h1 {
   letter-spacing: 0.08em;
 }
 
-/* ---------- OVERLAY ---------- */
+/* ---------- FULLSCREEN PROJECT ---------- */
 .overlay {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.95);
   display: none;
   z-index: 1000;
-  overflow-y: auto; /* added so laptops can scroll */
 }
 
 .overlay.active {
@@ -142,7 +140,7 @@ h1 {
   max-width: 1700px;
   margin: auto;
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 1.6fr 1fr;
   gap: 48px;
 }
 
@@ -153,8 +151,7 @@ h1 {
 }
 
 .overlay-media img,
-.overlay-media video,
-.overlay-media iframe {
+.overlay-media video {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
@@ -177,7 +174,7 @@ h1 {
   color: #fff;
 }
 
-/* ---------- VIEWER ---------- */
+/* ---------- IMAGE VIEWER ---------- */
 .viewer {
   position: fixed;
   inset: 0;
@@ -228,63 +225,38 @@ footer a {
   <a class="glitch" data-text="Resume" href="resume.html">Resume</a>
 </nav>
 
-<h1>Audiovisual</h1>
-<p class="subtitle">// Experimental, VFX, Projection Mapping Commissions</p>
+<h1>3D Assets</h1>
+<p class="subtitle">// Selected environment and material studies</p>
 
 <section class="projects">
-  <div class="project" onclick="openProject('glitchjungle')">
-    <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline></video>
-    <div class="project-title">Glitch Jungle Commission</div>
-    <div class="project" onclick="openProject('dedalus')">
+  <div class="project" onclick="openProject('dedalus')">
   <img src="AVImage/IMG_3927.HEIC" alt="">
   <div class="project-title">Dedalus Labs</div>
 </div>
-  </div>
-  if (project === 'dedalus') {
-  content.innerHTML = `
-    <div class="overlay-media">
-      <img src="AVImage/IMG_3927.HEIC" onclick="openViewer(this.outerHTML)">
-      <img src="AVImage/IMG_3935.HEIC" onclick="openViewer(this.outerHTML)">
-      <img src="AVImage/IMG_3978.HEIC" onclick="openViewer(this.outerHTML)">
-      <img src="AVImage/IMG_4106.JPG" onclick="openViewer(this.outerHTML)">
-      <img src="AVImage/IMG_4108.JPG" onclick="openViewer(this.outerHTML)">
-      <img src="AVImage/IMG_4109.JPG" onclick="openViewer(this.outerHTML)">
-      <img src="AVImage/IMG_4110.JPG" onclick="openViewer(this.outerHTML)">
-    </div>
-    <div class="overlay-text">
-Dedalus Labs | Freelance AV & Technical Support
-
-JUNE 2026 | Tribeca, NYC
-
-Supported AV setup, troubleshooting, and technical operations for a live NYC Tech Week showcase.
-
-Assisted with interactive installations, audio systems, equipment deployment, and event production.
-    </div>`;
-}
-
-  <div class="project" onclick="openProject('openstudios')">
-    <img src="AVImage/Alex01.jpg" alt="">
-    <div class="project-title">Open Studios at RISD</div>
+  
+  <div class="project" onclick="openProject('corner')">
+    <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline></video>
+    <div class="project-title">Corner</div>
   </div>
 
-  <div class="project" onclick="openProject('congee')">
-    <img src="AVImage/XCSIBER01.jpg" alt="">
-    <div class="project-title">Congee Studios</div>
+  <div class="project" onclick="openProject('jewel')">
+    <img src="images/CD_1.jpeg" alt="">
+    <div class="project-title">Jewel Case</div>
   </div>
 
-  <div class="project" onclick="openProject('rat')">
-    <img src="AVImage/rat.jpg" alt="">
-    <div class="project-title">NEORAT</div>
+  <div class="project" onclick="openProject('teeth')">
+    <img src="images/teeth_full.png" alt="">
+    <div class="project-title">Teeth</div>
   </div>
 
-  <div class="project" onclick="openProject('chan')">
-    <img src="AVImage/CHAN.PNG" alt="">
-    <div class="project-title">Dystopian</div>
+  <div class="project" onclick="openProject('cyborg')">
+    <video src="images/Cyborg.mov" autoplay muted loop playsinline></video>
+    <div class="project-title">Cyborg</div>
   </div>
 
-  <div class="project" onclick="openProject('darkness')">
-    <img src="AVImage/0002.png" alt="">
-    <div class="project-title">A Great Darkness</div>
+  <div class="project" onclick="openProject('lamb')">
+    <img src="images/1final.png" alt="">
+    <div class="project-title">Lamb</div>
   </div>
 </section>
 
@@ -310,95 +282,116 @@ function openProject(project) {
   const overlay = document.getElementById('overlay');
   const content = document.getElementById('overlayContent');
   document.body.style.overflow = 'hidden';
+if (project === 'dedalus') {
+  content.innerHTML = `
+    <div class="overlay-media">
+      <img src="AVImage/IMG_3927.HEIC" onclick="openViewer(this.outerHTML)">
+      <img src="AVImage/IMG_3935.HEIC" onclick="openViewer(this.outerHTML)">
+      <img src="AVImage/IMG_3978.HEIC" onclick="openViewer(this.outerHTML)">
+      <img src="AVImage/IMG_4106.JPG" onclick="openViewer(this.outerHTML)">
+      <img src="AVImage/IMG_4108.JPG" onclick="openViewer(this.outerHTML)">
+      <img src="AVImage/IMG_4109.JPG" onclick="openViewer(this.outerHTML)">
+      <img src="AVImage/IMG_4110.JPG" onclick="openViewer(this.outerHTML)">
+    </div>
+    <div class="overlay-text">
+Dedalus Labs | Freelance AV & Technical Support
 
-  if (project === 'glitchjungle') {
+JUNE 2026 | Tribeca, NYC
+
+Supported AV setup, troubleshooting, and technical operations for a live NYC Tech Week showcase.
+
+Assisted with interactive installations, audio systems, equipment deployment, and event production.
+    </div>`;
+}
+  if (project === 'corner') {
     content.innerHTML = `
       <div class="overlay-media">
-        <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/2Dtypeface.png" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/GlitchJungle_Linedup.png" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/Stacked.png" onclick="openViewer(this.outerHTML)">
+        <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <img src="3d-assets/Environment.png" onclick="openViewer(this.outerHTML)">
+        <img src="images/Natural_Typo.png" onclick="openViewer(this.outerHTML)">
       </div>
       <div class="overlay-text">
-Glitch Jungle Commission
+Corner
+Spring 2025
 
-Tools: ZBrush, Blender, Substance 3D Painter
-Techniques: Procedural modeling
+Environment modeling, sculpting, UVs, texturing
+Credits: Substance Painter library
 
-Commissioned audiovisual work exploring dense, layered digital ecosystems through typography, motion, and form.
+An environment study focused on decayed urban structures inspired by Philadelphia’s collapsing infrastructure and surface storytelling.
       </div>`;
   }
 
-  if (project === 'openstudios') {
+  if (project === 'jewel') {
     content.innerHTML = `
       <div class="overlay-media">
-        <img src="AVImage/Alex01.jpg" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/Alex02.jpg" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/Dp.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <video src="AVImage/Projectfinal - Trim.mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/Sky.JPG" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/Soul.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <img src="images/CD_1.jpeg" onclick="openViewer(this.outerHTML)">
+        <img src="images/CD_2.jpeg" onclick="openViewer(this.outerHTML)">
+        <img src="images/CD_3.png" onclick="openViewer(this.outerHTML)">
+        <img src="images/cd_typ.png" onclick="openViewer(this.outerHTML)">
       </div>
       <div class="overlay-text">
-Open Studios at RISD
+Jewel Case
 
-Installation-based audiovisual work presented during RISD Open Studios,
-exploring motion, projection, and spatial digital form.
+Blender
+Geometry Nodes, Cycles
+
+A small study exploring transparency, material layering, and surface behavior.
       </div>`;
   }
 
-  if (project === 'congee') {
+  if (project === 'teeth') {
     content.innerHTML = `
       <div class="overlay-media">
-        <img src="AVImage/000000.jpg" onclick="openViewer(this.outerHTML)">
-        <img src="AVImage/123.jpg" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/Congee (2).mp4" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/XCSIBER01.jpg" onclick="openViewer(this.outerHTML)">
-        <video src="AVImage/turnaround.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
-        <img src="AVImage/IMG_7083.png" onclick="openViewer(this.outerHTML)">
+        <img src="images/teeth_typ.png" onclick="openViewer(this.outerHTML)">
+        <img src="images/teeth_full.png" onclick="openViewer(this.outerHTML)">
+        <img src="images/jewel-lee-johnson-asset11.jpg" onclick="openViewer(this.outerHTML)">
       </div>
       <div class="overlay-text">
-CONGEE STUDIOS Presents
-PARASITE CHAMBER: A Halloween Experience
+Teeth
 
-Blender, ZBrush, Adobe Premiere Pro
-Audio-Visual Installation Performance Set.
+Blender
+
+An exploratory study focused on form, repetition, and surface tension using dental motifs and material contrast.
       </div>`;
   }
 
-  if (project === 'rat') {
+  if (project === 'cyborg') {
     content.innerHTML = `
       <div class="overlay-media">
-        <iframe src="https://player.vimeo.com/video/1169447886?muted=1&autoplay=1&loop=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <video src="images/Cyborg.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
+        <img src="images/headphonefinal.PNG" onclick="openViewer(this.outerHTML)">
+        <img src="images/image01.jpg" onclick="openViewer(this.outerHTML)">
+        <video src="images/0001-0250.mov" autoplay muted loop playsinline onclick="openViewer(this.outerHTML)"></video>
       </div>
       <div class="overlay-text">
-NEORAT
+Cyborg
 
-Junior thesis at RISD 2024. Worked in Blender, and scanned environments to create a grimy cyberpunk atmosphere.
+Blender
+Eevee, Geometry Nodes
+
+Modeled and composited in Blender.
       </div>`;
   }
 
-  if (project === 'chan') {
+  if (project === 'lamb') {
     content.innerHTML = `
       <div class="overlay-media">
-        <iframe src="https://player.vimeo.com/video/1169447859?muted=1&autoplay=1&loop=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <img src="images/1final.png" onclick="openViewer(this.outerHTML)">
+        <img src="images/2final.png" onclick="openViewer(this.outerHTML)">
+        <img src="images/4final.png" onclick="openViewer(this.outerHTML)">
+        <img src="images/LAMB_2.jpg" onclick="openViewer(this.outerHTML)">
+        <img src="images/jewel-johnson-asset8.jpg" onclick="openViewer(this.outerHTML)">
       </div>
       <div class="overlay-text">
-Dystopian
+Lamb
+July 2025
 
-Short captured on film. Interested in layering VFX compositing textures with Adobe After Effects.
-      </div>`;
-  }
+Role: Modeling, sculpting, UVs, texturing, lookdev
+Credits: Textures sourced from Substance 3D Painter Library
 
-  if (project === 'darkness') {
-    content.innerHTML = `
-      <div class="overlay-media">
-        <iframe src="https://player.vimeo.com/video/1171141225?muted=1&autoplay=1&loop=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-      </div>
-      <div class="overlay-text">
-A Great Darkness
+Exploring anatomical distortion through a surreal two-headed lamb. I focused on skin surface, asymmetry, and creature form to create a design that feels unsettling but grounded in real-world anatomy.
 
-Senior thesis project for RISD 2025. Worked in Blender, Substance Painter, ZBrush, Marvelous Designer. Exploring grief and sound design. Collaboration with Ian Kelewae on Cello and processed instruments in Ableton. Voices- Yeonju Yoo, Thank you to Nick Bentz, FAV Animation Department at Rhode Island School of Design.
+Sculpted and modeled in Blender, with textures painted in Substance Painter. While I chose not to use a particle system for fur due to workflow challenges, I emphasized surface storytelling to suggest a lamb that is exposed, vulnerable, and eerie in its stillness.
       </div>`;
   }
 
