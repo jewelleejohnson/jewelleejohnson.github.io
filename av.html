@@ -231,6 +231,11 @@ footer a {
 <h1>Audiovisual</h1>
 <p class="subtitle">// Experimental, VFX, Projection Mapping Commissions</p>
 
+  <div class="project" onclick="openProject('dedalus')">
+  <img src="AVImage/IMG_3927.HEIC" alt="">
+  <div class="project-title">Dedalus Labs</div>
+</div>
+  
 <section class="projects">
   <div class="project" onclick="openProject('glitchjungle')">
     <video src="AVImage/LooptrimGlitch.mp4" autoplay muted loop playsinline></video>
@@ -285,7 +290,27 @@ function openProject(project) {
   const overlay = document.getElementById('overlay');
   const content = document.getElementById('overlayContent');
   document.body.style.overflow = 'hidden';
+if (project === 'dedalus') {
+  content.innerHTML = `
+    <div class="overlay-media">
+      <img src="AVImage/IMG_3927.HEIC" onclick="openViewer(this.outerHTML)">
+      <img src="AVImage/IMG_3935.HEIC" onclick="openViewer(this.outerHTML)">
+      <img src="AVImage/IMG_3978.HEIC" onclick="openViewer(this.outerHTML)">
+      <img src="AVImage/IMG_4106.JPG" onclick="openViewer(this.outerHTML)">
+      <img src="AVImage/IMG_4108.JPG" onclick="openViewer(this.outerHTML)">
+      <img src="AVImage/IMG_4109.JPG" onclick="openViewer(this.outerHTML)">
+      <img src="AVImage/IMG_4110.JPG" onclick="openViewer(this.outerHTML)">
+    </div>
+    <div class="overlay-text">
+Dedalus Labs | Freelance AV & Technical Support
 
+JUNE 2026 | Tribeca, NYC
+
+Supported AV setup, troubleshooting, and technical operations for a live NYC Tech Week showcase.
+
+Assisted with interactive installations, audio systems, equipment deployment, and event production.
+    </div>`;
+}
   if (project === 'glitchjungle') {
     content.innerHTML = `
       <div class="overlay-media">
