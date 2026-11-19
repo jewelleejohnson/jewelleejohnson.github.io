@@ -145,12 +145,34 @@ nav a[aria-current="page"]::after { transform: scaleX(1); }
 
 @media (min-width: 1280px) { .code-overlay { display: block; } }
 
+/* ---------- PAGE TITLE ---------- */
+.hero {
+  padding: 96px 0 72px;
+  border-bottom: 1px solid var(--line);
+}
+
+h1 {
+  margin: 0 0 16px;
+  font-family: var(--sans);
+  font-weight: 200;
+  font-size: clamp(40px, 7vw, 84px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+.subtitle {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--accent);
+}
+
 /* ---------- PROJECT GRID ---------- */
 .projects {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 32px;
-  padding: 72px 0 40px;
+  padding: 80px 0 40px;
 }
 
 .project {
@@ -331,7 +353,8 @@ footer a:hover { border-color: var(--accent); }
 @media (max-width: 900px) {
   .wrap { padding: 0 20px; }
   nav .wrap { gap: 22px; overflow-x: auto; }
-  .projects { padding-top: 48px; }
+  .hero { padding: 64px 0 48px; }
+  .projects { padding-top: 56px; }
   .overlay { padding: 80px 20px 32px; }
   .overlay-inner { grid-template-columns: 1fr; gap: 40px; }
   .exit { top: 16px; right: 16px; }
@@ -357,6 +380,13 @@ footer a:hover { border-color: var(--accent); }
     <a class="glitch" data-text="Resume" href="resume.html">Resume</a>
   </div>
 </nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Audiovisual</h1>
+    <p class="subtitle">// technical projects</p>
+  </div>
+</header>
 
 <main class="wrap">
   <section class="projects">
