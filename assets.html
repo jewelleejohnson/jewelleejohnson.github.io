@@ -387,12 +387,17 @@ footer a:hover { border-color: var(--accent); }
       <img src="3d-assets/Cyberdeck_01.png" alt="">
       <div class="project-title">(WIP)CYBERDECK</div>
     </div>
-     
+
+    <div class="project" tabindex="0" onclick="openProject('prison')">
+      <img src="3d-assets/prison2 (1).png" alt="">
+      <div class="project-title">(WIP) PRISON</div>
+    </div>
+
       <div class="project" tabindex="0" onclick="openProject('jewel')">
       <img src="images/CD_1.jpeg" alt="">
       <div class="project-title">JEWEL CASE</div>
     </div>
-    
+
     <div class="project" tabindex="0" onclick="openProject('corner')">
       <video src="3d-assets/Eni_Turn.mp4" autoplay muted loop playsinline></video>
       <div class="project-title">CORNER</div>
@@ -552,6 +557,28 @@ Role: Modeling, texturing, lookdev
 Tools: Blender, Substance Painter
 
 Placeholder bio for the Cyberdeck project. Replace this text with a short description of the concept, your process, and what you set out to explore.
+      </div>`;
+  }
+
+  if (project === 'prison') {
+    content.innerHTML = `
+      <div class="overlay-media">
+        <img src="3d-assets/prison2 (1).png" onclick="openViewer(this.outerHTML)">
+        <img src="3d-assets/prison1 (1).png" onclick="openViewer(this.outerHTML)">
+        <img src="3d-assets/fence1 (1).png" onclick="openViewer(this.outerHTML)">
+        <img src="3d-assets/5.png" onclick="openViewer(this.outerHTML)">
+        <img src="3d-assets/1.png" onclick="openViewer(this.outerHTML)">
+        <img src="3d-assets/prisonbrainstorm (1).png" onclick="openViewer(this.outerHTML)">
+        <img src="3d-assets/njari01.png" onclick="openViewer(this.outerHTML)">
+      </div>
+      <div class="overlay-text">
+(WIP) PRISON
+Month Year
+
+Role: Modeling, texturing, lookdev
+Tools: Blender, Substance Painter
+
+Placeholder bio for the Prison project. Replace this text with a short description of the concept, your process, and what you set out to explore.
       </div>`;
   }
 
